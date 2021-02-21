@@ -2,6 +2,10 @@
  font-family: 'Montserrat Alternates', sans-serif;
   src: local("Montserrat Alternates"),url("./fonts/Montserrat/MontserratAlternates-SemiBoldItalic.ttf") format("truetype");
 }
+body{
+  font-size: 12px;
+
+}
 table{
   text-align: center;
 
@@ -18,5 +22,24 @@ table{
 .taking-care-records{
   background-color: rgba(188, 220, 179, 0.51);
   font-size: 1.5rem;
+}
+
+.input-wrapper{
+  text-align: center;
+  font-size: 14px;
+    margin-bottom: 20px;
+
+  input{
+    margin-left:20px;
+    width: 250px;
+    height: 50px;
+  }
+}
+.formik-form{
+  text-align: center;
+
+  button{
+    margin-top: 15px;
+  }
 }
 

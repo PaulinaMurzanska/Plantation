@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './styles/bootstrap-post-custom.sass';
 import './styles/bootstrap-pre-custom.sass';
 import './index.scss';
-import App from "./App";
-// import App from './App';
+// import NewApp from "NewApp";
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));

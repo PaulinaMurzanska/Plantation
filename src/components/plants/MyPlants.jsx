@@ -1,4 +1,5 @@
 import React from "react";
+import Login from "components/Login";
 
 class MyPlants extends React.PureComponent{
     constructor(props) {
@@ -6,7 +7,9 @@ class MyPlants extends React.PureComponent{
     }
     render() {
         return(
-            <p>MyPlants</p>
+            <React.Fragment>
+                <Login/>
+            </React.Fragment>
         )
     }
 }

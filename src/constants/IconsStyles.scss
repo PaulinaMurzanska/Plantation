@@ -1,0 +1,40 @@
+.stars {
+  color: #b6a240;
+  font-size: 1.5em;
+}
+
+
+.bright {
+  font-size: 2em;
+  color: #efdb7c;
+}
+
+.dark {
+  font-size: 1.5em;
+  color: #585339;
+}
+
+.dropfull {
+  font-size: 1.5em;
+  color: #77b1ae;
+}
+
+.dropless {
+  font-size: 1.5em;
+  color: #77b1ae;
+}
+.temperature{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  span{
+    margin-right: 5px;
+    font-size: 1.3em;
+    font-weight: bolder;
+  }
+  .celsius{
+     font-size: 1.5em;
+  }
+
+}

@@ -1,118 +1,143 @@
 import React from "react";
-import {Card, CardBody, Table} from "reactstrap";
-import axios from "axios";
-// import PlantRow from "/home/dev/Desktop/plantation/src/components/plants/PlantRow";
-// import PlantRow from "/home/dev/Desktop/plantation/src/components/plants/PlantRow";
+import {Card, CardBody, Button} from "reactstrap";
+import withCategories from "components/categories/WithCategoriesFetch";
+import withPlants from "components/plants/WithPlants";
+import './Plants.scss';
+import {ROUTE_SINGLEPLANT} from "constants/Routes";
 
 import PlantRow from "components/plants/PlantRow";
+import CategoriesSelect from "components/categories/CategoriesSelect";
 
-
-
-const PLANTS_FETCH_DELAY = 300;
 
 class Plants extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            plants: [],
-            plantsInProgress: undefined,
-            plantsSuccess: undefined,
+            categoryIdToCompare: undefined,
+            myId: 7,
+
+
         }
     }
 
     componentDidMount() {
-        this.fetchPlants();
+        this.props.fetchPlants();
+        this.props.fetchCategories();
     }
 
-    fetchPlants() {
-    const requestUrl = "http://gentle-tor-07382.herokuapp.com/plants/";
-    this.setState({inProgress: true});
+    handleCategorySort = (event) => {
+        const selectedValue = event.target.value;
+        console.log(selectedValue);
+        this.setState({
+            categoryIdToCompare: parseInt(selectedValue),
+        })
+        if (selectedValue === "") {
+            this.setState({categoryIdToCompare: undefined})
+        }
+    }
+    handleResetSearch = () => {
+        this.setState({
+            categoryIdToCompare: undefined,
 
+        })
 
-    return this.props.delayFetch(PLANTS_FETCH_DELAY, (resolve, reject) => {
-      const promise = axios.get(requestUrl);
-
-      promise
-              .then((response) => {
-
-                const data = response.data;
-                const plants = data.map((item) => {
-                  const {
-                    id, name, difficulty, blooming, category, category_slug, fertilizing_interval, last_fertilized,
-                    last_watered, required_exposure, required_humidity, required_temperature, room, watering_interval
-                  } = item;
-                  ;
-
-
-                  return {
-                    id, name, difficulty, blooming, category, category_slug, fertilizing_interval, last_fertilized,
-                    last_watered, required_exposure, required_humidity, required_temperature, room, watering_interval
-                  };
-
-                });
-
-                const successPlants = true;
-                this.setState({plants, successPlants});
-                resolve();
-              })
-              .catch((error) => {
-
-                // debugger;
-
-                this.setState({successPlants: false});
-                reject();
-              })
-              .finally(() => {
-                this.setState({inProgress: false});
-              })
-    });
-
-  }
+    }
 
 
     render() {
-        const {plants, successPlants, inProgress} = this.state;
+        const {categoryIdToCompare, myId} = this.state;
+
+
+        const {
+            categories,
+            categoriesInProgress,
+            categoriesSuccess,
+            plants,
+            successPlants,
+            inProgress,
+            getSinglePlantId,
+            selectedPlantId
+
+        } = this.props;
+        const categoriesSortedAsc = categories.sort((cat1, cat2) => {
+            const sortBy = "name"
+            const a = cat1[sortBy];
+            const b = cat2[sortBy];
+            if (a > b) {
+                return 1;
+            }
+            if (b > a) {
+                return -1;
+            }
+            return 0;
+        })
+
+
         return (
             <Card className="mb-4">
 
+
                 <CardBody>
-                {/*<InProgress inProgress={inProgress}/>*/}
-                {
-                  successPlants === false &&
-                  <p>Unable to fetch plants.</p>
-                }
-                {successPlants && (
-                        <>
-                          <Table bordered>
-                            <thead>
+                    <div className='search'>
+                        <label htmlFor="name">Search Categories</label>
+                        <select id="name" onChange={this.handleCategorySort}>
+                            <option value=''>
+                                select category
+                            </option>
 
-
-                            <tr>
-                              <th>Ind</th>
-                              <th>Id</th>
-                              <th>Name </th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
                             {
-                              plants.map(
-                                      (plant, index, arr) => (<PlantRow plant={plant} key={index} index={index+1}/>)
-                              )
+                                categoriesSortedAsc.map((item, index) =>
+                                    <CategoriesSelect
+                                        category={item}
+                                        index={index}
+                                    />)
+
                             }
-                            </tbody>
 
-                          </Table>
+                        </select>
+                        <Button
+                            onClick={this.handleResetSearch}
+                            color="secondary" size="lg">Reset Search</Button>
+
+                    </div>
+                    {/*<InProgress inProgress={inProgress}/>*/}
+                    {
+                        successPlants === false &&
+                        <p>Unable to fetch plants.</p>
+                    }
+
+                    {
+                        successPlants && (
+                            <div className="plants-wrapper">
+                                {
+                                    plants.filter(plant => plant.category === categoryIdToCompare).map((filteredPlant) => (
+                                        <PlantRow plant={filteredPlant} categories={categories}
+                                                  getSinglePlantId={getSinglePlantId}/>
+                                    ))
+                                }
+                            </div>
+                        )}
+
+                    {
+                        categoryIdToCompare === undefined && (
+                            <div className="plants-wrapper">
+                                {
+                                    plants.map(
+                                        (plant, index, arr) => (
+                                            <PlantRow plant={plant} categories={categories} key={index}
+                                                      index={index + 1} getSinglePlantId={getSinglePlantId}/>)
+                                    )
+                                }
+                            </div>
+                        )
+                    }
 
 
 
-                        </>
-
-                )}
-              </CardBody>
+                </CardBody>
             </Card>
         )
     }
 }
 
-export default Plants;
+export default withCategories(withPlants(Plants));

@@ -1,13 +1,47 @@
 import React from "react";
+import withCategories from "components/categories/WithCategoriesFetch";
+import {Card,CardBody,ListGroup} from "reactstrap";
+import InProgress from "components/sharedElements/InProgress";
+import CategoryItem from "components/categories/CategoryItem";
 
 class Categories extends React.PureComponent{
-    constructor(props) {
-        super(props);
+
+    componentDidMount() {
+        this.props.fetchCategories()
     }
+
     render() {
+        const {categoriesInProgress,categoriesSuccess,categories} = this.props;
+
         return(
-            <p>Categories</p>
+            <Card>
+        <CardBody>
+          <div className="app-container">
+            <InProgress inProgress={categoriesInProgress}/>
+            {
+              categoriesSuccess === false &&
+              <p>Nie udało się pobrać Kategorii</p>
+            }
+            {
+              categoriesSuccess &&
+              <ListGroup className="categories">
+                {
+                  categories.map((item, index, arr) =>
+                    <CategoryItem
+                      category={item}
+                      label='category'
+                      key={index}
+                      isLastItem={arr.length - 1 === index}
+                      index={index}
+                    />
+                  )
+                }
+              </ListGroup>
+            }
+          </div>
+        </CardBody>
+      </Card>
         )
     }
 }
-export default Categories;
+export default withCategories(Categories);
