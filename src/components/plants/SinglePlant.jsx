@@ -18,7 +18,7 @@ class SinglePlant extends React.PureComponent {
     }
 
     render() {
-        const {selectedPlantId, plants, categories} = this.props;
+        const {selectedPlantId, plants, categories, index} = this.props;
 
         console.log(selectedPlantId);
         console.log(plants);
@@ -28,13 +28,22 @@ class SinglePlant extends React.PureComponent {
         });
 
 
+
+
+
+
+
         return (
             <div>
 
                 <SinglePlantItem
-                plant={plantSelected}
+                    plant={plantSelected}
+                    categories={categories}
+                    index={index}
 
-               />
+
+
+                />
 
             </div>
         )
