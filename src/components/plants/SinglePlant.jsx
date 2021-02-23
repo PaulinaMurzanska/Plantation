@@ -5,6 +5,7 @@ import List from "reactstrap/es/List";
 import PlantRow from "components/plants/PlantRow";
 import SinglePlantItem from "components/plants/SinglePlantItem";
 import {CardBody} from "reactstrap";
+import { Redirect } from "react-router-dom";
 
 
 class SinglePlant extends React.PureComponent {
@@ -28,22 +29,19 @@ class SinglePlant extends React.PureComponent {
         });
 
 
-
-
-
-
-
         return (
             <div>
-
-                <SinglePlantItem
-                    plant={plantSelected}
-                    categories={categories}
-                    index={index}
+                {
+                    selectedPlantId === undefined ?
+                        <Redirect to="/plants"/> :
 
 
-
-                />
+                        <SinglePlantItem
+                            plant={plantSelected}
+                            categories={categories}
+                            index={index}
+                        />
+                }
 
             </div>
         )

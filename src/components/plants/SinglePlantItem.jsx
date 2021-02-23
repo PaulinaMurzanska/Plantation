@@ -5,6 +5,8 @@ import {difficulties, exposure, humidity, temp} from "constants/PlantsParameters
 import {Button, Container, ListGroup, ListGroupItem, Table} from "reactstrap";
 import './SinglePlantItem.scss';
 import{BiEdit,BiTrash} from 'react-icons/bi';
+import moment from "moment";
+
 
 const getCategoryName = (categories, plantCategoryId) => {
     const index = categories.findIndex((category) => category.id === plantCategoryId);
@@ -13,7 +15,7 @@ const getCategoryName = (categories, plantCategoryId) => {
     }
     return categories[index].name;
 }
-
+const secToDays = 84400;
 
 class SinglePlantItem extends React.Component {
     constructor(props) {
@@ -27,40 +29,39 @@ class SinglePlantItem extends React.Component {
         console.log(plant);
         const name = plant.map(a => a.name);
         const blooming = plant.map(a => a.blooming);
-        const fertilizing = plant.map(a => a.fertilizing_interval);
-        const watering = plant.map(a => a.watering_interval);
+        const fertilizing = Math.ceil(plant.map(a => a.fertilizing_interval)/secToDays);
+        const watering = Math.ceil(plant.map(a => a.watering_interval)/secToDays);
         const difficulty = plant.map(a => a.difficulty);
         const required_temp = plant.map(a => a.required_temperature);
         const required_humid = plant.map(a => a.required_humidity);
         const required_exposure = plant.map(a => a.required_exposure);
-        const lastWatered = plant.map(a => a.last_watered);
-        const lastFertilized = plant.map(a => a.last_fertilized);
+        const lastWatered = moment(plant.map(a => a.last_watered)).format("MMM Do YY");
+        const lastFertilized = moment(plant.map(a => a.last_fertilized)).format("MMM Do YY");
         const plantCategoryId = parseInt(plant.map(a => a.category));
         const plantCategoryName = getCategoryName(categories, plantCategoryId);
+        const isBlooming = blooming[0];
+        const lastFertilizedRelative = moment(plant.map(a => a.last_fertilized)).startOf("day").fromNow();
+        const lastWateredRelative = moment(plant.map(a => a.last_watered)).startOf("day").fromNow();
 
         return (
 
 
             <Container>
 
-
-
-
                 <div className='single-plant-wrapper'>
 
                     <div className='plant-data'>
 
-
                         <div className="plant-requirements">
                             <span>- {plantCategoryName} -</span>
-                            <h3>{name} {blooming ? <GiCottonFlower style={{color:"red", fontSize:"2em"}}  /> : <GiZigzagLeaf style={{color:"green", fontSize:"2em"}} />}</h3>
+                            <h3>{name} {isBlooming ? <GiCottonFlower style={{color:"red", fontSize:"2em"}}  /> : <GiZigzagLeaf style={{color:"green", fontSize:"2em"}} />}</h3>
                             <ListGroup>
                                 <ListGroupItem><span>Difficulty level:</span><span>{difficulties[difficulty]}</span></ListGroupItem>
                                 <ListGroupItem><span>Required Sun exposure: </span><span>{exposure[required_exposure]}</span></ListGroupItem>
                                 <ListGroupItem><span>Required room humidity:</span><span> {humidity[required_humid]}</span></ListGroupItem>
                                 <ListGroupItem><span>Required room temperature: </span><span>{temp[required_temp]}</span></ListGroupItem>
-                                <ListGroupItem><span>Watering interval:</span><span> {watering}</span></ListGroupItem>
-                                <ListGroupItem><span>Fertilizing interval:</span><span> {fertilizing}</span></ListGroupItem>
+                                <ListGroupItem><span>Watering interval [days]:</span><span> {watering}</span></ListGroupItem>
+                                <ListGroupItem><span>Fertilizing interval [days]:</span><span> {fertilizing}</span></ListGroupItem>
                                 <ListGroupItem className='edition-icons'><BiEdit className='edit'/><BiTrash/></ListGroupItem>
 
                             </ListGroup>
@@ -73,17 +74,14 @@ class SinglePlantItem extends React.Component {
                                     <Table bordered>
                                         <thead>
                                         <tr>
-
                                             <th>Last Watered</th>
-                                            <th>Next Watering</th>
-
+                                            <th>How long ago?</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>{lastWatered}</td>
-                                            <td>info</td>
-
+                                            <td>{lastWateredRelative}</td>
                                         </tr>
                                         </tbody>
                                     </Table>
@@ -100,15 +98,15 @@ class SinglePlantItem extends React.Component {
                                         <thead>
                                         <tr>
 
-                                            <th>Last Fertilized</th>
-                                            <th>Next Fertilizing</th>
+                                            <th>Last fertilized</th>
+                                            <th>How long ago?</th>
 
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>{lastFertilized}</td>
-                                            <td>info</td>
+                                            <td>{lastFertilizedRelative}</td>
 
                                         </tr>
                                         </tbody>
