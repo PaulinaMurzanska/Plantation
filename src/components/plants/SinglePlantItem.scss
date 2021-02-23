@@ -78,6 +78,15 @@
   justify-content: flex-end;
   .edit{
     margin-right: 20px;
+    &:hover{
+      color:green;
+
+    }
+  }
+  .delete{
+    &:hover{
+       color:red;
+    }
   }
 
 }

@@ -48,7 +48,7 @@ class PlantationNavbar extends React.PureComponent {
             <React.Fragment>
 
                 <Navbar color ='dark' dark expand='md' className='mb-4' >
-                    <NavbarBrand href='/'> Plantation </NavbarBrand>
+                    <NavbarBrand href='/welcome'> Plantation </NavbarBrand>
                     <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className='mr-auto' navbar>

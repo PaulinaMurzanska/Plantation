@@ -2,10 +2,12 @@ import React from "react";
 import {GiZigzagLeaf} from "react-icons/gi";
 import {GiCottonFlower} from "react-icons/gi";
 import {difficulties, exposure, humidity, temp} from "constants/PlantsParameters";
-import {Button, Container, ListGroup, ListGroupItem, Table} from "reactstrap";
+import {Button, Container, ListGroup, ListGroupItem, NavItem, NavLink, Table} from "reactstrap";
 import './SinglePlantItem.scss';
-import{BiEdit,BiTrash} from 'react-icons/bi';
+import {BiEdit, BiTrash} from 'react-icons/bi';
 import moment from "moment";
+import {Link, Redirect} from "react-router-dom";
+import {ROUTE_DELETE, ROUTE_EDIT} from "constants/Routes";
 
 
 const getCategoryName = (categories, plantCategoryId) => {
@@ -17,9 +19,14 @@ const getCategoryName = (categories, plantCategoryId) => {
 }
 const secToDays = 84400;
 
+
 class SinglePlantItem extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    redirectToEdition = () => {
+        <Redirect to="/plants"/>
     }
 
 
@@ -29,8 +36,8 @@ class SinglePlantItem extends React.Component {
         console.log(plant);
         const name = plant.map(a => a.name);
         const blooming = plant.map(a => a.blooming);
-        const fertilizing = Math.ceil(plant.map(a => a.fertilizing_interval)/secToDays);
-        const watering = Math.ceil(plant.map(a => a.watering_interval)/secToDays);
+        const fertilizing = Math.ceil(plant.map(a => a.fertilizing_interval) / secToDays);
+        const watering = Math.ceil(plant.map(a => a.watering_interval) / secToDays);
         const difficulty = plant.map(a => a.difficulty);
         const required_temp = plant.map(a => a.required_temperature);
         const required_humid = plant.map(a => a.required_humidity);
@@ -43,6 +50,7 @@ class SinglePlantItem extends React.Component {
         const lastFertilizedRelative = moment(plant.map(a => a.last_fertilized)).startOf("day").fromNow();
         const lastWateredRelative = moment(plant.map(a => a.last_watered)).startOf("day").fromNow();
 
+
         return (
 
 
@@ -54,7 +62,8 @@ class SinglePlantItem extends React.Component {
 
                         <div className="plant-requirements">
                             <span>- {plantCategoryName} -</span>
-                            <h3>{name} {isBlooming ? <GiCottonFlower style={{color:"red", fontSize:"2em"}}  /> : <GiZigzagLeaf style={{color:"green", fontSize:"2em"}} />}</h3>
+                            <h3>{name} {isBlooming ? <GiCottonFlower style={{color: "red", fontSize: "2em"}}/> :
+                                <GiZigzagLeaf style={{color: "green", fontSize: "2em"}}/>}</h3>
                             <ListGroup>
                                 <ListGroupItem><span>Difficulty level:</span><span>{difficulties[difficulty]}</span></ListGroupItem>
                                 <ListGroupItem><span>Required Sun exposure: </span><span>{exposure[required_exposure]}</span></ListGroupItem>
@@ -62,7 +71,16 @@ class SinglePlantItem extends React.Component {
                                 <ListGroupItem><span>Required room temperature: </span><span>{temp[required_temp]}</span></ListGroupItem>
                                 <ListGroupItem><span>Watering interval [days]:</span><span> {watering}</span></ListGroupItem>
                                 <ListGroupItem><span>Fertilizing interval [days]:</span><span> {fertilizing}</span></ListGroupItem>
-                                <ListGroupItem className='edition-icons'><BiEdit className='edit'/><BiTrash/></ListGroupItem>
+                                <ListGroupItem className='edition-icons'>
+                                    <NavItem tag={Link} to={ROUTE_EDIT}>
+                                        <BiEdit className='edit'/>
+
+                                    </NavItem>
+                                    <NavItem tag={Link} to={ROUTE_DELETE}>
+                                        <BiTrash className='delete'/>
+
+                                    </NavItem>
+                                </ListGroupItem>
 
                             </ListGroup>
 

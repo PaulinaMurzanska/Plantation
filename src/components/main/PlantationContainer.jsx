@@ -101,9 +101,11 @@ class PlantationContainer extends React.PureComponent {
                         />
                     </Route>
                     <Route path={ROUTE_EDIT}>
+                        <PlantationNavbar/>
                         <Edit/>
                     </Route>
                     <Route path={ROUTE_DELETE}>
+                        <PlantationNavbar/>
                         <Delete/>
                     </Route>
                     <Route path={ROUTE_POST}>
