@@ -8,7 +8,8 @@ import * as serviceWorker from './serviceWorker';
 import{Api} from "services/Api";
 import axios from 'axios';
 
-axios.defaults.baseURL = Api.baseUrl;
+
+axios.defaults.baseURL = "https://still-fortress-69660.herokuapp.com";
 axios.defaults.timeout = Api.timeout;
 
 ReactDOM.render(<App />, document.getElementById('root'));

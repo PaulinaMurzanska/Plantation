@@ -1,45 +1,55 @@
+
 @font-face {
- font-family: 'Montserrat Alternates', sans-serif;
-  src: local("Montserrat Alternates"),url("./fonts/Montserrat/MontserratAlternates-SemiBoldItalic.ttf") format("truetype");
+  font-family: 'Noto Sans', sans-serif;
+  src: local("NotoSans-Regular"), url("https://fonts.google.com/specimen/Noto+Sans?preview.text_type=custom&sidebar.open=true&selection.family=Noto+Sans:wght@400;700") format("truetype");
 }
-body{
+
+body {
   font-size: 12px;
+  background-color: #efefef;
+
 
 }
-table{
+
+table {
   text-align: center;
 
 
 }
-.table-mid-color{
+
+.table-mid-color {
   background-color: #f7f7fc;
 }
-.solid-data{
+
+.solid-data {
   background-color: rgba(219, 171, 182, 0.51);
   font-size: 1.5rem;
 }
 
-.taking-care-records{
+.taking-care-records {
   background-color: rgba(188, 220, 179, 0.51);
   font-size: 1.5rem;
 }
 
-.input-wrapper{
+.input-wrapper {
   text-align: center;
   font-size: 14px;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 
-  input{
-    margin-left:20px;
+  input {
+    margin-left: 20px;
     width: 250px;
     height: 50px;
   }
 }
-.formik-form{
+
+.formik-form {
   text-align: center;
 
-  button{
+  button {
     margin-top: 15px;
   }
 }
+
+
 

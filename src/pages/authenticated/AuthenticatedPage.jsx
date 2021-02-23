@@ -5,13 +5,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 // import AuthenticatedContainer from "components/authenticated/AuthenticatedContainer";
 // import AuthenticatedFooter from 'components/authenticated/AuthenticatedFooter';
 import PropTypes from 'prop-types';
+import PlantationNavbar from "components/nav/PlantationNavbar";
+import PlantationContainer from "components/main/PlantationContainer";
 
 const AuthenticatedPage = ({ onLogout }) => (
   <Router>
     {/*<AuthenticatedNavbar onLogout={ onLogout } />*/}
     {/*<AuthenticatedContainer />*/}
     {/*<AuthenticatedFooter />*/}
-    <p>hello</p>
+    <PlantationNavbar onLogout={ onLogout }/>
+    <PlantationContainer/>
+
   </Router>
 );
 

@@ -56,38 +56,29 @@ class PlantationContainer extends React.PureComponent {
 
                 <Switch>
                     <Route exact path={ROUTE_MAIN}>
-                        <LogInPage/>
+                        {/*<PlantationNavbar/>*/}
+                        <WelcomeSite/>
                     </Route>
                     <Route exact path={ROUTE_WELCOME}>
-                        <PlantationNavbar/>
                         <WelcomeSite/>
                     </Route>
                     <Route path={ROUTE_PLANTS}>
-                        <PlantationNavbar/>
-
                         <Plants
                             delayFetch={delayFetch}
                             getSinglePlantId={this.getSinglePlantId}
                             selectedPlantId={selectedPlantId}
                         />
-
                     </Route>
                     <Route path={ROUTE_CATEGORIES}>
-                        <PlantationNavbar/>
-
                         <Categories/>
                     </Route>
                     <Route path={ROUTE_ROOMS}>
-                        <PlantationNavbar/>
                         <Rooms/>
                     </Route>
                     <Route path={ROUTE_MYPLANTS}>
-                        <PlantationNavbar/>
                         <MyPlants/>
                     </Route>
-
                     <Route path={ROUTE_SINGLEPLANT}>
-                        <PlantationNavbar/>
                         <SinglePlant
                             selectedPlantId={selectedPlantId}
                        />
@@ -101,11 +92,11 @@ class PlantationContainer extends React.PureComponent {
                         />
                     </Route>
                     <Route path={ROUTE_EDIT}>
-                        <PlantationNavbar/>
+
                         <Edit/>
                     </Route>
                     <Route path={ROUTE_DELETE}>
-                        <PlantationNavbar/>
+
                         <Delete/>
                     </Route>
                     <Route path={ROUTE_POST}>

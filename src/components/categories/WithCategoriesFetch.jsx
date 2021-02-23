@@ -19,7 +19,7 @@ const withCategories = (WrappedComponent)=>{
         }
 
         fetchCategories = ()=> {
-            const requestUrl = "http://gentle-tor-07382.herokuapp.com/categories/"
+            const requestUrl = "https://still-fortress-69660.herokuapp.com/category";
             this.setState({categoriesInProgress:true});
             return delayFetch(category_fetch_delay_simulator,(resolve, reject)=>{
                 return axios.get(requestUrl)

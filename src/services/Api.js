@@ -25,8 +25,10 @@ const ApiGenericStatus = Object.freeze({
 });
 
 class Api {
-  static baseUrl = process.env.REACT_APP_PLANTS_API_URL;
-  static timeout = process.env.REACT_APP_PLANTS_API_TIMEOUT;
+  // static baseUrl = process.env.REACT_APP_PLANTS_API_URL;
+  static baseUrl = "https://still-fortress-69660.herokuapp.com";
+  // static timeout = process.env.REACT_APP_PLANTS_API_TIMEOUT;
+  static timeout = 3000;
   static AUTH_TOKEN = '/api-token-auth/';
   static PLANTS = '/plant/';
   static CATEGORIES = '/category/';

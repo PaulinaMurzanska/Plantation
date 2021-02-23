@@ -1,5 +1,5 @@
 import React from 'react';
-import themeImage from 'images/plant_theme6.jpeg';
+import themeImage from 'images/Plantation-Logo-layout-1.jpg';
 
 const Logo = (props) => {
   return (

@@ -12,12 +12,12 @@ const LoginPageContainer = React.memo(({ onSubmit, visible }) => {
     { 'd-none': !visible }
   );
   return (
-    <Container className={ className }>
+    <Container className='login-site-container'>
       <Row className="h-100 align-items-start align-items-md-center">
         <Col xs={ { size: 12 } } sm={ { size: 10 } } lg={ { size: 8, offset: 2 } }>
           <Card className="login-container">
             <CardHeader>
-              Welcome! Please sign in.
+              Welcome to Plantation ! Please sign in.
             </CardHeader>
             <CardBody>
               <Row>

@@ -1,0 +1,53 @@
+@import "src/styles/variables.scss";
+.custom-navbar{
+  background-color: green;
+  font-family: $documentFontFamily;
+  color:red;
+  background-color:$themeColor;
+
+  .mylogo{
+    margin-right: 20px;
+
+
+    .logo-name{
+
+      display: flex;
+      position: relative;
+      padding: 10px;
+      .logo-icon{
+        font-size: 2.6em;
+        margin-right: 10px;
+      }
+      h1{
+        font-weight:normal;
+        font-size: 1.5em;
+
+      }
+       span{
+      font-size: .6em;
+      font-weight: lighter;
+         position: absolute;
+         bottom: 4px;
+         left:42px;
+         letter-spacing: 2px;
+    }
+
+    }
+
+  }
+}
+ul>li{
+  font-size: 1.5em;
+  margin-right: 10px;
+
+}
+.admin-logout-menu{
+  text-decoration:none;
+  .admin{
+  color:black;
+  &:hover{
+    text-decoration:none;
+  }
+}
+
+}

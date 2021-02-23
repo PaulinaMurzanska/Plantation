@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const PLANTS_FETCH_DELAY = 500;
+const PLANTS_FETCH_DELAY = 100;
 
 const delayFetch = (ms, func) => {
     return new Promise((resolve, reject) => setTimeout(() => func(resolve, reject), ms));
@@ -21,7 +21,7 @@ const withPlants = (WrappedComponent) => {
 
 
         fetchPlants = () => {
-            const requestUrl = "http://gentle-tor-07382.herokuapp.com/plants/";
+            const requestUrl = "https://still-fortress-69660.herokuapp.com/plant";
             this.setState({inProgress: true});
 
 
