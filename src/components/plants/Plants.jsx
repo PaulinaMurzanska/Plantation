@@ -3,10 +3,14 @@ import {Card, CardBody, Button} from "reactstrap";
 import withCategories from "components/categories/WithCategoriesFetch";
 import withPlants from "components/plants/WithPlants";
 import './Plants.scss';
-import {ROUTE_SINGLEPLANT} from "constants/Routes";
+import {ROUTE_CREATE, ROUTE_SINGLEPLANT} from "constants/Routes";
+import {Link} from "react-router-dom";
 
 import PlantRow from "components/plants/PlantRow";
 import CategoriesSelect from "components/categories/CategoriesSelect";
+import CategoriesSelectOptions from "components/categories/CategorySelectOptions";
+
+
 
 
 class Plants extends React.PureComponent {
@@ -14,8 +18,6 @@ class Plants extends React.PureComponent {
         super(props);
         this.state = {
             categoryIdToCompare: undefined,
-            myId: 7,
-
 
         }
     }
@@ -45,18 +47,15 @@ class Plants extends React.PureComponent {
 
 
     render() {
-        const {categoryIdToCompare, myId} = this.state;
+        const {categoryIdToCompare} = this.state;
 
 
         const {
             categories,
-            categoriesInProgress,
-            categoriesSuccess,
             plants,
             successPlants,
-            inProgress,
             getSinglePlantId,
-            selectedPlantId
+
 
         } = this.props;
         const categoriesSortedAsc = categories.sort((cat1, cat2) => {
@@ -75,8 +74,6 @@ class Plants extends React.PureComponent {
 
         return (
             <Card className="mb-4">
-
-
                 <CardBody>
                     <div className='search'>
                         <label htmlFor="name">Search Categories</label>
@@ -87,19 +84,22 @@ class Plants extends React.PureComponent {
 
                             {
                                 categoriesSortedAsc.map((item, index) =>
-                                    <CategoriesSelect
+                                    <CategoriesSelectOptions
                                         category={item}
                                         index={index}
-                                    />)
+                                    />
+                                    )
 
                             }
 
                         </select>
+
                         <Button
                             onClick={this.handleResetSearch}
                             color="secondary" size="lg">Reset Search</Button>
 
                     </div>
+                    <Button tag={Link} to={ROUTE_CREATE}>Create New Plant</Button>
                     {/*<InProgress inProgress={inProgress}/>*/}
                     {
                         successPlants === false &&

@@ -1,22 +1,45 @@
 import React from "react";
+import withCategories from "components/categories/WithCategoriesFetch";
+import CategoriesSelectOptions from "components/categories/CategorySelectOptions";
 
 
 class CategoriesSelect extends React.PureComponent {
     constructor(props) {
         super(props);
 
+
     }
+
+    componentDidMount() {
+
+        this.props.fetchCategories();
+    }
+
+
+
     render() {
+        const {categories} = this.props;
 
- const category=this.props.category;
+        return (
+            <>
+                {
+                    categories.map((category, index) =>
 
-        return(
-            <option value={category.id}>
-                {category.name}
-            </option>
+                        <CategoriesSelectOptions
+                            category={category}
+                            key={index}
+                        />
+                    )
+                }
+
+
+
+            </>
+
 
         )
 
     }
 }
-export default CategoriesSelect;
+
+export default withCategories(CategoriesSelect);

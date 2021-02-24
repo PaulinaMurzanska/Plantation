@@ -34,15 +34,15 @@ const withPlants = (WrappedComponent) => {
                         const data = response.data;
                         const plants = data.map((item) => {
                             const {
-                                id, name, description, user, watering_interval, fertilizing_interval, difficulty,
-                                blooming, category, required_exposure, required_humidity, required_temperature,last_watered,last_fertilized,room
+                                id, name, description, watering_interval, fertilizing_interval, difficulty,
+                                blooming, category, required_exposure, required_humidity, required_temperature
                             } = item;
                             ;
 
 
                             return {
-                                id, name, description, user, watering_interval, fertilizing_interval, difficulty,
-                                blooming, category, required_exposure, required_humidity, required_temperature,last_watered,last_fertilized,room
+                                id, name, description, watering_interval, fertilizing_interval, difficulty,
+                                blooming, category, required_exposure, required_humidity, required_temperature
                             };
 
                         });
