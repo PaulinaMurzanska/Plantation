@@ -16,7 +16,7 @@ class WelcomeSiteItem extends React.PureComponent {
                     style={{backgroundColor: `blue`, backgroundRepeat:"no-repeat",backgroundPosition:"center",backgroundSize:"cover"}}
                     className="welcome-site-item-wrapper">
                     <div className='welcome-site-item'
-                         style={{backgroundImage: `url(${pic})`}}/>
+                         style={{backgroundColor:"#387f34"}}/>
                     <div className='trapezoid'
                          style={{borderTop: borderTop}}
                     />

@@ -1,16 +1,15 @@
 import React from "react";
-import {Card, CardBody, Button} from "reactstrap";
-import withCategories from "components/categories/WithCategoriesFetch";
-import withPlants from "components/plants/WithPlants";
+import {Card, CardBody, Button, ListGroup} from "reactstrap";
+// import withCategories from "components/categories/WithCategoriesFetch";
+// import withPlants from "components/plants/WithPlants";
 import './Plants.scss';
-import {ROUTE_CREATE, ROUTE_SINGLEPLANT} from "constants/Routes";
-import {Link} from "react-router-dom";
-
+import {ROUTE_CREATE, ROUTE_FORM,} from "constants/Routes";
+import {generatePath, Link} from "react-router-dom";
 import PlantRow from "components/plants/PlantRow";
 import CategoriesSelect from "components/categories/CategoriesSelect";
 import CategoriesSelectOptions from "components/categories/CategorySelectOptions";
-
-
+import axios from "axios";
+import InProgress from "components/sharedElements/InProgress";
 
 
 class Plants extends React.PureComponent {
@@ -18,14 +17,13 @@ class Plants extends React.PureComponent {
         super(props);
         this.state = {
             categoryIdToCompare: undefined,
-
         }
     }
 
-    componentDidMount() {
-        this.props.fetchPlants();
-        this.props.fetchCategories();
-    }
+    // componentDidMount() {
+    //     this.props.fetchCategories();
+    //
+    // }
 
     handleCategorySort = (event) => {
         const selectedValue = event.target.value;
@@ -42,22 +40,20 @@ class Plants extends React.PureComponent {
             categoryIdToCompare: undefined,
 
         })
-
     }
-
 
     render() {
         const {categoryIdToCompare} = this.state;
-
-
         const {
             categories,
             plants,
-            successPlants,
             getSinglePlantId,
-
+            plantsInProgress,
+            plantsSuccess,
 
         } = this.props;
+
+
         const categoriesSortedAsc = categories.sort((cat1, cat2) => {
             const sortBy = "name"
             const a = cat1[sortBy];
@@ -71,47 +67,53 @@ class Plants extends React.PureComponent {
             return 0;
         })
 
-
         return (
+
             <Card className="mb-4">
                 <CardBody>
-                    <div className='search'>
-                        <label htmlFor="name">Search Categories</label>
-                        <select id="name" onChange={this.handleCategorySort}>
-                            <option value=''>
-                                select category
-                            </option>
 
-                            {
-                                categoriesSortedAsc.map((item, index) =>
-                                    <CategoriesSelectOptions
-                                        category={item}
-                                        index={index}
-                                    />
+                    <div className='create-search-tab'>
+                        <div className='search'>
+                            <label htmlFor="name">Search Categories</label>
+                            <select id="name" onChange={this.handleCategorySort}>
+                                <option value=''>
+                                    select category
+                                </option>
+
+                                {
+                                    categoriesSortedAsc.map((item, index) =>
+                                        <CategoriesSelectOptions
+                                            category={item}
+                                            key={index}
+                                        />
                                     )
 
-                            }
+                                }
 
-                        </select>
+                            </select>
 
-                        <Button
-                            onClick={this.handleResetSearch}
-                            color="secondary" size="lg">Reset Search</Button>
+                            <Button
+                                onClick={this.handleResetSearch}
+                                color="secondary" size="md">Reset Search</Button>
+
+                        </div>
+
+
+                        <Button tag={Link} to={ROUTE_FORM}>Create New Plant</Button>
 
                     </div>
-                    <Button tag={Link} to={ROUTE_CREATE}>Create New Plant</Button>
-                    {/*<InProgress inProgress={inProgress}/>*/}
+                    {/*<InProgress inProgress={plantsInProgress}/>*/}
                     {
-                        successPlants === false &&
+                        plantsSuccess === false &&
                         <p>Unable to fetch plants.</p>
                     }
 
                     {
-                        successPlants && (
-                            <div className="plants-wrapper">
+                        plantsSuccess && (
+                             <div className="plant-card">
                                 {
-                                    plants.filter(plant => plant.category === categoryIdToCompare).map((filteredPlant) => (
-                                        <PlantRow plant={filteredPlant} categories={categories}
+                                    plants.filter(plant => plant.category === categoryIdToCompare).map((filteredPlant, index) => (
+                                        <PlantRow plant={filteredPlant} categories={categories} key={index}
                                                   getSinglePlantId={getSinglePlantId}/>
                                     ))
                                 }
@@ -120,7 +122,7 @@ class Plants extends React.PureComponent {
 
                     {
                         categoryIdToCompare === undefined && (
-                            <div className="plants-wrapper">
+                            <div className="plant-card">
                                 {
                                     plants.map(
                                         (plant, index, arr) => (
@@ -133,11 +135,13 @@ class Plants extends React.PureComponent {
                     }
 
 
-
                 </CardBody>
             </Card>
+
+
+
         )
     }
 }
 
-export default withCategories(withPlants(Plants));
+export default Plants;

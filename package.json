@@ -4,9 +4,11 @@
   "private": true,
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^26.0.15",
+    "@types/react-router-dom": "^5.1.5",
     "node-sass": "^4.14.1"
   },
   "dependencies": {
@@ -25,10 +27,13 @@
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
+    "react-datepicker": "^3.6.0",
     "react-dom": "^16.14.0",
     "react-icons": "^4.2.0",
+    "react-promise-tracker": "^2.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
+    "react-toastify": "^7.0.3",
     "reactstrap": "^8.9.0",
     "yup": "^0.31.0"
   },

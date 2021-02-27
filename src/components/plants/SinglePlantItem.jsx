@@ -25,9 +25,6 @@ class SinglePlantItem extends React.Component {
         super(props);
     }
 
-    redirectToEdition = () => {
-        <Redirect to="/plants"/>
-    }
 
 
     render() {

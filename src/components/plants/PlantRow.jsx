@@ -1,19 +1,22 @@
 import React, {useState} from 'react';
-import {NavItem} from "reactstrap";
+import {ListGroupItem, NavItem} from "reactstrap";
 import {Link} from "react-router-dom";
-
 import './Plants.scss';
 import itemImage from "images/plant_theme1.jpg"
-import withPlants from "components/plants/WithPlants";
-import {ROUTE_SINGLEPLANT} from "constants/Routes";
+import {ROUTE_DELETE, ROUTE_EDIT, ROUTE_PLANT} from "constants/Routes";
+import {BiEdit, BiTrash} from "react-icons/bi";
+import {
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button
+} from 'reactstrap';
 
-// import './Plant.scss';
-
+import bloomingPic from "images/blooming.jpg";
+import leafyPic from "images/plant_theme4.jpg";
 
 const getCategoryName = (categories, categoryId) => {
     const index = categories.findIndex((category) => category.id === categoryId);
     if (index < 0) {
-        return '¯\\_(ツ)_/¯';
+        return 'Category temporarily undefined ';
     }
     return categories[index].name;
 }
@@ -23,44 +26,44 @@ class PlantRow extends React.PureComponent {
 
     constructor(props) {
         super(props);
-
-
     }
-    // getSinglePlantId=(event)=>{
-    //     console.log(event.target.id);
-    // }
 
     render() {
-        const {index, plant, categories,route,getSinglePlantId} = this.props;
+        const {plant, categories, getSinglePlantId} = this.props;
 
 
         const {
             name,
             id,
             category,
+            blooming,
+
         } = plant;
+        console.log(blooming);
+        const plantImage = blooming ? {bloomingPic} : {leafyPic};
+        console.log(bloomingPic);
 
 
         return (
+            <div className="plant-card-items">
+                    <div>
+                        <Card>
+                            <CardImg top width="100%" src={blooming? bloomingPic : leafyPic} alt="Card image cap"/>
+                            <CardBody >
+                                <CardTitle tag="h5" id={id}>{name}</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">Category: {getCategoryName(categories, category)}</CardSubtitle>
+                                <CardText>
+                                    {name} is a plant form categories of plants {getCategoryName(categories, category)}.
+                                    Please click to see more details about this type of plant
+                                </CardText>
+                                <Button tag={Link} to={ROUTE_PLANT + plant.id} onClick={getSinglePlantId}>Read more</Button>
+                            </CardBody>
+                        </Card>
+                    </div>
 
-                <div className='plant-box-wrapper' >
-                    <NavItem className='navigations' tag={Link} to={ROUTE_SINGLEPLANT + plant.id} onClick={getSinglePlantId} >
 
-                        <div className='plant-box-theme' id={id}
-                             style={{backgroundImage: `url(${itemImage})`}}/>
-
-                        <div className='plant-box'>
-                            <p>
-                                {name}
-                            </p>
-                            <span>
-                                - {getCategoryName(categories, category)} -
-                            </span>
-                        </div>
-
-                    </NavItem>
-                </div>
-
+                {/*</NavItem>*/}
+            </div>
 
 
         )

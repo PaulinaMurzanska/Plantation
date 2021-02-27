@@ -1,0 +1,143 @@
+.form-wrapper {
+  padding: 50px 50px 0 50px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.3em;
+  h4{
+    margin-bottom: 10px;
+    padding-left: 10px;
+  }
+  @media(max-width: 800px) {
+    padding: 10px;
+  }
+
+  .label {
+    font-size: 1.6rem;
+    padding: 15px;
+  }
+
+  .section1 {
+    box-shadow: 0px 0px 15px 0px #B7B7B7;
+
+    padding: 15px;
+    div {
+      display: flex;
+      flex-wrap: wrap;
+
+      .name-category {
+        width: 50%;
+        padding: 15px;
+        @media(max-width: 800px) {
+          width: 100%;
+
+        }
+
+        label {
+          margin: 5px;
+        }
+
+        input {
+          margin-bottom: 10px;
+        }
+      }
+
+      .blooming-description {
+        width: 50%;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        @media(max-width: 800px) {
+          width: 100%;
+        }
+
+        .custom-checkbox {
+          display: flex;
+          justify-content: left;
+        }
+
+        .description {
+          margin-bottom: 15px;
+          margin-top: 12px;
+
+        }
+
+      }
+
+    }
+
+
+  }
+
+  .section2 {
+    margin-top: 10px;
+    box-shadow: 0px 0px 15px 0px #B7B7B7;
+    padding: 2px;
+
+
+    .settings {
+      display: flex;
+      flex-wrap: wrap;
+
+      .set-a {
+        width: 50%;
+        padding: 15px;
+        @media(max-width: 800px) {
+          width: 100%;
+        }
+      }
+
+      .set-b {
+        width: 50%;
+        padding: 15px;
+        @media(max-width: 800px) {
+          width: 100%;
+        }
+
+
+      }
+
+
+    }
+
+
+  }
+
+  .section3 {
+    margin-top: 10px;
+    box-shadow: 0px 0px 15px 0px #B7B7B7;
+    padding: 15px;
+
+    .difficulty {
+      padding: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      div {
+        width: 15%;
+        margin: 10px;
+        @media(max-width: 800px) {
+          width: 40%;
+
+        }
+      }
+
+    }
+  }
+
+
+}
+.form-buttons{
+  text-align: right;
+  padding:0 50px;
+
+  @media(max-width: 800px) {
+    padding: 10px;
+  }
+  hr{
+    display: none;
+
+  }
+
+
+}

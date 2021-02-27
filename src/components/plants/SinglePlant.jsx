@@ -1,5 +1,5 @@
 import React from "react";
-import withPlants from "components/plants/WithPlants";
+// import withPlants from "components/plants/WithPlants";
 import withCategories from "components/categories/WithCategoriesFetch";
 import List from "reactstrap/es/List";
 import PlantRow from "components/plants/PlantRow";
@@ -14,7 +14,7 @@ class SinglePlant extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.props.fetchPlants();
+
         this.props.fetchCategories();
     }
 
@@ -50,4 +50,4 @@ class SinglePlant extends React.PureComponent {
 }
 
 
-export default withCategories(withPlants(SinglePlant));
+export default withCategories(SinglePlant);
