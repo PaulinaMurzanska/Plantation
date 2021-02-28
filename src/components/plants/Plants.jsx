@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, CardBody, Button, ListGroup} from "reactstrap";
+import {Card, CardBody, Button,Container, ListGroup} from "reactstrap";
 // import withCategories from "components/categories/WithCategoriesFetch";
 // import withPlants from "components/plants/WithPlants";
 import './Plants.scss';
@@ -10,6 +10,7 @@ import CategoriesSelect from "components/categories/CategoriesSelect";
 import CategoriesSelectOptions from "components/categories/CategorySelectOptions";
 import axios from "axios";
 import InProgress from "components/sharedElements/InProgress";
+import ScrollToTop from "react-scroll-to-top";
 
 
 class Plants extends React.PureComponent {
@@ -69,9 +70,11 @@ class Plants extends React.PureComponent {
 
         return (
 
-            <Card className="mb-4">
-                <CardBody>
+            <Container>
 
+                <ScrollToTop smooth color="#387f34"/>
+
+                    <h2 className='title'>Plants Types</h2>
                     <div className='create-search-tab'>
                         <div className='search'>
                             <label htmlFor="name">Search Categories</label>
@@ -118,7 +121,8 @@ class Plants extends React.PureComponent {
                                     ))
                                 }
                             </div>
-                        )}
+                        )
+                    }
 
                     {
                         categoryIdToCompare === undefined && (
@@ -135,8 +139,8 @@ class Plants extends React.PureComponent {
                     }
 
 
-                </CardBody>
-            </Card>
+
+            </Container>
 
 
 

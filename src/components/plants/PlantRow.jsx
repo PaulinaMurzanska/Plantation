@@ -39,24 +39,22 @@ class PlantRow extends React.PureComponent {
             blooming,
 
         } = plant;
-        console.log(blooming);
-        const plantImage = blooming ? {bloomingPic} : {leafyPic};
-        console.log(bloomingPic);
+
 
 
         return (
             <div className="plant-card-items">
                     <div>
                         <Card>
-                            <CardImg top width="100%" src={blooming? bloomingPic : leafyPic} alt="Card image cap"/>
+                            <CardImg top width="100%" style={{height:"30vh"}}  src={blooming? bloomingPic : leafyPic} alt="Card image cap"/>
                             <CardBody >
-                                <CardTitle tag="h5" id={id}>{name}</CardTitle>
+                                <CardTitle tag="h5" >{name}</CardTitle>
                                 <CardSubtitle tag="h6" className="mb-2 text-muted">Category: {getCategoryName(categories, category)}</CardSubtitle>
                                 <CardText>
                                     {name} is a plant form categories of plants {getCategoryName(categories, category)}.
                                     Please click to see more details about this type of plant
                                 </CardText>
-                                <Button tag={Link} to={ROUTE_PLANT + plant.id} onClick={getSinglePlantId}>Read more</Button>
+                                <Button tag={Link} to={ROUTE_PLANT + plant.id} id={id} onClick={getSinglePlantId}>Read more</Button>
                             </CardBody>
                         </Card>
                     </div>

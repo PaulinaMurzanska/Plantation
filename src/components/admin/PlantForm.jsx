@@ -16,77 +16,88 @@ import HumidityField from "components/formik/HumidityField";
 import Buttons from "components/sharedElements/Buttons";
 
 
-const PlantForm = (props) => {
+class PlantForm extends React.Component {
+    render() {
+        const{selectedPlantId,plants,plant, plantCategory}=this.props;
+        console.log(plant);
 
 
-    return (
-        <Container>
 
-            <FormGroup className="form-wrapper">
-                <h4>Create New Plant</h4>
-                <div className='section1'>
-                    <div className='label'>Plant's Information:</div>
-                    <div>
+        return (
+            <Container>
 
-                        <div className='name-category'>
-                            <Label for='id'>Name:</Label>
-                            <Field
-                                component={PlantationInput}
-                                id="name"
-                                name={PlantFormFields.NAME}
-                                placeholder="Monstera"
-                                type="text"
-                            />
-                            <CategoryField/>
+                <FormGroup className="form-wrapper">
+                    <h4>Create New Plant</h4>
+                    <div className='section1'>
+                        <div className='label'>Plant's Information:</div>
+                        <div>
 
-                        </div>
-                        <div className='blooming-description'>
-                            <Blooming/>
-                            <div className='description'>
-                                <Label for='id'>Description:</Label>
+                            <div className='name-category'>
+                                <Label for='id'>Name:</Label>
                                 <Field
                                     component={PlantationInput}
-                                    id='description'
-                                    name={PlantFormFields.DESCRIPTION}
+                                    id="name"
+                                    name={PlantFormFields.NAME}
                                     placeholder="Monstera"
                                     type="text"
+
                                 />
+                                <CategoryField
+                                  selectedPlantId={selectedPlantId}
+                                  plant={plant}
+                                  plantCategory={plantCategory}
+                                />
+
+                            </div>
+                            <div className='blooming-description'>
+                                <Blooming/>
+                                <div className='description'>
+                                    <Label for='id'>Description:</Label>
+                                    <Field
+                                        component={PlantationInput}
+                                        id='description'
+                                        name={PlantFormFields.DESCRIPTION}
+                                        placeholder="Monstera"
+                                        type="text"
+                                    />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className='section2'>
+                        <div className='label'>Plant's Setting:</div>
+
+                        <div className='settings'>
+
+
+                            <div className='set-a'>
+                                <WateringIntervalField/>
+                                <PlantFormFertilizingInterval/>
+                            </div>
+                            <div className='set-b'>
+                                <HumidityField/>
+                                <ExposureField/>
+                                <TemperatureField/>
                             </div>
 
                         </div>
-                    </div>
-
-                </div>
-
-                <div className='section2'>
-                    <div className='label'>Plant's Setting:</div>
-
-                    <div className='settings'>
-
-
-                        <div className='set-a'>
-                            <WateringIntervalField/>
-                            <PlantFormFertilizingInterval/>
-                        </div>
-                        <div className='set-b'>
-                            <HumidityField/>
-                            <ExposureField/>
-                            <TemperatureField/>
-                        </div>
 
                     </div>
-
-                </div>
-                <div className='section3'>
-                    <PlantFormDifficulty/>
-                </div>
+                    <div className='section3'>
+                        <PlantFormDifficulty/>
+                    </div>
 
 
+                </FormGroup>
+            </Container>
 
-            </FormGroup>
-        </Container>
+        )
 
-    )
+
+    }
 
 
 }

@@ -1,5 +1,5 @@
 import { JsonConverter, JsonObject, JsonProperty, JsonType } from 'ta-json';
-import MomentSerializer from "components/plants/plantForm/MomentSerializer";
+import MomentSerializer from "serializers/MomentSerializer";
 
 @JsonObject()
 class Plant {

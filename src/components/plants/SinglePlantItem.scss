@@ -1,5 +1,9 @@
 .single-plant-wrapper {
   padding: 20px;
+   @media(max-width: 500px) {
+        padding: 20px 0;
+
+      }
 
   .plant-data {
     display: flex;
@@ -72,18 +76,21 @@
 }
 
 .edition-icons {
-  font-size: 2em;
   color: black;
   display: flex;
   justify-content: flex-end;
   .edit{
     margin-right: 20px;
+      font-size: 2rem;
+
     &:hover{
       color:green;
+
 
     }
   }
   .delete{
+    font-size: 2rem;
     &:hover{
        color:red;
     }

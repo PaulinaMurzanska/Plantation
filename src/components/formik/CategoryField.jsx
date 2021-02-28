@@ -5,22 +5,23 @@ import PlantFormFields from "constants/PlantFormFields";
 import withCategories from "components/categories/WithCategoriesFetch";
 import CategoriesSelect from "components/categories/CategoriesSelect";
 import PlantationSelect from "components/formik/PlantationSelect";
+
 // import CategoriesSelectOptions from "components/categories/CategorySelectOptions";
 
 
-
-
-class CategoryField extends  React.Component{
+class CategoryField extends React.Component {
     constructor(props) {
         super(props);
 
     }
 
-    componentDidMount=()=> {
+    componentDidMount = () => {
         this.props.fetchCategories();
     }
+
     render() {
-        const {categories} = this.props;
+        const {categories, plantCategory,selectedPlantId, plants, plant} = this.props;
+
 
 
         return (
@@ -43,4 +44,5 @@ class CategoryField extends  React.Component{
         )
     }
 }
+
 export default withCategories(CategoryField);

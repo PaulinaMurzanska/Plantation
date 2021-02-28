@@ -7,16 +7,13 @@ const ROUTE_WELCOME="/welcome";
 const ROUTE_FORM="/form";
 const ROUTE_ABOUT='/about';
 const ROUTE_MENU='/menu';
-
-
-
-
 const ROUTE_CREATE ="/create";
 const ROUTE_EDIT ="/edit/";
 const ROUTE_DELETE ="/delete/:id";
+const ROUTE_PLANT ="/plant/";
 
-
-const ROUTE_PLANT="/plant/";
+const ROUTE_MYPLANTS="/myplants/";
+const ROUTE_MYPLANTSPAGE="/myplantspage/";
 
 
 export {
@@ -32,7 +29,9 @@ export {
     ROUTE_PLANT,
     ROUTE_FORM,
     ROUTE_ABOUT,
-    ROUTE_MENU
+    ROUTE_MENU,
+    ROUTE_MYPLANTS,
+    ROUTE_MYPLANTSPAGE
 
 
 

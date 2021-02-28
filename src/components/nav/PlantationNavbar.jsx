@@ -18,28 +18,21 @@ import {
 import {
     ROUTE_CATEGORIES,
     ROUTE_PLANTS,
-    ROUTE_ROOMS,
-    ROUTE_MYPLANTS, ROUTE_ABOUT, ROUTE_MENU
+    ROUTE_MYPLANTS, ROUTE_ABOUT, ROUTE_MENU, ROUTE_MYPLANTSPAGE
 } from '../../constants/Routes';
 
-
 import {
-    faCog,
-    faCogs,
+faCogs,
     faHome,
     faLeaf,
-    faSeedling,
-    faSpa,
-    faCodeBranch,
-    faBars,
     faFolderPlus,
     faBookReader,
 } from "@fortawesome/free-solid-svg-icons";
-import {FaSeedling} from "react-icons/fa";
-import{RiPlantLine} from"react-icons/ri";
+// import {FaSeedling} from "react-icons/fa";
+// import{RiPlantLine} from"react-icons/ri";
 
 import PlantationNavItem from "./PlantationNavItem";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Brand} from "components/sharedElements/Brand";
 
 
@@ -71,13 +64,6 @@ class PlantationNavbar extends React.PureComponent {
 
                 >
                     <NavbarBrand tag={Link} to={ROUTE_ABOUT}>
-                        {/*<div className='mylogo'>*/}
-                        {/*    <div className='logo-name'>*/}
-                        {/*        <FaSeedling className="logo-icon"/>*/}
-                        {/*        <h1>Plantation</h1>*/}
-                        {/*        <span>plant display solution</span>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
                         <Brand/>
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle}/>
@@ -86,6 +72,7 @@ class PlantationNavbar extends React.PureComponent {
                             <PlantationNavItem path={ROUTE_ABOUT} icon={faHome} name="About"/>
                             <PlantationNavItem path={ROUTE_MENU} icon={faFolderPlus} name="Menu"/>
                             <PlantationNavItem path={ROUTE_PLANTS} icon={faLeaf} name="Types of Plants"/>
+                            <PlantationNavItem path={ROUTE_MYPLANTSPAGE} icon={faCogs} name="My Plants"/>
                             <PlantationNavItem path={ROUTE_CATEGORIES} icon={faBookReader} name="Articles"/>
 
                         </Nav>
@@ -97,8 +84,9 @@ class PlantationNavbar extends React.PureComponent {
                                 </DropdownToggle>
                                 <DropdownMenu right className='admin-logout-menu'>
                                     <DropdownItem>
-                                        <a className='admin' href={"https://still-fortress-69660.herokuapp.com"} target="_blank">
-                                             Admin
+                                        <a className='admin' href={"https://still-fortress-69660.herokuapp.com"}
+                                           target="_blank">
+                                            Admin
                                         </a>
 
                                     </DropdownItem>

@@ -23,14 +23,15 @@ const secToDays = 84400;
 class SinglePlantItem extends React.Component {
     constructor(props) {
         super(props);
+
     }
 
 
-
     render() {
-        const {index, plant, categories, category} = this.props;
+        const {index, plant, categories, category, onEdit} = this.props;
 
         console.log(plant);
+        const id = plant.map(a => a.id);
         const name = plant.map(a => a.name);
         const blooming = plant.map(a => a.blooming);
         const fertilizing = Math.ceil(plant.map(a => a.fertilizing_interval) / secToDays);
@@ -46,7 +47,6 @@ class SinglePlantItem extends React.Component {
         const isBlooming = blooming[0];
         const lastFertilizedRelative = moment(plant.map(a => a.last_fertilized)).startOf("day").fromNow();
         const lastWateredRelative = moment(plant.map(a => a.last_watered)).startOf("day").fromNow();
-
 
         return (
 
@@ -69,8 +69,8 @@ class SinglePlantItem extends React.Component {
                                 <ListGroupItem><span>Watering interval [days]:</span><span> {watering}</span></ListGroupItem>
                                 <ListGroupItem><span>Fertilizing interval [days]:</span><span> {fertilizing}</span></ListGroupItem>
                                 <ListGroupItem className='edition-icons'>
-                                    <NavItem tag={Link} to={ROUTE_EDIT}>
-                                        <BiEdit className='edit'/>
+                                    <NavItem tag={Link} to={ROUTE_EDIT} >
+                                        <BiEdit id={id} onClick={onEdit} className='edit'/>
 
                                     </NavItem>
                                     <NavItem tag={Link} to={ROUTE_DELETE}>
@@ -80,60 +80,59 @@ class SinglePlantItem extends React.Component {
                                 </ListGroupItem>
 
                             </ListGroup>
-
                         </div>
-                        <div className='plant-actions'>
-                            <div className="plant-watering">
-                                <h4>Watering</h4>
-                                <div className='info-table'>
-                                    <Table bordered>
-                                        <thead>
-                                        <tr>
-                                            <th>Last Watered</th>
-                                            <th>How long ago?</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>{lastWatered}</td>
-                                            <td>{lastWateredRelative}</td>
-                                        </tr>
-                                        </tbody>
-                                    </Table>
-                                    <Button> I watered plant today</Button>
+                        {/*<div className='plant-actions'>*/}
+                        {/*    <div className="plant-watering">*/}
+                        {/*        <h4>Watering</h4>*/}
+                        {/*        <div className='info-table'>*/}
+                        {/*            <Table bordered>*/}
+                        {/*                <thead>*/}
+                        {/*                <tr>*/}
+                        {/*                    <th>Last Watered</th>*/}
+                        {/*                    <th>How long ago?</th>*/}
+                        {/*                </tr>*/}
+                        {/*                </thead>*/}
+                        {/*                <tbody>*/}
+                        {/*                <tr>*/}
+                        {/*                    <td>{lastWatered}</td>*/}
+                        {/*                    <td>{lastWateredRelative}</td>*/}
+                        {/*                </tr>*/}
+                        {/*                </tbody>*/}
+                        {/*            </Table>*/}
+                        {/*            <Button> I watered plant today</Button>*/}
 
-                                </div>
-                            </div>
+                        {/*        </div>*/}
+                        {/*    </div>*/}
 
-                            <div className="plant-fertilizing">
-                                <h4>Fertilizing</h4>
+                        {/*    <div className="plant-fertilizing">*/}
+                        {/*        <h4>Fertilizing</h4>*/}
 
-                                <div className='info-table'>
-                                    <Table bordered>
-                                        <thead>
-                                        <tr>
+                        {/*        <div className='info-table'>*/}
+                        {/*            <Table bordered>*/}
+                        {/*                <thead>*/}
+                        {/*                <tr>*/}
 
-                                            <th>Last fertilized</th>
-                                            <th>How long ago?</th>
+                        {/*                    <th>Last fertilized</th>*/}
+                        {/*                    <th>How long ago?</th>*/}
 
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>{lastFertilized}</td>
-                                            <td>{lastFertilizedRelative}</td>
+                        {/*                </tr>*/}
+                        {/*                </thead>*/}
+                        {/*                <tbody>*/}
+                        {/*                <tr>*/}
+                        {/*                    <td>{lastFertilized}</td>*/}
+                        {/*                    <td>{lastFertilizedRelative}</td>*/}
 
-                                        </tr>
-                                        </tbody>
-                                    </Table>
-                                    <Button> I Fertilized plant today</Button>
+                        {/*                </tr>*/}
+                        {/*                </tbody>*/}
+                        {/*            </Table>*/}
+                        {/*            <Button> I Fertilized plant today</Button>*/}
 
-                                </div>
+                        {/*        </div>*/}
 
 
-                            </div>
+                        {/*</div>*/}
 
-                        </div>
+                        {/*</div>*/}
 
                     </div>
 

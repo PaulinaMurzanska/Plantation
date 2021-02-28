@@ -1,56 +1,77 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
-// import Effect from 'components/shared/form/Effect';
-// import ResultAdd from "components/admin/ResultAdd";
 import {Button, Container} from "reactstrap";
 import Buttons from "components/sharedElements/Buttons";
 import PlantForm from "components/admin/PlantForm";
+import {humidity} from "constants/PlantsParameters";
 
-const PlantFormCard = (props) => {
-
-    const onSubmit = (values) => {
-        const plant = values;
-        props.onSubmit(plant);
-    };
-
-    const {
-        initialValues,
-    } = props;
-
-    const key = initialValues.id;
-
-    const formikProps = {
-        key,
-        initialValues,
-        onSubmit,
-    };
-
-    return (
-        <Formik {...formikProps}>
-            {({isValid}) => (
-                <Form className="plant-form">
-                    {/*<Effect onChange={onChange}/>*/}
-                    <PlantForm/>
-                    <Container>
-                        <div className='form-buttons'>
-
-                            <Buttons
-                                cancelLabel="Cancel"
-                                submitDisabled={!isValid}
-                                submitLabel={key ? 'Save changes' : 'Create new plant'}
-                            />
+class PlantFormCard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
 
-                        </div>
-                    </Container>
+    render() {
+
+        const {
+            categories,
+            initialValues,
+            selectedPlantId,
+            plantIdToEdit,
+            plants,
+        } = this.props;
+        console.log(plants);
+        console.log(initialValues);
+
+        const onSubmit = (values) => {
+            const plant = values;
+            this.props.onSubmit(plant);
+        };
 
 
-                </Form>
+        const key = initialValues.id;
+        console.log(key);
 
-            )}
+        const formikProps = {
+            key,
+            initialValues,
+            onSubmit,
+        };
 
-        </Formik>
-    );
+        return (
+            <Formik {...formikProps}>
+                {({isValid}) => (
+                    <Form className="plant-form">
+
+                        <PlantForm
+                            selectedPlantId={selectedPlantId}
+                            plants={plants}
+
+
+                        />
+                        <Container>
+                            <div className='form-buttons'>
+
+                                <Buttons
+                                    cancelLabel="Cancel"
+                                    submitDisabled={!isValid}
+                                    submitLabel={key === undefined ?'Create new plant' : 'Save changes'}
+                                />
+
+
+                            </div>
+                        </Container>
+
+
+                    </Form>
+
+                )}
+
+            </Formik>
+        );
+
+    }
+
 
 };
 
