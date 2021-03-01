@@ -9,6 +9,8 @@ class PlantFormFields {
   static REQUIRED_HUMIDITY = 'required_humidity';
   static REQUIRED_TEMPERATURE = 'required_temperature';
   static WATERING_INTERVAL = 'watering_interval';
-}
+};
+
+
 
 export default PlantFormFields;

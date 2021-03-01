@@ -1,4 +1,4 @@
-    import React from "react";
+import React from "react";
 import axios from "axios";
 import {CardBody, ListGroup} from "reactstrap";
 import MyPlant from "components/myPlant/MyPlant";
@@ -99,21 +99,21 @@ class MyPlantsPage extends React.PureComponent {
             .then((response) => {
                 const data = response.data;
                 const myPlant = data;
-                const myPlants = [...this.state.myPlants];
-                myPlants.push(myPlant);
-                this.setState({myPlants: myPlants});
-                this.props.history.push(path);
+                // const myPlants = [...this.state.myPlants];
+                // myPlants.push(myPlant);
+                // this.setState({myPlants: myPlants});
+                // this.props.history.push(path);
             })
             .catch((error) => {
                 const plantsErrorMessage = "Error creating plant";
-                this.props.history.push(path);
+                // this.props.history.push(path);
                 this.setState({
                     createPlantErrorMessage: plantsErrorMessage,
                 });
             });
     };
 
-     onCreate = (event) => {
+     onCreateMyPlant = (event) => {
         console.log("kliknięto plant create");
         this.setState({selectedMyPlantId: undefined})
     }
@@ -131,34 +131,44 @@ class MyPlantsPage extends React.PureComponent {
 
         console.log(myPlants);
 
-        const toEdit =
-            {
-               description: description,
-            difficulty: difficulty,
-            id: id,
-            image_url:image_url,
-            last_fertilized:last_fertilized,
-            last_watered:last_watered,
-            name:name,
-            plant:plant,
-            room:room,
+        // const toEdit =
+        //     {
+        //         description: description,
+        //     difficulty: difficulty,
+        //     id: id,
+        //     image_url:image_url,
+        //     last_fertilized:last_fertilized,
+        //     last_watered:last_watered,
+        //     name:name,
+        //     plant:plant,
+        //     room:room,
+        //
+        //     };
+        // const initial = {
+        //     description:this.state.description,
+        //     difficulty: this.state.difficulty,
+        //     id: this.state.id,
+        //     image_url:this.state.image_url,
+        //     last_fertilized:this.state.last_fertilized,
+        //     last_watered:this.state.last_watered,
+        //     name:this.state.name,
+        //     plant:this.state.plant,
+        //     room:this.state.room,
+        //
+        // };
+        // console.log(toEdit);
 
-            };
-        const initial = {
-            description:this.state.description,
-            difficulty: this.state.difficulty,
-            id: this.state.id,
-            image_url:this.state.image_url,
-            last_fertilized:this.state.last_fertilized,
-            last_watered:this.state.last_watered,
-            name:this.state.name,
-            plant:this.state.plant,
-            room:this.state.room,
-
-        };
-        console.log(toEdit);
-
-
+    const initialValues={
+            description: '',
+            difficulty: undefined,
+            id: undefined,
+            image_url: "",
+            last_fertilized: undefined,
+            last_watered: undefined,
+            name:"",
+            plant:undefined,
+            room:undefined,
+    };
 
 
 
@@ -170,8 +180,10 @@ class MyPlantsPage extends React.PureComponent {
                     <MyPlantFormCard
                         cateories={categories}
                         rooms={rooms}
-                        froubmLabel='Create New Plant'
-                        inS
+                        plants={plants}
+                        formLabel='Create New Plant'
+                        initialValues={initialValues}
+                        onSubmit={this.onSubmitPlantCreate}
                     />
                 </Route>
                 <Route exact path={ROUTE_MYPLANTS}>
@@ -181,6 +193,7 @@ class MyPlantsPage extends React.PureComponent {
                         categories={categories}
                         myPlantsSuccess={myPlantsSuccess}
                         rooms={rooms}
+                        onCreateMyPlant={this.onCreateMyPlant}
 
 
                     />

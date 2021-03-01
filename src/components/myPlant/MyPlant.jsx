@@ -43,7 +43,8 @@ class MyPlant extends React.PureComponent {
     }
 
     render() {
-        const {myPlants, plants, rooms, categories, hello, myPlantsSuccess} = this.props;
+        const {myPlants, plants, rooms, categories, hello, myPlantsSuccess, onCreateMyPlant} = this.props;
+        console.log(this.props);
         const {sortDirection} = this.state;
         const multiplier = sortDirection ? 1 : -1;
 
@@ -80,8 +81,9 @@ class MyPlant extends React.PureComponent {
                                     onClick={this.handleResetSearch}
                                     color="secondary" size="md">Reset Search</Button>
                             </div>
-                            <Button tag={Link} to={ROUTE_MYPLANT_CREATE
-                            }>Create New Plant</Button>
+                            <Button tag={Link} to={ROUTE_MYPLANT_CREATE}
+                                    // onClick={onCreateMyPlant}
+                            >Create New Plant</Button>
                         </div>
                         <div className="my-plant-card">
                             {

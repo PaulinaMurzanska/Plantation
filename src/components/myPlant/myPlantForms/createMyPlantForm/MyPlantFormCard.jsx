@@ -3,6 +3,7 @@ import {Form, Formik} from 'formik';
 import {Button, Container} from "reactstrap";
 import Buttons from "components/sharedElements/Buttons";
 import PlantForm from "components/admin/PlantForm";
+import MyPlantForm from "components/myPlant/myPlantForms/MyPlantForm";
 
 
 class MyPlantFormCard extends React.Component {
@@ -12,63 +13,67 @@ class MyPlantFormCard extends React.Component {
     }
     render() {
 
-        // const {
-        //     categories,
-        //     initial,
-        //     selectedPlantId,
+        const {
+            categories,
+            initialValues,
+            selectedMyPlantId,
         //     plantIdToEdit,
-        //     plants,
+            myPlants,
+            plants,
+            rooms,
         //     plant
-        // } = this.props;
+        } = this.props;
         //
-        // const initialValues = initial;
+
         //
-        // const onSubmit = (values) => {
-        //     const plant = values;
-        //     this.props.onSubmit(plant);
-        // };
+        const onSubmit = (values) => {
+            console.log(values);
+            const myPlant = values;
+            this.props.onSubmit(myPlant);
+        };
         //
         //
         // const key = initialValues.id;
-        // // const key = 1;
+        const key = 1;
         //
-        // const formikProps = {
-        //     key,
-        //     initialValues,
-        //     onSubmit,
-        // };
+        const formikProps = {
+            key,
+            initialValues,
+            onSubmit,
+        };
 
         return (
-            <p>hello</p>
-            // <Formik {...formikProps}>
-            //     {({isValid}) => (
-            //         <Form className="plant-form">
-            //
-            //             <PlantForm
-            //                 selectedPlantId={selectedPlantId}
-            //                 plants={plants}
-            //
-            //
-            //             />
-            //             <Container>
-            //                 <div className='form-buttons'>
-            //
-            //                     <Buttons
-            //                         cancelLabel="Cancel"
-            //                         submitDisabled={!isValid}
-            //                         submitLabel={key ? 'Save changes' : 'Create new plant'}
-            //                     />
-            //
-            //
-            //                 </div>
-            //             </Container>
-            //
-            //
-            //         </Form>
-            //
-            //     )}
-            //
-            // </Formik>
+
+            <Formik {...formikProps}>
+                {({isValid}) => (
+                    <Form className="plant-form">
+
+                        <MyPlantForm
+                            myPlants={myPlants}
+                            plants={plants}
+                            rooms={rooms}
+
+
+                        />
+                        <Container>
+                            <div className='form-buttons'>
+
+                                <Buttons
+                                    cancelLabel="Cancel"
+                                    submitDisabled={!isValid}
+                                    submitLabel={key ? 'Save changes' : 'Create new plant'}
+                                />
+
+
+                            </div>
+                        </Container>
+
+
+                    </Form>
+
+                )}
+
+            </Formik>
         );
 
     }
