@@ -10,6 +10,8 @@ import axios from 'axios';
 
 
 axios.defaults.baseURL = Api.baseUrl;
+
+
 axios.defaults.timeout = Api.timeout;
 
 ReactDOM.render(<App />, document.getElementById('root'));

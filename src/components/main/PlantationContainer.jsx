@@ -12,7 +12,7 @@ import {
     ROUTE_FORM,
     ROUTE_ABOUT,
     ROUTE_MENU,
-    ROUTE_MYPLANTS, ROUTE_MYPLANTSPAGE, ROUTE_CREATE
+    ROUTE_MYPLANTS, ROUTE_MYPLANTSPAGE, ROUTE_CREATE, ROUTE_MYPLANT_CREATE
 } from "/home/dev/Desktop/plantation/src/constants/Routes";
 import {generatePath, Route, Switch, withRouter} from "react-router-dom";
 import Plants from "components/plants/Plants";
@@ -30,6 +30,7 @@ import {About} from "components/about/About";
 import MyPlant from "components/myPlant/MyPlant";
 import MyPlantsPage from "components/myPlant/MyPlantsPage";
 import {Api} from "services/Api";
+import Test from "components/myPlant/Test";
 
 
 const PLANTS_FETCH_DELAY = 50;
@@ -131,35 +132,12 @@ class PlantationContainer extends React.PureComponent {
         console.log("kliknięto plant create");
         this.setState({selectedPlantId: undefined})
     }
-    onEdit=()=>{
+    onEdit = () => {
         const selectedPlant = this.state.plants.find(obj => obj.id === this.state.selectedPlantId)
         console.log(selectedPlant);
-        this.setState({plantSelected:selectedPlant})
+        this.setState({plantSelected: selectedPlant})
     }
 
-
-    // onEdit = (event) => {
-    //     const chosenPlant = this.state.plants.filter(plant => {
-    //         return plant.id === this.state.selectedPlantId
-    //     });
-    //     this.setState({
-    //         plantSelected: chosenPlant,
-    //         // blooming: true,
-    //         // category: 2,
-    //         // description: 'sfgbs',
-    //         // difficulty: 2,
-    //         // fertilizing_interval: 30,
-    //         // name: "agdhghad",
-    //         // required_humidity: "medium",
-    //         // required_exposure: "partsun",
-    //         // required_temperature: "medium",
-    //         // watering_interval: '1',
-    //         // id: 8,
-    //
-    //
-    //     })
-    //
-    // }
 
     onSubmitPlantCreate = (plant) => {
         console.log(plant);
@@ -214,28 +192,27 @@ class PlantationContainer extends React.PureComponent {
 
         const {delayFetch, categories, rooms} = this.props;
         const {createPlantErrorMessage, selectedPlantId, plants, plantsSuccess, plantsInProgress, plantSelected, plantIdToEdit} = this.state;
-        const {name, blooming, id, watering_interval,category,difficulty,description,
-            fertilizing_interval,required_exposure,required_humidity,required_temperature
-        } =plantSelected;
-        console.log(name, blooming, id, watering_interval,category,difficulty,description,
-            fertilizing_interval,required_exposure,required_humidity,required_temperature);
-
-
+        const {
+            name, blooming, id, watering_interval, category, difficulty, description,
+            fertilizing_interval, required_exposure, required_humidity, required_temperature
+        } = plantSelected;
+        console.log(name, blooming, id, watering_interval, category, difficulty, description,
+            fertilizing_interval, required_exposure, required_humidity, required_temperature);
 
 
         const toEdit =
             {
                 blooming: blooming,
-                category:category,
-                description:description,
-                difficulty:difficulty,
+                category: category,
+                description: description,
+                difficulty: difficulty,
                 fertilizing_interval: fertilizing_interval,
                 name: name,
                 required_humidity: required_humidity,
                 required_exposure: required_exposure,
                 required_temperature: required_temperature,
                 watering_interval: watering_interval,
-                id:id,
+                id: id,
             }
         const initial = {
             blooming: this.state.blooming,
@@ -250,15 +227,15 @@ class PlantationContainer extends React.PureComponent {
             watering_interval: this.state.watering_interval,
             id: this.state.id,
         };
-        console.log(initial);
+        console.log(toEdit);
 
 
         return (
             <>
 
                 <Switch>
+
                     <Route exact path={ROUTE_MAIN}>
-                        {/*<PlantationNavbar/>*/}
                         <About/>
                     </Route>
                     <Route exact path={ROUTE_MENU}>
@@ -293,6 +270,7 @@ class PlantationContainer extends React.PureComponent {
                     <Route path={ROUTE_ROOMS}>
                         <Rooms/>
                     </Route>
+
                     <Route path={ROUTE_PLANT}>
                         <SinglePlant
                             selectedPlantId={selectedPlantId}

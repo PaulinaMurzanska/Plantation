@@ -4,10 +4,12 @@ import MyPlantItem from "components/myPlant/MyPlantItem";
 import "./MyPlant.scss";
 import CategoriesSelectOptions from "components/categories/CategorySelectOptions";
 import {Link} from "react-router-dom";
-import {ROUTE_CREATE, ROUTE_FORM} from "constants/Routes";
+import {ROUTE_CREATE, ROUTE_FORM, ROUTE_MYPLANT_CREATE, ROUTE_MYPLANTS} from "constants/Routes";
 import {BiSortZA, BiSortAZ} from "react-icons/bi"
 // import {ScrollTop} from "components/sharedElements/ScrollTop";
 import ScrollToTop from "react-scroll-to-top";
+import {Switch, Route} from "react-router-dom";
+import {About} from "components/about/About";
 
 class MyPlant extends React.PureComponent {
     constructor(props) {
@@ -41,7 +43,7 @@ class MyPlant extends React.PureComponent {
     }
 
     render() {
-        const {myPlants, plants, rooms,categories, myPlantsSuccess} = this.props;
+        const {myPlants, plants, rooms, categories, hello, myPlantsSuccess} = this.props;
         const {sortDirection} = this.state;
         const multiplier = sortDirection ? 1 : -1;
 
@@ -58,40 +60,46 @@ class MyPlant extends React.PureComponent {
             return 0;
         });
 
-        const myPlantsList = sortDirection===undefined ? myPlants : myPlantsSorted;
+        const myPlantsList = sortDirection === undefined ? myPlants : myPlantsSorted;
 
 
         return (
-            <Container>
-                <ScrollToTop smooth color="#387f34"/>
-                <div className='create-search-tab'>
-                    <div className='search'>
-                        <label htmlFor="name">Sort Plants</label>
-                        <BiSortAZ  id="name" onClick={this.handlePlantsSortAsc} style={{fontSize:"2rem",marginRight:"15px"}} />
-                        <BiSortZA id="name" onClick={this.handlePlantsSortDesc} style={{fontSize:"2rem",marginRight:"15px"}} />
 
-                        <Button
-                            onClick={this.handleResetSearch}
-                            color="secondary" size="md">Reset Search</Button>
-                    </div>
-                    <Button tag={Link} to={ROUTE_CREATE}>Create New Plant</Button>
-                </div>
-                <div className="my-plant-card">
-                    {
-                        myPlantsList.map((myPlant, index) => (
-                            <MyPlantItem
-                                myPlant={myPlant}
-                                key={index}
-                                plants={plants}
-                                categories={categories}
-                                rooms={rooms}
+                    <Container>
+                        <ScrollToTop smooth color="#387f34"/>
+                        <div className='create-search-tab'>
+                            <div className='search'>
+                                {hello}
+                                <label htmlFor="name">Sort Plants</label>
+                                <BiSortAZ id="name" onClick={this.handlePlantsSortAsc}
+                                          style={{fontSize: "2rem", marginRight: "15px"}}/>
+                                <BiSortZA id="name" onClick={this.handlePlantsSortDesc}
+                                          style={{fontSize: "2rem", marginRight: "15px"}}/>
 
-                            />
-                        ))
-                    }
-                </div>
+                                <Button
+                                    onClick={this.handleResetSearch}
+                                    color="secondary" size="md">Reset Search</Button>
+                            </div>
+                            <Button tag={Link} to={ROUTE_MYPLANT_CREATE
+                            }>Create New Plant</Button>
+                        </div>
+                        <div className="my-plant-card">
+                            {
+                                myPlantsList.map((myPlant, index) => (
+                                    <MyPlantItem
+                                        myPlant={myPlant}
+                                        key={index}
+                                        plants={plants}
+                                        categories={categories}
+                                        rooms={rooms}
 
-            </Container>
+                                    />
+                                ))
+                            }
+                        </div>
+
+                    </Container>
+
 
         )
     }

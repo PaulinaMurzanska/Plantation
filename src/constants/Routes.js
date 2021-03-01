@@ -13,6 +13,7 @@ const ROUTE_CREATE ="/create";
 
 const ROUTE_MYPLANTS="/myplants/";
 const ROUTE_MYPLANTSPAGE="/myplantspage/";
+const ROUTE_MYPLANT_CREATE=ROUTE_MYPLANTS+'/myplantcreate'
 
 
 export {
@@ -29,7 +30,8 @@ export {
     ROUTE_MENU,
     ROUTE_MYPLANTS,
     ROUTE_MYPLANTSPAGE,
-    ROUTE_CREATE
+    ROUTE_CREATE,
+    ROUTE_MYPLANT_CREATE
 
 
 

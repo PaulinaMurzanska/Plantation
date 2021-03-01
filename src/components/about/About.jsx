@@ -10,6 +10,8 @@ export const About = () => {
         <Container>
             <div className='about-section'>
                 <Brand/>
+
+
                 <br/>
                 <div className='line'/>
                 <h3>Welcome to Plantation</h3>
