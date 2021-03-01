@@ -48,6 +48,7 @@ class MyPlantItem extends React.PureComponent {
         const {myPlant, plants,rooms} = this.props;
         const {name, room, plant, id, last_watered, last_fertilized, image_url} = myPlant;
         console.log(rooms[0].name);
+        console.log(last_watered);
 
 
 

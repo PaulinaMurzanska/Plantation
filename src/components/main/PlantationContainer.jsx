@@ -4,28 +4,22 @@ import {
     ROUTE_CATEGORIES,
     ROUTE_PLANTS,
     ROUTE_MAIN,
-    ROUTE_TEST,
     ROUTE_EDIT,
     ROUTE_POST,
-    ROUTE_DELETE,
-    ROUTE_CREATE,
     ROUTE_ADMIN,
     ROUTE_WELCOME,
     ROUTE_PLANT,
     ROUTE_FORM,
     ROUTE_ABOUT,
     ROUTE_MENU,
-    ROUTE_MYPLANTS, ROUTE_MYPLANTSPAGE
+    ROUTE_MYPLANTS, ROUTE_MYPLANTSPAGE, ROUTE_CREATE
 } from "/home/dev/Desktop/plantation/src/constants/Routes";
 import {generatePath, Route, Switch, withRouter} from "react-router-dom";
 import Plants from "components/plants/Plants";
 import Categories from "components/categories/Categories";
 import Rooms from "components/rooms/Rooms";
 import WelcomeSite from "components/welcome/WelcomeSite";
-import Test from "components/categories/TestSortedByCateg";
-import Create from "components/admin/Create";
 import Edit from "components/admin/Edit";
-import Delete from "components/admin/Delete";
 import SinglePlant from "components/plants/SinglePlant";
 import withRoomsFetch from "components/rooms/withRooms";
 import withCategories from "components/categories/WithCategoriesFetch";
@@ -35,6 +29,7 @@ import PlantFormCard from "components/plants/PlantFormCard";
 import {About} from "components/about/About";
 import MyPlant from "components/myPlant/MyPlant";
 import MyPlantsPage from "components/myPlant/MyPlantsPage";
+import {Api} from "services/Api";
 
 
 const PLANTS_FETCH_DELAY = 50;
@@ -49,10 +44,24 @@ class PlantationContainer extends React.PureComponent {
     state = {
         plants: [],
         createPlantErrorMessage: "",
-        selectedPlantId: 0,
+        selectedPlantId: undefined,
         plantsInProgress: false,
         plantsSuccess: undefined,
         plantIdToEdit: undefined,
+
+        plantSelected: [],
+
+        blooming: false,
+        category: 1,
+        description: '',
+        difficulty: 2,
+        fertilizing_interval: 30,
+        name: "",
+        required_humidity: "medium",
+        required_exposure: "partsun",
+        required_temperature: "medium",
+        watering_interval: '1',
+        id: undefined,
 
 
     }
@@ -118,29 +127,52 @@ class PlantationContainer extends React.PureComponent {
         });
 
     }
-
-    onEdit = (event) => {
-        console.log(event.target.id);
-        this.setState({
-            plantIdToEdit: parseInt(event.target.id),
-        })
+    onCreate = (event) => {
+        console.log("kliknięto plant create");
+        this.setState({selectedPlantId: undefined})
+    }
+    onEdit=()=>{
+        const selectedPlant = this.state.plants.find(obj => obj.id === this.state.selectedPlantId)
+        console.log(selectedPlant);
+        this.setState({plantSelected:selectedPlant})
     }
 
-    /*  As soon as posting data to server will be available, const plants and set state need to be placed below axios*/
+
+    // onEdit = (event) => {
+    //     const chosenPlant = this.state.plants.filter(plant => {
+    //         return plant.id === this.state.selectedPlantId
+    //     });
+    //     this.setState({
+    //         plantSelected: chosenPlant,
+    //         // blooming: true,
+    //         // category: 2,
+    //         // description: 'sfgbs',
+    //         // difficulty: 2,
+    //         // fertilizing_interval: 30,
+    //         // name: "agdhghad",
+    //         // required_humidity: "medium",
+    //         // required_exposure: "partsun",
+    //         // required_temperature: "medium",
+    //         // watering_interval: '1',
+    //         // id: 8,
+    //
+    //
+    //     })
+    //
+    // }
 
     onSubmitPlantCreate = (plant) => {
         console.log(plant);
         const path = generatePath(ROUTE_PLANTS);
-        const plants = [...this.state.plants];
-        this.setState({plants: plants});
 
-        plants.push(plant);
-
-        axios.post('https://still-fortress-69660.herokuapp.com/plant', plant)
+        console.log(plant);
+        axios.post(Api.PLANTS, plant)
             .then((response) => {
-                // const data = response.data;
-                // const plant = data;
-                // this.setState({plants: plants});
+                const data = response.data;
+                const plant = data;
+                const plants = [...this.state.plants];
+                plants.push(plant);
+                this.setState({plants: plants});
                 this.props.history.push(path);
             })
             .catch((error) => {
@@ -152,26 +184,73 @@ class PlantationContainer extends React.PureComponent {
             });
     };
 
+    onSubmitPlantUpdate = (plant) => {
+        console.warn('Edited plant:');
+        console.log(plant);
+
+        const path = generatePath(ROUTE_PLANTS);
+
+        axios.put(Api.PLANTS + plant.id + '/', plant)
+            .then((response) => {
+                const data = response.data;
+                const plant = data;
+                const plants = [...this.state.plants];
+                const getIndex = plants.findIndex(item => item.id === plant.id);
+                plants[getIndex] = plant;
+                this.setState({plants: plants});
+                this.props.history.push(path);
+            })
+            .catch((error) => {
+                const plantsErrorMessage = "Error updating plant";
+                this.props.history.push(path);
+                this.setState({
+                    updatePlantErrorMessage: plantsErrorMessage,
+                });
+            });
+    };
+
 
     render() {
 
         const {delayFetch, categories, rooms} = this.props;
-        const {createPlantErrorMessage, selectedPlantId, plants, plantsSuccess, plantsInProgress, plantIdToEdit} = this.state;
+        const {createPlantErrorMessage, selectedPlantId, plants, plantsSuccess, plantsInProgress, plantSelected, plantIdToEdit} = this.state;
+        const {name, blooming, id, watering_interval,category,difficulty,description,
+            fertilizing_interval,required_exposure,required_humidity,required_temperature
+        } =plantSelected;
+        console.log(name, blooming, id, watering_interval,category,difficulty,description,
+            fertilizing_interval,required_exposure,required_humidity,required_temperature);
 
 
-        const initialValues = {
-            blooming: false,
-            category: 1,
-            description: '',
-            difficulty: 2,
-            fertilizing_interval: 30,
-            name: "",
-            required_humidity: "medium",
-            required_exposure: "partsun",
-            required_temperature: "medium",
-            watering_interval: '1',
-            id: undefined,
+
+
+        const toEdit =
+            {
+                blooming: blooming,
+                category:category,
+                description:description,
+                difficulty:difficulty,
+                fertilizing_interval: fertilizing_interval,
+                name: name,
+                required_humidity: required_humidity,
+                required_exposure: required_exposure,
+                required_temperature: required_temperature,
+                watering_interval: watering_interval,
+                id:id,
+            }
+        const initial = {
+            blooming: this.state.blooming,
+            category: this.state.category,
+            description: this.state.description,
+            difficulty: this.state.difficulty,
+            fertilizing_interval: this.state.fertilizing_interval,
+            name: this.state.name,
+            required_humidity: this.state.required_humidity,
+            required_exposure: this.state.required_exposure,
+            required_temperature: this.state.required_temperature,
+            watering_interval: this.state.watering_interval,
+            id: this.state.id,
         };
+        console.log(initial);
 
 
         return (
@@ -195,15 +274,12 @@ class PlantationContainer extends React.PureComponent {
                             plantsSuccess={plantsSuccess}
                             plants={plants}
                             categories={categories}
+                            onCreate={this.onCreate}
 
                         />
                     </Route>
-                    {/*<Route path={ROUTE_MYPLANTS}>*/}
-                    {/*    <MyPlant*/}
-                    {/*        plants={plants}*/}
-                    {/*    />*/}
-                    {/*</Route>*/}
-                    <Route path={ROUTE_MYPLANTSPAGE}>
+
+                    <Route path={ROUTE_MYPLANTS}>
                         <MyPlantsPage
                             plants={plants}
                             categories={categories}
@@ -225,19 +301,20 @@ class PlantationContainer extends React.PureComponent {
                             onEdit={this.onEdit}
                         />
                     </Route>
-                    <Route path={ROUTE_TEST}>
-                        <Test/>
-                    </Route>
+
                     <Route path={ROUTE_ABOUT}>
                         <About/>
                     </Route>
-                    <Route path={ROUTE_FORM}>
+                    <Route path={ROUTE_CREATE}>
                         <PlantFormCard
                             categories={categories}
                             formLabel="Create New Plant"
-                            initialValues={initialValues}
+                            initial={initial}
                             onSubmit={this.onSubmitPlantCreate}
                             selectedPlantId={selectedPlantId}
+                            plant={plantSelected}
+                            plants={plants}
+
 
                         />
                     </Route>
@@ -245,11 +322,12 @@ class PlantationContainer extends React.PureComponent {
                         <PlantFormCard
                             categories={categories}
                             formLabel="Create New Plant"
-                            initialValues={initialValues}
-                            onSubmit={this.onSubmitPlantCreate}
+                            initial={toEdit}
+                            onSubmit={this.onSubmitPlantUpdate}
                             selectedPlantId={selectedPlantId}
                             plantIdToEdit={plantIdToEdit}
                             plants={plants}
+                            plant={plantSelected}
 
                         />
                     </Route>

@@ -7,7 +7,7 @@ import './SinglePlantItem.scss';
 import {BiEdit, BiTrash} from 'react-icons/bi';
 import moment from "moment";
 import {Link, Redirect} from "react-router-dom";
-import {ROUTE_DELETE, ROUTE_EDIT} from "constants/Routes";
+import {ROUTE_EDIT} from "constants/Routes";
 
 
 const getCategoryName = (categories, plantCategoryId) => {
@@ -30,12 +30,11 @@ class SinglePlantItem extends React.Component {
     render() {
         const {index, plant, categories, category, onEdit} = this.props;
 
-        console.log(plant);
         const id = plant.map(a => a.id);
         const name = plant.map(a => a.name);
         const blooming = plant.map(a => a.blooming);
-        const fertilizing = Math.ceil(plant.map(a => a.fertilizing_interval) / secToDays);
-        const watering = Math.ceil(plant.map(a => a.watering_interval) / secToDays);
+        const fertilizing = plant.map(a => a.fertilizing_interval);
+        const watering = plant.map(a => a.watering_interval);
         const difficulty = plant.map(a => a.difficulty);
         const required_temp = plant.map(a => a.required_temperature);
         const required_humid = plant.map(a => a.required_humidity);
@@ -48,6 +47,8 @@ class SinglePlantItem extends React.Component {
         const lastFertilizedRelative = moment(plant.map(a => a.last_fertilized)).startOf("day").fromNow();
         const lastWateredRelative = moment(plant.map(a => a.last_watered)).startOf("day").fromNow();
 
+
+        console.log(watering);
         return (
 
 
@@ -66,14 +67,16 @@ class SinglePlantItem extends React.Component {
                                 <ListGroupItem><span>Required Sun exposure: </span><span>{exposure[required_exposure]}</span></ListGroupItem>
                                 <ListGroupItem><span>Required room humidity:</span><span> {humidity[required_humid]}</span></ListGroupItem>
                                 <ListGroupItem><span>Required room temperature: </span><span>{temp[required_temp]}</span></ListGroupItem>
-                                <ListGroupItem><span>Watering interval [days]:</span><span> {watering}</span></ListGroupItem>
-                                <ListGroupItem><span>Fertilizing interval [days]:</span><span> {fertilizing}</span></ListGroupItem>
+                                <ListGroupItem><span>Watering interval [days]:</span><span> {watering[0]}</span></ListGroupItem>
+                                <ListGroupItem><span>Fertilizing interval [days]:</span><span> {fertilizing[0]}</span></ListGroupItem>
                                 <ListGroupItem className='edition-icons'>
                                     <NavItem tag={Link} to={ROUTE_EDIT} >
-                                        <BiEdit id={id} onClick={onEdit} className='edit'/>
+                                        <BiEdit id={id} name={name}
+                                                onClick={onEdit}
+                                                className='edit'/>
 
                                     </NavItem>
-                                    <NavItem tag={Link} to={ROUTE_DELETE}>
+                                    <NavItem  >
                                         <BiTrash className='delete'/>
 
                                     </NavItem>
@@ -81,58 +84,7 @@ class SinglePlantItem extends React.Component {
 
                             </ListGroup>
                         </div>
-                        {/*<div className='plant-actions'>*/}
-                        {/*    <div className="plant-watering">*/}
-                        {/*        <h4>Watering</h4>*/}
-                        {/*        <div className='info-table'>*/}
-                        {/*            <Table bordered>*/}
-                        {/*                <thead>*/}
-                        {/*                <tr>*/}
-                        {/*                    <th>Last Watered</th>*/}
-                        {/*                    <th>How long ago?</th>*/}
-                        {/*                </tr>*/}
-                        {/*                </thead>*/}
-                        {/*                <tbody>*/}
-                        {/*                <tr>*/}
-                        {/*                    <td>{lastWatered}</td>*/}
-                        {/*                    <td>{lastWateredRelative}</td>*/}
-                        {/*                </tr>*/}
-                        {/*                </tbody>*/}
-                        {/*            </Table>*/}
-                        {/*            <Button> I watered plant today</Button>*/}
 
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-
-                        {/*    <div className="plant-fertilizing">*/}
-                        {/*        <h4>Fertilizing</h4>*/}
-
-                        {/*        <div className='info-table'>*/}
-                        {/*            <Table bordered>*/}
-                        {/*                <thead>*/}
-                        {/*                <tr>*/}
-
-                        {/*                    <th>Last fertilized</th>*/}
-                        {/*                    <th>How long ago?</th>*/}
-
-                        {/*                </tr>*/}
-                        {/*                </thead>*/}
-                        {/*                <tbody>*/}
-                        {/*                <tr>*/}
-                        {/*                    <td>{lastFertilized}</td>*/}
-                        {/*                    <td>{lastFertilizedRelative}</td>*/}
-
-                        {/*                </tr>*/}
-                        {/*                </tbody>*/}
-                        {/*            </Table>*/}
-                        {/*            <Button> I Fertilized plant today</Button>*/}
-
-                        {/*        </div>*/}
-
-
-                        {/*</div>*/}
-
-                        {/*</div>*/}
 
                     </div>
 

@@ -4,7 +4,7 @@ import MyPlantItem from "components/myPlant/MyPlantItem";
 import "./MyPlant.scss";
 import CategoriesSelectOptions from "components/categories/CategorySelectOptions";
 import {Link} from "react-router-dom";
-import {ROUTE_FORM} from "constants/Routes";
+import {ROUTE_CREATE, ROUTE_FORM} from "constants/Routes";
 import {BiSortZA, BiSortAZ} from "react-icons/bi"
 // import {ScrollTop} from "components/sharedElements/ScrollTop";
 import ScrollToTop from "react-scroll-to-top";
@@ -74,7 +74,7 @@ class MyPlant extends React.PureComponent {
                             onClick={this.handleResetSearch}
                             color="secondary" size="md">Reset Search</Button>
                     </div>
-                    <Button tag={Link} to={ROUTE_FORM}>Create New Plant</Button>
+                    <Button tag={Link} to={ROUTE_CREATE}>Create New Plant</Button>
                 </div>
                 <div className="my-plant-card">
                     {

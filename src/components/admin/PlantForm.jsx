@@ -19,9 +19,6 @@ import Buttons from "components/sharedElements/Buttons";
 class PlantForm extends React.Component {
     render() {
         const{selectedPlantId,plants,plant, plantCategory}=this.props;
-        console.log(plant);
-
-
 
         return (
             <Container>

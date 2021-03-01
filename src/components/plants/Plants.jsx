@@ -51,6 +51,7 @@ class Plants extends React.PureComponent {
             getSinglePlantId,
             plantsInProgress,
             plantsSuccess,
+            onCreate,
 
         } = this.props;
 
@@ -102,7 +103,7 @@ class Plants extends React.PureComponent {
                         </div>
 
 
-                        <Button tag={Link} to={ROUTE_FORM}>Create New Plant</Button>
+                        <Button tag={Link} to={ROUTE_CREATE} onClick={onCreate}>Create New Plant</Button>
 
                     </div>
                     {/*<InProgress inProgress={plantsInProgress}/>*/}

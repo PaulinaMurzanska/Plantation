@@ -78,9 +78,9 @@ class MyPlantsPage extends React.PureComponent {
 
         return (
 
-            <>
-
-                <MyPlant
+            <Switch>
+                <Route path={ROUTE_MYPLANTS}>
+                      <MyPlant
                     myPlants={myPlants}
                     plants={plants}
                     categories={categories}
@@ -89,8 +89,15 @@ class MyPlantsPage extends React.PureComponent {
 
                 />
 
+                </Route>
+                <Route path={{}}>
 
-            </>
+                </Route>
+
+
+
+
+            </Switch>
 
 
         )

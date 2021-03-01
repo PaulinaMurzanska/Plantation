@@ -8,20 +8,21 @@ import {humidity} from "constants/PlantsParameters";
 class PlantFormCard extends React.Component {
     constructor(props) {
         super(props);
-    }
 
+    }
 
     render() {
 
         const {
             categories,
-            initialValues,
+            initial,
             selectedPlantId,
             plantIdToEdit,
             plants,
+            plant
         } = this.props;
-        console.log(plants);
-        console.log(initialValues);
+
+        const initialValues = initial;
 
         const onSubmit = (values) => {
             const plant = values;
@@ -30,7 +31,7 @@ class PlantFormCard extends React.Component {
 
 
         const key = initialValues.id;
-        console.log(key);
+        // const key = 1;
 
         const formikProps = {
             key,
@@ -55,7 +56,7 @@ class PlantFormCard extends React.Component {
                                 <Buttons
                                     cancelLabel="Cancel"
                                     submitDisabled={!isValid}
-                                    submitLabel={key === undefined ?'Create new plant' : 'Save changes'}
+                                    submitLabel={key ? 'Save changes' : 'Create new plant'}
                                 />
 
 
