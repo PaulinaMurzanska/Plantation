@@ -14,6 +14,7 @@ const ROUTE_MYPLANTS="/myplants/";
 const ROUTE_MYPLANTSPAGE="/myplantspage/";
 const ROUTE_MYPLANT_CREATE=ROUTE_MYPLANTS+'/myplantcreate';
 const ROUTE_MYPLANT_EDIT =ROUTE_MYPLANTS+'myplantedit/';
+const ROUTE_DELETE ='/delete';
 
 
 
@@ -34,6 +35,7 @@ export {
     ROUTE_CREATE,
     ROUTE_MYPLANT_CREATE,
     ROUTE_MYPLANT_EDIT,
+    ROUTE_DELETE
 
 
 

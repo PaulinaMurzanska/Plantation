@@ -12,7 +12,7 @@ import {
     ROUTE_FORM,
     ROUTE_ABOUT,
     ROUTE_MENU,
-    ROUTE_MYPLANTS, ROUTE_MYPLANTSPAGE, ROUTE_CREATE, ROUTE_MYPLANT_CREATE
+    ROUTE_MYPLANTS, ROUTE_MYPLANTSPAGE, ROUTE_CREATE, ROUTE_MYPLANT_CREATE, ROUTE_DELETE
 } from "/home/dev/Desktop/plantation/src/constants/Routes";
 import {generatePath, Route, Switch, withRouter} from "react-router-dom";
 import Plants from "components/plants/Plants";
@@ -31,6 +31,7 @@ import MyPlant from "components/myPlant/MyPlant";
 import MyPlantsPage from "components/myPlant/MyPlantsPage";
 import {Api} from "services/Api";
 import Test from "components/myPlant/Test";
+import {Delete} from "components/admin/Delete";
 
 
 const PLANTS_FETCH_DELAY = 50;
@@ -303,6 +304,9 @@ class PlantationContainer extends React.PureComponent {
                             plants={plants}
                             plant={plantSelected}
                         />
+                    </Route>
+                     <Route path={ROUTE_DELETE}>
+                        <Delete/>
                     </Route>
 
 

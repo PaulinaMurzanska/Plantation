@@ -7,7 +7,7 @@ import './SinglePlantItem.scss';
 import {BiEdit, BiTrash} from 'react-icons/bi';
 import moment from "moment";
 import {Link, Redirect} from "react-router-dom";
-import {ROUTE_EDIT} from "constants/Routes";
+import {ROUTE_DELETE, ROUTE_EDIT} from "constants/Routes";
 
 
 const getCategoryName = (categories, plantCategoryId) => {
@@ -61,8 +61,10 @@ class SinglePlantItem extends React.Component {
                                                 onClick={onEdit}
                                                 className='edit'/>
                                     </NavItem>
-                                    <NavItem  >
-                                        <BiTrash className='delete'id={id} onClick={onDelete}/>
+                                    <NavItem    tag={Link} to={ROUTE_DELETE} >
+                                        <BiTrash className='delete'id={id} onClick={onDelete}
+
+                                        />
                                     </NavItem>
                                 </ListGroupItem>
 
