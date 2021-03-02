@@ -3,8 +3,6 @@ import { useField, useFormikContext } from 'formik';
 import DatePicker from 'react-datepicker';
 import MomentSerializer from 'serializers/MomentSerializer';
 
-import "react-datepicker/dist/react-datepicker.css";
-
 const momentSerializer = new MomentSerializer();
 
 const PlantationDatePicker = ({ ...props }) => {

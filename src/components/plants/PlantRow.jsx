@@ -39,7 +39,7 @@ class PlantRow extends React.PureComponent {
             blooming,
 
         } = plant;
-        console.log(plant);
+
 
         return (
             <div className="plant-card-items">

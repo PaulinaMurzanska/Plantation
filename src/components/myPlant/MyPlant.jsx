@@ -43,7 +43,7 @@ class MyPlant extends React.PureComponent {
     }
 
     render() {
-        const {myPlants, plants, rooms, categories, hello, myPlantsSuccess, onCreateMyPlant} = this.props;
+        const {myPlants, plants, rooms, categories, hello, myPlantsSuccess, onCreateMyPlant,getSingleMyPlantId,} = this.props;
         console.log(this.props);
         const {sortDirection} = this.state;
         const multiplier = sortDirection ? 1 : -1;
@@ -65,7 +65,6 @@ class MyPlant extends React.PureComponent {
 
 
         return (
-
                     <Container>
                         <ScrollToTop smooth color="#387f34"/>
                         <div className='create-search-tab'>
@@ -82,7 +81,7 @@ class MyPlant extends React.PureComponent {
                                     color="secondary" size="md">Reset Search</Button>
                             </div>
                             <Button tag={Link} to={ROUTE_MYPLANT_CREATE}
-                                    // onClick={onCreateMyPlant}
+                                    onClick={onCreateMyPlant}
                             >Create New Plant</Button>
                         </div>
                         <div className="my-plant-card">
@@ -94,6 +93,7 @@ class MyPlant extends React.PureComponent {
                                         plants={plants}
                                         categories={categories}
                                         rooms={rooms}
+                                        getSinglePlantMyId={getSingleMyPlantId}
 
                                     />
                                 ))

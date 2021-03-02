@@ -30,7 +30,7 @@ class Api {
 
 
     // static timeout = process.env.REACT_APP_PLANTS_API_TIMEOUT;
-    static timeout = 3000;
+    static timeout = 1000;
     static AUTH_TOKEN = '/api-token-auth/';
     static PLANTS = '/plant/';
     static MYPLANTS='/user-plant/';

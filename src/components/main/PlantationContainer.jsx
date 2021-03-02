@@ -161,10 +161,7 @@ class PlantationContainer extends React.PureComponent {
                 });
             });
     };
-
     onSubmitPlantUpdate = (plant) => {
-        console.warn('Edited plant:');
-        console.log(plant);
 
         const path = generatePath(ROUTE_PLANTS);
 
@@ -187,19 +184,24 @@ class PlantationContainer extends React.PureComponent {
             });
     };
 
+    onDelete =(event)=>{
+        console.log('kliknięto delete');
+        const plantToDelete =this.state.plants.find(obj=>obj.id===event.target.id);
+        axios.delete(Api.PLANTS,plantToDelete)
+            .then(response=>{
+                console.log(response);
+                console.log(response.data);
+            })
+
+    }
 
     render() {
-
         const {delayFetch, categories, rooms} = this.props;
         const {createPlantErrorMessage, selectedPlantId, plants, plantsSuccess, plantsInProgress, plantSelected, plantIdToEdit} = this.state;
         const {
             name, blooming, id, watering_interval, category, difficulty, description,
             fertilizing_interval, required_exposure, required_humidity, required_temperature
         } = plantSelected;
-        console.log(name, blooming, id, watering_interval, category, difficulty, description,
-            fertilizing_interval, required_exposure, required_humidity, required_temperature);
-
-
         const toEdit =
             {
                 blooming: blooming,
@@ -227,12 +229,9 @@ class PlantationContainer extends React.PureComponent {
             watering_interval: this.state.watering_interval,
             id: this.state.id,
         };
-        console.log(toEdit);
-
 
         return (
             <>
-
                 <Switch>
 
                     <Route exact path={ROUTE_MAIN}>
@@ -252,16 +251,14 @@ class PlantationContainer extends React.PureComponent {
                             plants={plants}
                             categories={categories}
                             onCreate={this.onCreate}
-
                         />
                     </Route>
 
-                    <Route path={ROUTE_MYPLANTS}>
+                    <Route  path={ROUTE_MYPLANTS}>
                         <MyPlantsPage
                             plants={plants}
                             categories={categories}
                             rooms={rooms}
-
                         />
                     </Route>
                     <Route path={ROUTE_CATEGORIES}>
@@ -277,6 +274,7 @@ class PlantationContainer extends React.PureComponent {
                             plants={plants}
                             categories={categories}
                             onEdit={this.onEdit}
+                            onDelete={this.onDelete}
                         />
                     </Route>
 
@@ -292,8 +290,6 @@ class PlantationContainer extends React.PureComponent {
                             selectedPlantId={selectedPlantId}
                             plant={plantSelected}
                             plants={plants}
-
-
                         />
                     </Route>
                     <Route path={ROUTE_EDIT}>
@@ -306,9 +302,9 @@ class PlantationContainer extends React.PureComponent {
                             plantIdToEdit={plantIdToEdit}
                             plants={plants}
                             plant={plantSelected}
-
                         />
                     </Route>
+
 
 
                 </Switch>

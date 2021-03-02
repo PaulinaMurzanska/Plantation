@@ -39,10 +39,10 @@ const MyPlantDifficultyField = (props) => (
             {
                 plantDifficultyOptions.map(myPlantDifficultyOption)
             }
-            {/*<Field*/}
-            {/*    name={plantDifficultyName}*/}
-            {/*        component={myPlantFormDifficultyDescription}*/}
-            {/*/>*/}
+            <Field
+                name={plantDifficultyName}
+                    component={myPlantFormDifficultyDescription}
+            />
               </div>
 
     </FormGroup>

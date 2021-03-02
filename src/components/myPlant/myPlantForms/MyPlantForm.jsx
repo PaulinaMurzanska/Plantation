@@ -10,56 +10,29 @@ import MyRoomField from "components/myPlant/myPlantForms/createMyPlantForm/MyRoo
 import MyPlantDifficultyField from "components/myPlant/myPlantForms/createMyPlantForm/MyPlantDifficultyField";
 import LastWateredField from "components/myPlant/myPlantForms/createMyPlantForm/LastWateredField";
 import LastFertilizedField from "components/myPlant/myPlantForms/createMyPlantForm/LastFertilizedField";
+import './MyPlantForm.scss';
 
 
 class MyPlantForm extends React.Component {
     render() {
-        const{rooms,plants}=this.props;
+        const {rooms, plants} = this.props;
 
         return (
             <Container>
-                <p>hello form my plant form</p>
 
                 <FormGroup className="form-wrapper">
-                    <h4>Create New Plant</h4>
+                    <h4 style={{padding:'15px'}}>Create New Plant</h4>
                     <div className='section1'>
                         <div className='label'>Plant's Information:</div>
-                        <div>
+                        <div className='sub-section1'>
 
-                            <div className='name-category'>
+                            <div className='name-description'>
                                 <Label for='name'>Name:</Label>
                                 <Field
                                     component={PlantationInput}
                                     id="name"
                                     name={PlantFormFields.NAME}
                                     placeholder="Monstera"
-                                    type="text"
-
-                                />
-
-                                <PlantTypeField
-                                  plants={plants}
-                                />
-                                <MyRoomField
-                                rooms={rooms}
-                                />
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div className='section2'>
-                        <div className='label'>Plant's Setting:</div>
-
-                        <div className='settings'>
-                            <Label for='image'>Image URL:</Label>
-                                <Field
-                                    component={PlantationInput}
-                                    id="image"
-                                    name={MyPlantFormFields.IMAGE_URL}
-                                    placeholder="paste url here"
                                     type="text"
 
                                 />
@@ -72,27 +45,52 @@ class MyPlantForm extends React.Component {
                                     type="text"
 
                                 />
-                                <MyPlantDifficultyField/>
-                                <LastWateredField/>
-                                <LastFertilizedField/>
+                            </div>
+                            <div className="type-room">
 
+                                <PlantTypeField
+                                    plants={plants}
+                                />
+                                <MyRoomField
+                                    rooms={rooms}
+                                />
+                            </div>
+                        </div>
+                        <div className='image-url'>
+                            <Label for='image'>Image URL:</Label>
+                            <Field
+                                component={PlantationInput}
+                                id="image"
+                                name={MyPlantFormFields.IMAGE_URL}
+                                placeholder="paste url here"
+                                type="text"
+                            />
+                        </div>
+                    </div>
 
+                    <div className='section2'>
+                        <div className='label'>Plant's Maintenance:</div>
+                        <div className='settings-wrap'>
+                            <div className='settings'>
+                                <div className='maintain'>
+                                    <div className='watering'>
+                                        <LastWateredField/>
+                                    </div>
+                                    <div className="fertilizing">
+                                        <LastFertilizedField/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
-
-
-
+                    <div className='section3'>
+                         <MyPlantDifficultyField/>
+                    </div>
                 </FormGroup>
             </Container>
-
         )
-
-
     }
-
-
 }
-
 
 export default MyPlantForm;

@@ -3,7 +3,7 @@ import {ListGroupItem, ListGroup, Card, CardImg, CardBody, CardTitle, CardSubtit
 import bloomingPic from "images/blooming.jpg";
 import leafyPic from "images/plant_theme4.jpg";
 import {Link} from "react-router-dom";
-import {ROUTE_PLANT} from "constants/Routes";
+import {ROUTE_MYPLANT_EDIT, ROUTE_PLANT, ROUTE_MYPLANT_BASE_TO_EDIT} from "constants/Routes";
 import "./MyPlant.scss";
 import sampleImage from "images/blooming.jpg";
 
@@ -13,7 +13,6 @@ class MyPlantItem extends React.PureComponent {
         super(props);
     }
 
-
     render() {
         const getPlantName = (plants, plant) => {
             const index = plants.findIndex((item) => item.id === plant);
@@ -22,7 +21,7 @@ class MyPlantItem extends React.PureComponent {
             }
             return plants[index].name;
         }
-          const getRoomsName = (rooms, plant) => {
+        const getRoomsName = (rooms, plant) => {
             const index = rooms.findIndex((room) => room.id === plant);
             if (index < 0) {
                 return ' /*temporarily undefined */ ';
@@ -36,7 +35,7 @@ class MyPlantItem extends React.PureComponent {
             }
             return plants[index].fertilizing_interval;
         }
-          const getWateringInterval = (plants, plant) => {
+        const getWateringInterval = (plants, plant) => {
             const index = plants.findIndex((item) => item.id === plant);
             if (index < 0) {
                 return '  /*temporarily undefined */ ';
@@ -45,50 +44,60 @@ class MyPlantItem extends React.PureComponent {
         }
 
 
-        const {myPlant, plants,rooms} = this.props;
+        const {myPlant, plants, rooms, getSinglePlantMyId} = this.props;
         const {name, room, plant, id, last_watered, last_fertilized, image_url} = myPlant;
-        console.log(rooms[0].name);
-        console.log(last_watered);
 
+        // const imageURL = `"${image_url}"`;
+        // console.log(imageURL);
 
 
         return (
 
 
-                <div className="my-plant-card-items">
-                    <div>
-                        <Card>
-                            <CardImg top width="100%" src={image_url===""? sampleImage : image_url } alt={name} style={{height:"30vh"}}/>
-                            <CardBody>
-                                <CardTitle tag="h5">{name}</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">Plant
-                                    Family: {getPlantName(plants, plant)}</CardSubtitle>
-                                <div>
-                                    <hr/>
-                                    {name} is a plant from family of plants {getPlantName(plants, plant)}.
-                                    <hr/>
-                                    <p>Location : {getRoomsName(rooms,plant)} .</p>
-                                    <hr/>
-                                    <p>Last watered : {last_watered} /null from API?/. </p>
-                                    <span>Remember to water this plant every {getWateringInterval(plants,plant)} days.</span>
-                                    <hr/>
-                                    <p>Last fertilized : {last_fertilized} /null from API?/. </p>
-                                    <span>Remember to fertilize this plant every  {getFertilizingInterval(plants,plant)} days.</span>
-                                    <hr/>
+            <div className="my-plant-card-items">
+                <div>
+                    <Card>
+                        <CardImg top width="100%" src={image_url} alt={name}
+                                 style={{height: "30vh"}}/>
+                        <CardBody>
+                            <CardTitle tag="h5">{name}</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">Plant
+                                Family: {getPlantName(plants, plant)}</CardSubtitle>
+                            <div>
+                                <hr/>
+                                {name} is a plant from family of plants {getPlantName(plants, plant)}.
+                                <hr/>
+                                <p>Location : {getRoomsName(rooms, plant)} .</p>
+                                <hr/>
+                                <p>Last watered : {last_watered} /null from API?/. </p>
+                                <span>Remember to water this plant every {getWateringInterval(plants, plant)} days.</span>
+                                <hr/>
+                                <p>Last fertilized : {last_fertilized} /null from API?/. </p>
+                                <span>Remember to fertilize this plant every {getFertilizingInterval(plants, plant)} days.</span>
+                                <hr/>
 
-                                </div>
-                                <Button
-                                    // tag={Link} to={ROUTE_PLANT + plant.id} id={id} onClick={getSinglePlantId}
-                                >Click to update</Button>
-                            </CardBody>
-                        </Card>
-                    </div>
+                            </div>
+                            <Button
+                                tag={Link}
+                                to={ROUTE_MYPLANT_EDIT + myPlant.id}
+                                id={id}
+                                onClick={getSinglePlantMyId}
 
+                            >Click to update</Button>
+                            {/* <Button*/}
+                            {/*    tag={Link}*/}
+                            {/*    to={ROUTE_MYPLANT_BASE_TO_EDIT + myPlant.id}*/}
+                            {/*    id={id}*/}
+                            {/*    onClick={getSinglePlantMyId}*/}
 
-                    {/*</NavItem>*/}
+                            {/*>Click for Details</Button>*/}
+                        </CardBody>
+                    </Card>
                 </div>
 
 
+                {/*</NavItem>*/}
+            </div>
 
 
         )

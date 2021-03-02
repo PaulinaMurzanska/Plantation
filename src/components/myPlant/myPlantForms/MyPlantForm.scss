@@ -1,0 +1,74 @@
+.section1 {
+  .sub-section1 {
+    display: flex;
+    justify-content: space-around;
+
+    .name-description {
+      padding: 15px;
+      width: 50%;
+      @media(max-width: 900px) {
+        width: 100%;
+      }
+    }
+
+    .type-room {
+      padding: 15px;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      @media(max-width: 900px) {
+        width: 100%;
+      }
+    }
+
+
+  }
+
+  .image-url {
+    width: 100%;
+    padding: 15px;
+  }
+}
+
+.section2 {
+  .settings-wrap {
+    display: flex;
+
+    .settings {
+      width: 100%;
+      display: block;
+
+      .maintain {
+        padding: 15px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+
+        .watering {
+          margin-bottom: 15px;
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+          padding: 15px;
+          @media(max-width: 900px) {
+            width: 100%;
+          }
+
+        }
+
+        .fertilizing {
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+          padding: 15px;
+          @media(max-width: 900px) {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+

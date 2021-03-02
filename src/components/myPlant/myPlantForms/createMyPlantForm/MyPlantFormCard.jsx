@@ -47,13 +47,10 @@ class MyPlantFormCard extends React.Component {
             <Formik {...formikProps}>
                 {({isValid}) => (
                     <Form className="plant-form">
-
                         <MyPlantForm
                             myPlants={myPlants}
                             plants={plants}
                             rooms={rooms}
-
-
                         />
                         <Container>
                             <div className='form-buttons'>
@@ -63,16 +60,10 @@ class MyPlantFormCard extends React.Component {
                                     submitDisabled={!isValid}
                                     submitLabel={key ? 'Save changes' : 'Create new plant'}
                                 />
-
-
                             </div>
                         </Container>
-
-
                     </Form>
-
                 )}
-
             </Formik>
         );
 

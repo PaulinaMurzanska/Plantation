@@ -17,7 +17,7 @@ const getCategoryName = (categories, plantCategoryId) => {
     }
     return categories[index].name;
 }
-const secToDays = 84400;
+const secToDays = 36000;
 
 
 class SinglePlantItem extends React.Component {
@@ -26,33 +26,18 @@ class SinglePlantItem extends React.Component {
 
     }
 
-
     render() {
-        const {index, plant, categories, category, onEdit} = this.props;
-
-        const id = plant.map(a => a.id);
-        const name = plant.map(a => a.name);
-        const blooming = plant.map(a => a.blooming);
-        const fertilizing = plant.map(a => a.fertilizing_interval);
-        const watering = plant.map(a => a.watering_interval);
-        const difficulty = plant.map(a => a.difficulty);
-        const required_temp = plant.map(a => a.required_temperature);
-        const required_humid = plant.map(a => a.required_humidity);
-        const required_exposure = plant.map(a => a.required_exposure);
-        const lastWatered = moment(plant.map(a => a.last_watered)).format("MMM Do YY");
-        const lastFertilized = moment(plant.map(a => a.last_fertilized)).format("MMM Do YY");
-        const plantCategoryId = parseInt(plant.map(a => a.category));
-        const plantCategoryName = getCategoryName(categories, plantCategoryId);
-        const isBlooming = blooming[0];
-        const lastFertilizedRelative = moment(plant.map(a => a.last_fertilized)).startOf("day").fromNow();
-        const lastWateredRelative = moment(plant.map(a => a.last_watered)).startOf("day").fromNow();
-
-
-        console.log(watering);
+        const {index, plant, categories, onEdit,onDelete} = this.props;
+        const{id,name,blooming,fertilizing_interval,watering_interval,difficulty,
+            required_temperature,required_humidity,required_exposure,category
+        }=plant;
+        const plantCategoryName = getCategoryName(categories, category);
+        const watering =Math.ceil(watering_interval/secToDays);
+        const fertilizing=Math.ceil(fertilizing_interval/secToDays);
         return (
 
-
             <Container>
+                {name}
 
                 <div className='single-plant-wrapper'>
 
@@ -60,25 +45,24 @@ class SinglePlantItem extends React.Component {
 
                         <div className="plant-requirements">
                             <span>- {plantCategoryName} -</span>
-                            <h3>{name} {isBlooming ? <GiCottonFlower style={{color: "red", fontSize: "2em"}}/> :
+                            <h3>{name} {blooming ? <GiCottonFlower style={{color: "red", fontSize: "2em"}}/> :
                                 <GiZigzagLeaf style={{color: "green", fontSize: "2em"}}/>}</h3>
                             <ListGroup>
                                 <ListGroupItem><span>Difficulty level:</span><span>{difficulties[difficulty]}</span></ListGroupItem>
                                 <ListGroupItem><span>Required Sun exposure: </span><span>{exposure[required_exposure]}</span></ListGroupItem>
-                                <ListGroupItem><span>Required room humidity:</span><span> {humidity[required_humid]}</span></ListGroupItem>
-                                <ListGroupItem><span>Required room temperature: </span><span>{temp[required_temp]}</span></ListGroupItem>
-                                <ListGroupItem><span>Watering interval [days]:</span><span> {watering[0]}</span></ListGroupItem>
-                                <ListGroupItem><span>Fertilizing interval [days]:</span><span> {fertilizing[0]}</span></ListGroupItem>
+                                <ListGroupItem><span>Required room humidity:</span><span> {humidity[required_humidity]}</span></ListGroupItem>
+                                <ListGroupItem><span>Required room temperature: </span><span>{temp[required_temperature]}</span></ListGroupItem>
+                                <ListGroupItem><span>Watering interval [days]:</span><span> {watering}</span></ListGroupItem>
+                                <ListGroupItem><span>Fertilizing interval [days]:</span><span> {fertilizing}</span></ListGroupItem>
                                 <ListGroupItem className='edition-icons'>
+
                                     <NavItem tag={Link} to={ROUTE_EDIT} >
                                         <BiEdit id={id} name={name}
                                                 onClick={onEdit}
                                                 className='edit'/>
-
                                     </NavItem>
                                     <NavItem  >
-                                        <BiTrash className='delete'/>
-
+                                        <BiTrash className='delete'id={id} onClick={onDelete}/>
                                     </NavItem>
                                 </ListGroupItem>
 

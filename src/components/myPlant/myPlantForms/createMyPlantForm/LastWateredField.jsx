@@ -2,6 +2,7 @@ import React from 'react';
 import { Label } from 'reactstrap';
 import MyPlantFormFields from "constants/MyPlantFormFields";
 import PlantationDatePicker from "components/sharedElements/DatePicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const LastWateredField = (props) => {
   const plantLastWateredId = "last_watered";

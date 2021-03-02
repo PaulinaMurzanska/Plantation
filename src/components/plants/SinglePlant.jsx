@@ -6,12 +6,13 @@ import { Redirect } from "react-router-dom";
 class SinglePlant extends React.PureComponent {
 
     render() {
-        const {selectedPlantId, plants, categories, index, onEdit} = this.props;
+        const {selectedPlantId, plants, categories, index, onEdit,onDelete} = this.props;
         console.log(selectedPlantId);
 
-        const plantSelected = plants.filter(plant => {
-            return plant.id === selectedPlantId
-        });
+        // const plantSelected = plants.filter(plant => {
+        //     return plant.id === selectedPlantId
+        // });
+        const plantSelected = plants.find(plant=>plant.id===selectedPlantId);
 
 
         return (
@@ -25,6 +26,7 @@ class SinglePlant extends React.PureComponent {
                             categories={categories}
                             index={index}
                             onEdit={onEdit}
+                            onDelete={onDelete}
                         />
                 }
 

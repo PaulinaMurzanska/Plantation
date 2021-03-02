@@ -2,15 +2,22 @@ import React from "react";
 import axios from "axios";
 import {CardBody, ListGroup} from "reactstrap";
 import MyPlant from "components/myPlant/MyPlant";
-import {ROUTE_ABOUT, ROUTE_MYPLANT_CREATE, ROUTE_MYPLANTS, ROUTE_PLANTS} from "constants/Routes";
+import {
+    ROUTE_ABOUT,
+    ROUTE_MYPLANT_CREATE,
+    ROUTE_MYPLANTS,
+    ROUTE_MYPLANT_EDIT,
+    ROUTE_MYPLANTSPAGE,
+    ROUTE_PLANTS,
+} from "constants/Routes";
 import {Switch, Route, generatePath} from "react-router-dom";
 import Plants from "components/plants/Plants";
 import {Api} from "services/Api";
 import {About} from "components/about/About";
 import MyPlantFormCard from "components/myPlant/myPlantForms/createMyPlantForm/MyPlantFormCard";
 import Test from "components/myPlant/Test";
-import {BrowserRouter as Router} from 'react-router-dom';
-    import withRoomsFetch from "components/rooms/withRooms";
+import {BrowserRouter as Router, withRouter} from 'react-router-dom';
+import withRoomsFetch from "components/rooms/withRooms";
 
 
 const plantsDelay = 500;
@@ -20,30 +27,28 @@ const delayFetch = (ms, func) => {
 }
 
 class MyPlantsPage extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            myPlantsInProgress: false,
-            myPlantsSuccess: undefined,
-            myPlants: [],
 
-            selectedMyPlantId:undefined,
-            myPlantSelected:[],
+    state = {
+        myPlantsInProgress: false,
+        myPlantsSuccess: undefined,
+        myPlants: [],
 
-            description: '',
-            difficulty: undefined,
-            id: undefined,
-            image_url: "",
-            last_fertilized: undefined,
-            last_watered: undefined,
-            name:"",
-            plant:undefined,
-            room:undefined,
+        selectedMyPlantId: undefined,
+        myPlantSelected: [],
 
+        description: '',
+        difficulty: 2,
+        id: undefined,
+        image_url: "",
+        last_fertilized: undefined,
+        last_watered: undefined,
+        name: "",
+        plant: undefined,
+        room: undefined,
 
 
-        }
     }
+
 
     componentDidMount() {
         this.fetchMyPlants();
@@ -99,38 +104,58 @@ class MyPlantsPage extends React.PureComponent {
             .then((response) => {
                 const data = response.data;
                 const myPlant = data;
-                // const myPlants = [...this.state.myPlants];
-                // myPlants.push(myPlant);
-                // this.setState({myPlants: myPlants});
-                // this.props.history.push(path);
+                const myPlants = [...this.state.myPlants];
+                myPlants.push(myPlant);
+                this.setState({myPlants: myPlants});
+                this.props.history.push(path);
             })
             .catch((error) => {
                 const plantsErrorMessage = "Error creating plant";
-                // this.props.history.push(path);
+                this.props.history.push(path);
                 this.setState({
                     createPlantErrorMessage: plantsErrorMessage,
                 });
             });
     };
 
-     onCreateMyPlant = (event) => {
+    onCreateMyPlant = (event) => {
         console.log("kliknięto plant create");
         this.setState({selectedMyPlantId: undefined})
     }
-    onEdit = () => {
-        const selectedMyPlant = this.state.myPlants.find(obj => obj.id === this.state.selectedMyPlantId)
-        console.log(selectedMyPlant);
-        this.setState({myPlantSelected: selectedMyPlant})
+    getSingleMyPlantId = (event) => {
+        console.log(event.target.id);
+        const targetId = event.target.id;
+        this.setState(
+            // {myPlantSelected: selectedMyPlant}
+            {selectedMyPlantId: parseInt(targetId),}
+        )
+
+
     }
 
 
+    // onEdit = (event) => {
+    //     const selectedMyPlant = this.state.myPlants.find(obj => obj.id === this.state.selectedMyPlantId)
+    //     console.log(selectedMyPlant);
+    //     this.setState({myPlantSelected: selectedMyPlant})
+    // }
+
+
     render() {
-        const {myPlants, myPlantsSuccess,myPlantSelected,selectedMyPlantId} = this.state;
-        const {plants, categories, rooms} = this.props;
-        const {description,difficulty, id,  image_url, last_fertilized, last_watered, name,plant,room} =myPlantSelected;
+        const {myPlants, myPlantsSuccess, myPlantSelected, selectedMyPlantId} = this.state;
+        const {plants, categories, rooms,} = this.props;
+        // const {description, difficulty, id, image_url, last_fertilized, last_watered, name, plant, room} = myPlantSelected;
 
-        console.log(myPlants);
+        const selectedMyPlant = myPlants.find(obj => obj.id === selectedMyPlantId)
+        // console.log(selectedMyPlant);
 
+
+        // console.log(myPlants);
+        // console.log(myPlantSelected);
+        // console.log(selectedMyPlantId);
+        // console.log(selectedMyPlant);
+
+        //
         // const toEdit =
         //     {
         //         description: description,
@@ -144,39 +169,38 @@ class MyPlantsPage extends React.PureComponent {
         //     room:room,
         //
         //     };
-        // const initial = {
-        //     description:this.state.description,
-        //     difficulty: this.state.difficulty,
-        //     id: this.state.id,
-        //     image_url:this.state.image_url,
-        //     last_fertilized:this.state.last_fertilized,
-        //     last_watered:this.state.last_watered,
-        //     name:this.state.name,
-        //     plant:this.state.plant,
-        //     room:this.state.room,
-        //
-        // };
-        // console.log(toEdit);
 
-    const initialValues={
-            description: '',
-            difficulty: undefined,
-            id: undefined,
-            image_url: "",
-            last_fertilized: undefined,
-            last_watered: undefined,
-            name:"",
-            plant:undefined,
-            room:undefined,
-    };
 
+        const initialValues = {
+            description:this.state.description,
+            difficulty:this.state.difficulty,
+            id:this.state.id,
+            image_url:this.state.image_url,
+            last_fertilized:this.state.last_fertilized,
+            last_watered:this.state.last_watered,
+            name: this.state.name,
+            plant: this.state.plant,
+            room: this.state.room,
+        };
+        console.log(initialValues);
 
 
         return (
 
-            <Router>
+            <Switch>
+                <Route exact path={ROUTE_MYPLANT_EDIT}>
+                    <MyPlantFormCard
+                        cateories={categories}
+                        rooms={rooms}
+                        plants={plants}
+                        formLabel='Edit New Plant'
+                        // initialValues={toEdit}
+                        // onSubmit={this.onSubmitPlantCreate}
+                        myPlant={selectedMyPlant}
+                    />
+                </Route>
 
-                <Route exact path={ROUTE_MYPLANT_CREATE}>
+                <Route exact path={ROUTE_MYPLANT_CREATE} >
                     <MyPlantFormCard
                         cateories={categories}
                         rooms={rooms}
@@ -186,6 +210,7 @@ class MyPlantsPage extends React.PureComponent {
                         onSubmit={this.onSubmitPlantCreate}
                     />
                 </Route>
+
                 <Route exact path={ROUTE_MYPLANTS}>
                     <MyPlant
                         myPlants={myPlants}
@@ -194,14 +219,14 @@ class MyPlantsPage extends React.PureComponent {
                         myPlantsSuccess={myPlantsSuccess}
                         rooms={rooms}
                         onCreateMyPlant={this.onCreateMyPlant}
+                        getSingleMyPlantId={this.getSingleMyPlantId}
 
 
                     />
 
                 </Route>
 
-
-            </Router>
+            </Switch>
 
 
         )
@@ -210,4 +235,4 @@ class MyPlantsPage extends React.PureComponent {
 
 }
 
-export default MyPlantsPage;
+export default withRouter(MyPlantsPage);
