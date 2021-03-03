@@ -185,11 +185,24 @@ class PlantationContainer extends React.PureComponent {
             });
     };
 
-    onDelete =(event)=>{
+    onDelete = (event) => {
         console.log('kliknięto delete');
-        const plantToDelete =this.state.plants.find(obj=>obj.id===event.target.id);
-        axios.delete(Api.PLANTS,plantToDelete)
-            .then(response=>{
+        console.log(event.target.id);
+
+        const idToDelete =this.state.selectedPlantId;
+        console.log(idToDelete);
+
+        const plantToDelete = this.state.plants.find(obj => obj.id === idToDelete);
+        console.log(plantToDelete);
+        console.log(plantToDelete.id);
+        const index = this.state.plants.findIndex((plant)=>plant.id ===idToDelete);
+        if(index!==-1)this.state.plants.splice(index,1);
+
+
+
+
+        axios.delete(Api.PLANTS + plantToDelete.id + '/', plantToDelete)
+            .then(response => {
                 console.log(response);
                 console.log(response.data);
             })
@@ -255,7 +268,7 @@ class PlantationContainer extends React.PureComponent {
                         />
                     </Route>
 
-                    <Route  path={ROUTE_MYPLANTS}>
+                    <Route path={ROUTE_MYPLANTS}>
                         <MyPlantsPage
                             plants={plants}
                             categories={categories}
@@ -305,10 +318,9 @@ class PlantationContainer extends React.PureComponent {
                             plant={plantSelected}
                         />
                     </Route>
-                     <Route path={ROUTE_DELETE}>
+                    <Route path={ROUTE_DELETE}>
                         <Delete/>
                     </Route>
-
 
 
                 </Switch>
