@@ -1,9 +1,9 @@
 .single-plant-wrapper {
   padding: 20px;
-   @media(max-width: 500px) {
-        padding: 20px 0;
+  @media(max-width: 500px) {
+    padding: 20px 0;
 
-      }
+  }
 
   .plant-data {
     display: flex;
@@ -78,22 +78,76 @@
 .edition-icons {
   color: black;
   display: flex;
-  justify-content: flex-end;
-  .edit{
+  justify-content: space-between;
+  div{
+    display: flex;
+    justify-content: space-between;
+    .edit {
     margin-right: 20px;
-      font-size: 2rem;
+    font-size: 2rem;
 
-    &:hover{
-      color:green;
+    &:hover {
+      color: green;
 
 
     }
   }
-  .delete{
+
+  .delete {
     font-size: 2rem;
-    &:hover{
-       color:red;
+
+    &:hover {
+      color: red;
     }
+  }
+
+  }
+
+
+
+}
+
+.modal-open {
+  .modal {
+    transition: 0.3s;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0px 0px 8px 0px rgba(168, 19, 39, 0.97);
+
+    &:focus {
+      outline: none;
+      box-shadow: 0px 0px 8px 0px rgba(168, 19, 39, 0.97);
+
+    }
+
+    .modal-header {
+      color: darkred;
+
+      button {
+        display: none;
+
+        padding: 20px;
+        color: #8b0000;
+      }
+    }
+
+    .modal-body {
+      margin-bottom: 15px;
+      color: #8b0000;
+    }
+
+    .modal-footer {
+      button {
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
   }
 
 }

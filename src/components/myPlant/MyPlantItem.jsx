@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 import {ROUTE_MYPLANT_EDIT, ROUTE_PLANT, ROUTE_MYPLANT_BASE_TO_EDIT} from "constants/Routes";
 import "./MyPlant.scss";
 import sampleImage from "images/blooming.jpg";
+import moment from "moment";
+
 
 
 class MyPlantItem extends React.PureComponent {
@@ -46,9 +48,9 @@ class MyPlantItem extends React.PureComponent {
 
         const {myPlant, plants, rooms, getSinglePlantMyId} = this.props;
         const {name, room, plant, id, last_watered, last_fertilized, image_url} = myPlant;
+        const watering = moment(last_watered).format("MMM Do YY");
+        const fertilizing = moment(last_fertilized).format("MMM Do YY");
 
-        // const imageURL = `"${image_url}"`;
-        // console.log(imageURL);
 
 
         return (
@@ -65,14 +67,12 @@ class MyPlantItem extends React.PureComponent {
                                 Family: {getPlantName(plants, plant)}</CardSubtitle>
                             <div>
                                 <hr/>
-                                {name} is a plant from family of plants {getPlantName(plants, plant)}.
-                                <hr/>
                                 <p>Location : {getRoomsName(rooms, plant)} .</p>
                                 <hr/>
-                                <p>Last watered : {last_watered} /null from API?/. </p>
+                                <p>Last watered : {watering} </p>
                                 <span>Remember to water this plant every {getWateringInterval(plants, plant)} days.</span>
                                 <hr/>
-                                <p>Last fertilized : {last_fertilized} /null from API?/. </p>
+                                <p>Last fertilized : {fertilizing}</p>
                                 <span>Remember to fertilize this plant every {getFertilizingInterval(plants, plant)} days.</span>
                                 <hr/>
 
@@ -82,15 +82,10 @@ class MyPlantItem extends React.PureComponent {
                                 to={ROUTE_MYPLANT_EDIT + myPlant.id}
                                 id={id}
                                 onClick={getSinglePlantMyId}
-
+                                style={{marginTop:"10px"}}
                             >Click to update</Button>
-                            {/* <Button*/}
-                            {/*    tag={Link}*/}
-                            {/*    to={ROUTE_MYPLANT_BASE_TO_EDIT + myPlant.id}*/}
-                            {/*    id={id}*/}
-                            {/*    onClick={getSinglePlantMyId}*/}
 
-                            {/*>Click for Details</Button>*/}
+
                         </CardBody>
                     </Card>
                 </div>

@@ -4,8 +4,10 @@ import {Button, Container} from "reactstrap";
 import Buttons from "components/sharedElements/Buttons";
 import PlantForm from "components/admin/PlantForm";
 import {humidity} from "constants/PlantsParameters";
+import CategoryForm from "components/categories/categoryForm/CategoryForm";
+import Categories from "components/categories/Categories";
 
-class PlantFormCard extends React.Component {
+class CategoryFormCard extends React.Component {
     constructor(props) {
         super(props);
 
@@ -13,21 +15,15 @@ class PlantFormCard extends React.Component {
 
     render() {
 
-        const {
-            categories,
-            initial,
-            selectedPlantId,
-            plantIdToEdit,
-            plants,
-            plant
-        } = this.props;
-
-        const initialValues = initial;
-
         const onSubmit = (values) => {
-            const plant = values;
-            this.props.onSubmit(plant);
+            const category = values;
+            this.props.onSubmit(category);
         };
+        const initialValues = {
+            name: '',
+            image_url: "",
+            slug: "",
+        }
 
 
         const key = initialValues.id;
@@ -43,14 +39,8 @@ class PlantFormCard extends React.Component {
         return (
             <Formik {...formikProps}>
                 {({isValid}) => (
-                    <Form className="plant-form">
-
-                        <PlantForm
-                            selectedPlantId={selectedPlantId}
-                            plants={plants}
-
-
-                        />
+                    <Form>
+                        <CategoryForm/>
                         <Container>
                             <div className='form-buttons'>
 
@@ -59,6 +49,7 @@ class PlantFormCard extends React.Component {
                                     submitDisabled={!isValid}
                                     submitLabel={key ? 'Save changes' : 'Create new plant'}
                                 />
+
 
                             </div>
                         </Container>
@@ -77,4 +68,4 @@ class PlantFormCard extends React.Component {
 };
 
 
-export default React.memo(PlantFormCard);
+export default React.memo(CategoryFormCard);

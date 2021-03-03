@@ -5,33 +5,26 @@ import {
     ROUTE_PLANTS,
     ROUTE_MAIN,
     ROUTE_EDIT,
-    ROUTE_POST,
-    ROUTE_ADMIN,
-    ROUTE_WELCOME,
     ROUTE_PLANT,
-    ROUTE_FORM,
     ROUTE_ABOUT,
     ROUTE_MENU,
-    ROUTE_MYPLANTS, ROUTE_MYPLANTSPAGE, ROUTE_CREATE, ROUTE_MYPLANT_CREATE, ROUTE_DELETE
+    ROUTE_MYPLANTS, ROUTE_CREATE, ROUTE_DELETE, ROUTE_CATEGORY_EDIT, ROUTE_CATEGORY_CREATE
 } from "/home/dev/Desktop/plantation/src/constants/Routes";
 import {generatePath, Route, Switch, withRouter} from "react-router-dom";
 import Plants from "components/plants/Plants";
 import Categories from "components/categories/Categories";
 import Rooms from "components/rooms/Rooms";
 import WelcomeSite from "components/welcome/WelcomeSite";
-import Edit from "components/admin/Edit";
 import SinglePlant from "components/plants/SinglePlant";
 import withRoomsFetch from "components/rooms/withRooms";
 import withCategories from "components/categories/WithCategoriesFetch";
-// import withPlants from "components/plants/WithPlants";
 import axios from "axios";
 import PlantFormCard from "components/plants/PlantFormCard";
 import {About} from "components/about/About";
-import MyPlant from "components/myPlant/MyPlant";
 import MyPlantsPage from "components/myPlant/MyPlantsPage";
 import {Api} from "services/Api";
-import Test from "components/myPlant/Test";
 import {Delete} from "components/admin/Delete";
+import CategoryFormCard from "components/categories/categoryForm/CategoryFormCard";
 
 
 const PLANTS_FETCH_DELAY = 50;
@@ -40,12 +33,12 @@ const delayFetch = (ms, func) => {
     return new Promise((resolve, reject) => setTimeout(() => func(resolve, reject), ms));
 }
 
-
 class PlantationContainer extends React.PureComponent {
 
     state = {
         plants: [],
         createPlantErrorMessage: "",
+        deleteMessage: '',
         selectedPlantId: undefined,
         plantsInProgress: false,
         plantsSuccess: undefined,
@@ -64,6 +57,9 @@ class PlantationContainer extends React.PureComponent {
         required_temperature: "medium",
         watering_interval: '1',
         id: undefined,
+
+        categories: [],
+        createCategoryErrorMessage: '',
 
 
     }
@@ -144,7 +140,6 @@ class PlantationContainer extends React.PureComponent {
         console.log(plant);
         const path = generatePath(ROUTE_PLANTS);
 
-        console.log(plant);
         axios.post(Api.PLANTS, plant)
             .then((response) => {
                 const data = response.data;
@@ -186,32 +181,56 @@ class PlantationContainer extends React.PureComponent {
     };
 
     onDelete = (event) => {
-        console.log('kliknięto delete');
-        console.log(event.target.id);
-
-        const idToDelete =this.state.selectedPlantId;
-        console.log(idToDelete);
-
+        const idToDelete = this.state.selectedPlantId;
         const plantToDelete = this.state.plants.find(obj => obj.id === idToDelete);
-        console.log(plantToDelete);
-        console.log(plantToDelete.id);
-        const index = this.state.plants.findIndex((plant)=>plant.id ===idToDelete);
-        if(index!==-1)this.state.plants.splice(index,1);
-
-
-
-
+        const index = this.state.plants.findIndex((plant) => plant.id === idToDelete);
+        if (index !== -1) this.state.plants.splice(index, 1);
+        const path = generatePath(ROUTE_PLANTS);
         axios.delete(Api.PLANTS + plantToDelete.id + '/', plantToDelete)
             .then(response => {
-                console.log(response);
-                console.log(response.data);
+                this.props.history.push(path);
+                this.setState({deleteMessage: "You have successfully removed a plant from your list"})
             })
+        console.log(plantToDelete.name);
 
     }
 
+
+    onSubmitCategoryCreate = (category) => {
+        console.log(category);
+        const path = generatePath(ROUTE_CATEGORIES);
+
+        axios.post(Api.CATEGORIES, category)
+            .then((response) => {
+                const data = response.data;
+                const category = data;
+                const categories = [...this.state.categories];
+                categories.push(category);
+                this.setState({categories: categories});
+                this.props.history.push(path);
+            })
+            .catch((error) => {
+                const categoryErrorMessage = "Error creating category";
+                this.props.history.push(path);
+                this.setState({
+                    createCategoryErrorMessage: categoryErrorMessage,
+                });
+            });
+    };
+
     render() {
-        const {delayFetch, categories, rooms} = this.props;
-        const {createPlantErrorMessage, selectedPlantId, plants, plantsSuccess, plantsInProgress, plantSelected, plantIdToEdit} = this.state;
+        const {
+            delayFetch, categories, rooms,
+            handleCategoryEdit, onSubmitCategoryUpdate, onSubmitCategoryCreate
+        } = this.props;
+
+        console.log(this.props);
+        const {
+            createPlantErrorMessage, deleteMessage, selectedPlantId, plants, plantsSuccess,
+            plantsInProgress, plantSelected, plantIdToEdit, createCategoryErrorMessage,
+        } = this.state;
+
+
         const {
             name, blooming, id, watering_interval, category, difficulty, description,
             fertilizing_interval, required_exposure, required_humidity, required_temperature
@@ -265,6 +284,8 @@ class PlantationContainer extends React.PureComponent {
                             plants={plants}
                             categories={categories}
                             onCreate={this.onCreate}
+                            deleteMessage={deleteMessage}
+
                         />
                     </Route>
 
@@ -276,7 +297,15 @@ class PlantationContainer extends React.PureComponent {
                         />
                     </Route>
                     <Route path={ROUTE_CATEGORIES}>
-                        <Categories/>
+                        <Categories
+                        />
+                    </Route>
+                    <Route path={ROUTE_CATEGORY_CREATE}>
+                        <CategoryFormCard
+                            handleCategoryEdit={handleCategoryEdit}
+                            onSubmitCategoryUpdate={onSubmitCategoryUpdate}
+                            onSubmit={this.onSubmitCategoryCreate}
+                        />
                     </Route>
                     <Route path={ROUTE_ROOMS}>
                         <Rooms/>

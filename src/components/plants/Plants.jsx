@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, CardBody, Button,Container, ListGroup} from "reactstrap";
+import {Card, CardBody, Button, Container, ListGroup, Alert, UncontrolledAlert} from "reactstrap";
 // import withCategories from "components/categories/WithCategoriesFetch";
 // import withPlants from "components/plants/WithPlants";
 import './Plants.scss';
@@ -52,6 +52,8 @@ class Plants extends React.PureComponent {
             plantsInProgress,
             plantsSuccess,
             onCreate,
+            deleteMessage,
+            selectedPlantId,
 
         } = this.props;
 
@@ -75,74 +77,73 @@ class Plants extends React.PureComponent {
 
                 <ScrollToTop smooth color="#387f34"/>
 
-                    <h2 className='title'>Plants Types</h2>
-                    <div className='create-search-tab'>
-                        <div className='search'>
-                            <label htmlFor="name">Search Categories</label>
-                            <select id="name" onChange={this.handleCategorySort}>
-                                <option value=''>
-                                    select category
-                                </option>
+                <h2 className='success'>Plants Types</h2>
+                {/**/}
+                <div className='create-search-tab'>
+                    <div className='search'>
+                        <label htmlFor="name">Search Categories</label>
+                        <select id="name" onChange={this.handleCategorySort}>
+                            <option value=''>
+                                select category
+                            </option>
 
-                                {
-                                    categoriesSortedAsc.map((item, index) =>
-                                        <CategoriesSelectOptions
-                                            category={item}
-                                            key={index}
-                                        />
-                                    )
+                            {
+                                categoriesSortedAsc.map((item, index) =>
+                                    <CategoriesSelectOptions
+                                        category={item}
+                                        key={index}
+                                    />
+                                )
 
-                                }
+                            }
 
-                            </select>
+                        </select>
 
-                            <Button
-                                onClick={this.handleResetSearch}
-                                color="secondary" size="md">Reset Search</Button>
-
-                        </div>
-
-
-                        <Button tag={Link} to={ROUTE_CREATE} onClick={onCreate}>Create New Plant</Button>
+                        <Button
+                            onClick={this.handleResetSearch}
+                            color="secondary" size="md">Reset Search</Button>
 
                     </div>
-                    {/*<InProgress inProgress={plantsInProgress}/>*/}
-                    {
-                        plantsSuccess === false &&
-                        <p>Unable to fetch plants.</p>
-                    }
 
-                    {
-                        plantsSuccess && (
-                             <div className="plant-card">
-                                {
-                                    plants.filter(plant => plant.category === categoryIdToCompare).map((filteredPlant, index) => (
-                                        <PlantRow plant={filteredPlant} categories={categories} key={index}
-                                                  getSinglePlantId={getSinglePlantId}/>
-                                    ))
-                                }
-                            </div>
-                        )
-                    }
 
-                    {
-                        categoryIdToCompare === undefined && (
-                            <div className="plant-card">
-                                {
-                                    plants.map(
-                                        (plant, index, arr) => (
-                                            <PlantRow plant={plant} categories={categories} key={index}
-                                                      index={index + 1} getSinglePlantId={getSinglePlantId}/>)
-                                    )
-                                }
-                            </div>
-                        )
-                    }
+                    <Button tag={Link} to={ROUTE_CREATE} onClick={onCreate}>Create New Plant</Button>
 
+                </div>
+                {/*<InProgress inProgress={plantsInProgress}/>*/}
+                {
+                    plantsSuccess === false &&
+                    <p>Unable to fetch plants.</p>
+                }
+
+                {
+                    plantsSuccess && (
+                        <div className="plant-card">
+                            {
+                                plants.filter(plant => plant.category === categoryIdToCompare).map((filteredPlant, index) => (
+                                    <PlantRow plant={filteredPlant} categories={categories} key={index}
+                                              getSinglePlantId={getSinglePlantId}/>
+                                ))
+                            }
+                        </div>
+                    )
+                }
+
+                {
+                    categoryIdToCompare === undefined && (
+                        <div className="plant-card">
+                            {
+                                plants.map(
+                                    (plant, index, arr) => (
+                                        <PlantRow plant={plant} categories={categories} key={index}
+                                                  index={index + 1} getSinglePlantId={getSinglePlantId}/>)
+                                )
+                            }
+                        </div>
+                    )
+                }
 
 
             </Container>
-
 
 
         )

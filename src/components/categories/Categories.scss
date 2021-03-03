@@ -1,0 +1,19 @@
+.container{
+  margin-top:20px;
+  .categories{
+    margin-top:60px;
+    td{
+      div{
+        display: flex;
+        justify-content: center;
+        button{
+          width: 80px;
+          margin-right:15px;
+          &:last-child{
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

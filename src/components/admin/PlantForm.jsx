@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, FormGroup, Label} from "reactstrap";
+import {Button, Container, FormGroup, Label, NavItem} from "reactstrap";
 import {Field, Form} from "formik";
 import PlantationInput from "components/shared/form/PlantationInput";
 import PlantFormFields from "constants/PlantFormFields";
@@ -14,17 +14,28 @@ import ExposureField from "components/formik/ExposureField";
 import TemperatureField from "components/formik/TemperatureField";
 import HumidityField from "components/formik/HumidityField";
 import Buttons from "components/sharedElements/Buttons";
+import {Link} from "react-router-dom";
+import {ROUTE_PLANTS} from "constants/Routes";
+import ScrollToTop from "react-scroll-to-top";
 
 
 class PlantForm extends React.Component {
     render() {
-        const{selectedPlantId,plants,plant, plantCategory}=this.props;
+        const {selectedPlantId, plants, plant, plantCategory} = this.props;
 
         return (
             <Container>
-
+                <ScrollToTop smooth color="#387f34"/>
                 <FormGroup className="form-wrapper">
-                    <h4>Create New Plant</h4>
+                    <div className='head'>
+                        <h4>Create New Plant</h4>
+                        <div className='action-buttons'>
+                            <NavItem tag={Link} to={ROUTE_PLANTS}>
+                                <Button style={{backgroundColor:"#387f34"}}>Back to plants</Button>
+                            </NavItem>
+                        </div>
+                    </div>
+
                     <div className='section1'>
                         <div className='label'>Plant's Information:</div>
                         <div>
@@ -40,9 +51,9 @@ class PlantForm extends React.Component {
 
                                 />
                                 <CategoryField
-                                  selectedPlantId={selectedPlantId}
-                                  plant={plant}
-                                  plantCategory={plantCategory}
+                                    selectedPlantId={selectedPlantId}
+                                    plant={plant}
+                                    plantCategory={plantCategory}
                                 />
 
                             </div>

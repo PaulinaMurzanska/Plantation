@@ -133,6 +133,21 @@ class MyPlantsPage extends React.PureComponent {
 
     }
 
+    //   onMyPlantDelete = (event) => {
+    //     const idToDelete = event.target.id;
+    //     const myPlantToDelete = this.state.myPlants.find(obj => obj.id === idToDelete);
+    //     const index = this.state.myPlants.findIndex((myPlant) => myPlant.id === idToDelete);
+    //     if (index !== -1) this.state.plants.splice(index, 1);
+    //     const path = generatePath(ROUTE_MYPLANTS);
+    //     axios.delete(Api.MYPLANTS + myPlantToDelete.id + '/', myPlantToDelete)
+    //         .then(response => {
+    //             this.props.history.push(path);
+    //             this.setState({deleteMessage: "You have successfully removed a plant from your list"})
+    //         })
+    //     console.log(myPlantToDelete.name);
+    //
+    // }
+
 
     // onEdit = (event) => {
     //     const selectedMyPlant = this.state.myPlants.find(obj => obj.id === this.state.selectedMyPlantId)
@@ -220,6 +235,7 @@ class MyPlantsPage extends React.PureComponent {
                         rooms={rooms}
                         onCreateMyPlant={this.onCreateMyPlant}
                         getSingleMyPlantId={this.getSingleMyPlantId}
+                        onMyPlantDelete={this.onMyPlantDelete}
 
 
                     />

@@ -1,65 +1,30 @@
-//.card-body {
-//  padding: 40px 60px;
-//  @media(max-width: 1110px) {
-//    padding: 40px 50px;
-//  }
-//  @media(max-width: 700px) {
-//    padding: 20px 100px;
-//  }
-//  @media(max-width: 570px) {
-//    padding: 20px 50px;
-//  }
-//  @media(max-width: 460px) {
-//    padding: 20px 20px;
-//  }
 //
-//  img {
-//
-//    height: 40vh;
-//  }
+//.title{
+//  margin-top: 20px;
+//  padding-left:15px;
 //}
-
-//ul {
-//  text-decoration: none;
+//.plant-box {
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: center;
+//  padding: 0 20px;
 //
-//  li {
-//    text-decoration: none;
+//  .name-span {
+//    display: block;
+//    text-align: center;
+//    width: 70%;
 //
-//    &:hover {
-//      text-decoration: none;
-//
+//    p {
+//      font-size: 1.5em;
+//      color: black;
 //    }
 //
+//    span {
+//      color: black;
+//    }
 //  }
 //
 //}
-
-.title{
-  margin-top: 20px;
-  padding-left:15px;
-}
-.plant-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-
-  .name-span {
-    display: block;
-    text-align: center;
-    width: 70%;
-
-    p {
-      font-size: 1.5em;
-      color: black;
-    }
-
-    span {
-      color: black;
-    }
-  }
-
-}
 
 
 .icons {
@@ -83,6 +48,11 @@
     }
   }
 
+}
+
+.success {
+  margin-top: 20px;
+  padding-left: 15px;
 }
 
 .create-search-tab {
@@ -135,6 +105,7 @@
 .plant-card {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 
 
   .plant-card-items {
@@ -142,11 +113,25 @@
     width: calc(100% / 3.2);
     margin: 10px;
 
+
     @media(max-width: 1200px) {
-      width: 50%;
+      width: 42%;
+    }
+    @media(max-width: 960px) {
+      width: 40%;
+      //margin:10px 100px;
     }
     @media(max-width: 700px) {
       width: 100%;
+      margin:10px 100px;
+    }
+      @media(max-width: 500px) {
+      width: 100%;
+      margin:10px 70px;
+    }
+       @media(max-width: 500px) {
+      width: 100%;
+      margin:10px 10px;
     }
 
 

@@ -73,7 +73,7 @@ class PlantationNavbar extends React.PureComponent {
                             <PlantationNavItem path={ROUTE_MENU} icon={faFolderPlus} name="Menu"/>
                             <PlantationNavItem path={ROUTE_PLANTS} icon={faLeaf} name="Types of Plants"/>
                             <PlantationNavItem path={ROUTE_MYPLANTS} icon={faCogs} name="My Plants"/>
-                            <PlantationNavItem path={ROUTE_CATEGORIES} icon={faBookReader} name="Articles"/>
+                            <PlantationNavItem path={ROUTE_CATEGORIES} icon={faBookReader} name="Categories"/>
 
                         </Nav>
 

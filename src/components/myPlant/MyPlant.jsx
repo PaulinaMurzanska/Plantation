@@ -43,7 +43,7 @@ class MyPlant extends React.PureComponent {
     }
 
     render() {
-        const {myPlants, plants, rooms, categories, hello, myPlantsSuccess, onCreateMyPlant,getSingleMyPlantId,} = this.props;
+        const {myPlants,onMyPlantDelete, plants, rooms, categories, hello, myPlantsSuccess, onCreateMyPlant,getSingleMyPlantId,} = this.props;
         console.log(this.props);
         const {sortDirection} = this.state;
         const multiplier = sortDirection ? 1 : -1;
@@ -94,6 +94,7 @@ class MyPlant extends React.PureComponent {
                                         categories={categories}
                                         rooms={rooms}
                                         getSinglePlantMyId={getSingleMyPlantId}
+                                        onMyPlantDelete={onMyPlantDelete}
 
                                     />
                                 ))

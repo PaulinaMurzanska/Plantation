@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, FormGroup, Label} from "reactstrap";
+import {Button, Container, FormGroup, Label, NavItem} from "reactstrap";
 import {Field, Form} from "formik";
 import PlantationInput from "components/shared/form/PlantationInput";
 import PlantFormFields from "constants/PlantFormFields";
@@ -11,6 +11,8 @@ import MyPlantDifficultyField from "components/myPlant/myPlantForms/createMyPlan
 import LastWateredField from "components/myPlant/myPlantForms/createMyPlantForm/LastWateredField";
 import LastFertilizedField from "components/myPlant/myPlantForms/createMyPlantForm/LastFertilizedField";
 import './MyPlantForm.scss';
+import {Link} from "react-router-dom";
+import {ROUTE_PLANTS,ROUTE_MYPLANTS} from "constants/Routes";
 
 
 class MyPlantForm extends React.Component {
@@ -21,7 +23,18 @@ class MyPlantForm extends React.Component {
             <Container>
 
                 <FormGroup className="form-wrapper">
-                    <h4 style={{padding:'15px'}}>Create New Plant</h4>
+
+                    <div className='head'>
+                         <h4>Create New Plant</h4>
+                        <div className='action-buttons'>
+                            <NavItem tag={Link} to={ROUTE_MYPLANTS}>
+                                    <Button>Back to plants</Button>
+                                </NavItem>
+                        </div>
+                    </div>
+
+
+                    {/*<h4 style={{padding:'15px'}}>Create New Plant</h4>*/}
                     <div className='section1'>
                         <div className='label'>Plant's Information:</div>
                         <div className='sub-section1'>
