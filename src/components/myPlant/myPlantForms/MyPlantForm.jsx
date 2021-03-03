@@ -13,6 +13,7 @@ import LastFertilizedField from "components/myPlant/myPlantForms/createMyPlantFo
 import './MyPlantForm.scss';
 import {Link} from "react-router-dom";
 import {ROUTE_PLANTS,ROUTE_MYPLANTS} from "constants/Routes";
+import ScrollToTop from "react-scroll-to-top";
 
 
 class MyPlantForm extends React.Component {
@@ -21,6 +22,7 @@ class MyPlantForm extends React.Component {
 
         return (
             <Container>
+                <ScrollToTop smooth color="#387f34"/>
 
                 <FormGroup className="form-wrapper">
 

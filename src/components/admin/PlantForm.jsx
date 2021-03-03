@@ -21,7 +21,7 @@ import ScrollToTop from "react-scroll-to-top";
 
 class PlantForm extends React.Component {
     render() {
-        const {selectedPlantId, plants, plant, plantCategory} = this.props;
+        const {selectedPlantId, plants, plant, plantCategory,categories} = this.props;
 
         return (
             <Container>
@@ -54,6 +54,7 @@ class PlantForm extends React.Component {
                                     selectedPlantId={selectedPlantId}
                                     plant={plant}
                                     plantCategory={plantCategory}
+                                    categories={categories}
                                 />
 
                             </div>

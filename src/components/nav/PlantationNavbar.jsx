@@ -70,7 +70,7 @@ class PlantationNavbar extends React.PureComponent {
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className='mr-auto ' navbar>
                             <PlantationNavItem path={ROUTE_ABOUT} icon={faHome} name="About"/>
-                            <PlantationNavItem path={ROUTE_MENU} icon={faFolderPlus} name="Menu"/>
+                            {/*<PlantationNavItem path={ROUTE_MENU} icon={faFolderPlus} name="Menu"/>*/}
                             <PlantationNavItem path={ROUTE_PLANTS} icon={faLeaf} name="Types of Plants"/>
                             <PlantationNavItem path={ROUTE_MYPLANTS} icon={faCogs} name="My Plants"/>
                             <PlantationNavItem path={ROUTE_CATEGORIES} icon={faBookReader} name="Categories"/>

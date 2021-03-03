@@ -52,8 +52,8 @@ class MyPlantFormCard extends React.Component {
                             plants={plants}
                             rooms={rooms}
                         />
-                        <Container>
-                            <div className='form-buttons'>
+                        <Container style={{marginTop:"0"}}>
+                            <div className='form-buttons' >
 
                                 <Buttons
                                     cancelLabel="Cancel"

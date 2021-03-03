@@ -1,5 +1,5 @@
-import React from "react";
-import withCategories from "components/categories/WithCategoriesFetch";
+import React, {useState} from "react";
+// import withCategories from "components/categories/WithCategoriesFetch";
 import {Button, Card, CardBody, Container, ListGroup, Table} from "reactstrap";
 import InProgress from "components/sharedElements/InProgress";
 import CategoryItem from "components/categories/CategoryItem";
@@ -7,58 +7,55 @@ import "./Categories.scss"
 import {Link} from "react-router-dom";
 import {ROUTE_CATEGORY_CREATE, ROUTE_CREATE} from "constants/Routes";
 
-class Categories extends React.PureComponent {
 
-    componentDidMount() {
-        this.props.fetchCategories()
-    }
+const Categories = ({
+                        categoriesInProgress, categoriesSuccess, categories, onCategoryDelete,
+                        handleCategoryEdit
+                    }) => {
 
-    render() {
-        const {categoriesInProgress, categoriesSuccess, categories,
-            handleCategoryEdit,} = this.props;
+    return (
 
-        return (
+        <Container>
+            <Button tag={Link} to={ROUTE_CATEGORY_CREATE}>Create New Category</Button>
+            <InProgress inProgress={categoriesInProgress}/>
+            {
+                categoriesSuccess === false &&
+                <p>Nie udało się pobrać Kategorii</p>
+            }
+            {
+                categoriesSuccess &&
+                <Table striped className="categories">
+                    <thead>
+                    <tr>
+                        <th>Categories</th>
+                        <th> Edit and Delete</th>
 
-                <Container>
-                    <Button tag={Link} to={ROUTE_CATEGORY_CREATE} >Create New Plant</Button>
-                        <InProgress inProgress={categoriesInProgress}/>
-                        {
-                            categoriesSuccess === false &&
-                            <p>Nie udało się pobrać Kategorii</p>
-                        }
-                        {
-                            categoriesSuccess &&
-                            <Table striped className="categories">
-                                <thead>
-                                <tr>
-                                    <th>Categories</th>
-                                    <th> Edit and Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        categories.map((item, index, arr) =>
+                            <CategoryItem
+                                category={item}
+                                label='category'
+                                key={index}
+                                isLastItem={arr.length - 1 === index}
+                                index={index}
+                                handleCategoryEdit={handleCategoryEdit}
+                                onCategoryDelete={onCategoryDelete}
+                            />
+                        )
+                    }
 
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                    categories.map((item, index, arr) =>
-                                        <CategoryItem
-                                            category={item}
-                                            label='category'
-                                            key={index}
-                                            isLastItem={arr.length - 1 === index}
-                                            index={index}
-                                            handleCategoryEdit={handleCategoryEdit}
-                                        />
-                                    )
-                                }
-
-                                </tbody>
+                    </tbody>
 
 
-                            </Table>
-                        }
-                </Container>
+                </Table>
+            }
+        </Container>
 
-        )
-    }
+    )
+
 }
 
-export default withCategories(Categories);
+export default Categories;

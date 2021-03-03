@@ -2,7 +2,7 @@ import React from "react";
 import {Field} from "formik";
 import {FormGroup, Label} from "reactstrap";
 import PlantFormFields from "constants/PlantFormFields";
-import withCategories from "components/categories/WithCategoriesFetch";
+// import withCategories from "components/categories/WithCategoriesFetch";
 import CategoriesSelect from "components/categories/CategoriesSelect";
 import PlantationSelect from "components/formik/PlantationSelect";
 
@@ -15,9 +15,7 @@ class CategoryField extends React.Component {
 
     }
 
-    componentDidMount = () => {
-        this.props.fetchCategories();
-    }
+
 
     render() {
         const {categories, plantCategory,selectedPlantId, plants, plant} = this.props;
@@ -45,4 +43,4 @@ class CategoryField extends React.Component {
     }
 }
 
-export default withCategories(CategoryField);
+export default CategoryField;

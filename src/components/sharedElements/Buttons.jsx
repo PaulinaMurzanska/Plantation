@@ -7,7 +7,7 @@ import {ROUTE_PLANTS} from "constants/Routes";
 /**
  * @component
  */
-const PlantFormButtons = ({ cancelLabel, submitDisabled, submitLabel }) => {
+const PlantFormButtons = ({ cancelLabel, submitDisabled, submitLabel,route }) => {
   return (
     <React.Fragment>
       <hr className="mb-4 mt-4" />
@@ -16,7 +16,7 @@ const PlantFormButtons = ({ cancelLabel, submitDisabled, submitLabel }) => {
                 style={{marginRight:'15px',backgroundColor:"#387f34"}}>
           { submitLabel }
         </Button>
-          <NavItem tag={Link} to={ROUTE_PLANTS}>
+          <NavItem tag={Link} to={route}>
               <Button color="secondary" type="reset" className="ml-0 ml-md-2"  style={{paddingRight:'15px'}}>
           { cancelLabel }
         </Button>

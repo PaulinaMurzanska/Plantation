@@ -4,6 +4,7 @@ import {Button, Container} from "reactstrap";
 import Buttons from "components/sharedElements/Buttons";
 import PlantForm from "components/admin/PlantForm";
 import {humidity} from "constants/PlantsParameters";
+import {ROUTE_PLANTS} from "constants/Routes";
 
 class PlantFormCard extends React.Component {
     constructor(props) {
@@ -48,6 +49,7 @@ class PlantFormCard extends React.Component {
                         <PlantForm
                             selectedPlantId={selectedPlantId}
                             plants={plants}
+                            categories={categories}
 
 
                         />
@@ -55,6 +57,7 @@ class PlantFormCard extends React.Component {
                             <div className='form-buttons'>
 
                                 <Buttons
+                                    route={ROUTE_PLANTS}
                                     cancelLabel="Cancel"
                                     submitDisabled={!isValid}
                                     submitLabel={key ? 'Save changes' : 'Create new plant'}

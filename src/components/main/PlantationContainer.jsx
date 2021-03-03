@@ -17,7 +17,7 @@ import Rooms from "components/rooms/Rooms";
 import WelcomeSite from "components/welcome/WelcomeSite";
 import SinglePlant from "components/plants/SinglePlant";
 import withRoomsFetch from "components/rooms/withRooms";
-import withCategories from "components/categories/WithCategoriesFetch";
+// import withCategories from "components/categories/WithCategoriesFetch";
 import axios from "axios";
 import PlantFormCard from "components/plants/PlantFormCard";
 import {About} from "components/about/About";
@@ -32,6 +32,8 @@ const PLANTS_FETCH_DELAY = 50;
 const delayFetch = (ms, func) => {
     return new Promise((resolve, reject) => setTimeout(() => func(resolve, reject), ms));
 }
+const category_fetch_delay_simulator = 500;
+
 
 class PlantationContainer extends React.PureComponent {
 
@@ -60,6 +62,21 @@ class PlantationContainer extends React.PureComponent {
 
         categories: [],
         createCategoryErrorMessage: '',
+        categoryIdToEdit: undefined,
+        categoriesInProgress: false,
+        categoriesSuccess: undefined,
+        selectedCategoryToEdit: [],
+        baseCategoryIdToEdit: 0,
+        baseCategorySlugToEdit: '',
+        baseCategorySlugToDelete: '',
+        deleteCategoryMessage: '',
+
+
+        categoryName: '',
+        image_url: "",
+        slug: "",
+        categoryId: undefined,
+        categoryDescription: "",
 
 
     }
@@ -76,7 +93,7 @@ class PlantationContainer extends React.PureComponent {
 
     componentDidMount() {
         this.fetchPlants();
-        this.props.fetchCategories();
+        this.fetchCategories();
         this.props.fetchRooms();
 
     }
@@ -195,6 +212,32 @@ class PlantationContainer extends React.PureComponent {
 
     }
 
+    fetchCategories = () => {
+        this.setState({categoriesInProgress: true});
+        return delayFetch(category_fetch_delay_simulator, (resolve, reject) => {
+            return axios.get(Api.CATEGORIES)
+                .then((response) => {
+                    const data = response.data;
+                    const categories = data.map((item) => ({
+                        name: item.name, id: item.id,
+                        image_url: item.image_url,
+                        slug: item.slug,
+                        description: item.description,
+
+                    }));
+                    const categoriesSuccess = true;
+                    this.setState({categories, categoriesSuccess});
+                    resolve();
+                })
+                .catch((error) => {
+                    this.setState({categoriesSuccess: false});
+                    reject();
+                })
+        }).finally(() => {
+            this.setState({categoriesInProgress: false});
+        })
+    }
+
 
     onSubmitCategoryCreate = (category) => {
         console.log(category);
@@ -218,23 +261,87 @@ class PlantationContainer extends React.PureComponent {
             });
     };
 
+
+    handleCategoryEdit = (event) => {
+        const categoryId = parseInt(event.target.id);
+        const baseCategorySlug = event.target.name;
+        console.log(baseCategorySlug);
+        const selectedCategory = this.state.categories.find(obj => obj.id === categoryId);
+        this.setState({
+            selectedCategoryToEdit: selectedCategory,
+            baseCategoryIdToEdit: categoryId,
+            baseCategorySlugToEdit: baseCategorySlug,
+        })
+
+    }
+
+    onSubmitCategoryUpdate = (category) => {
+        console.log("on submit triggered")
+        console.log(category);
+        const path = generatePath(ROUTE_CATEGORIES);
+
+        axios.put(Api.CATEGORIES + this.state.baseCategorySlugToEdit + '/', category)
+            .then((response) => {
+                const data = response.data;
+                const category = data;
+                const categories = [...this.state.categories];
+                const getIndex = categories.findIndex(item => item.id === category.id);
+                categories[getIndex] = category;
+                this.setState({categories: categories});
+                this.props.history.push(path);
+            })
+            .catch((error) => {
+                const plantsErrorMessage = "Error updating plant";
+                this.props.history.push(path);
+                this.setState({
+                    updatePlantErrorMessage: plantsErrorMessage,
+                });
+            });
+    }
+
+    onCategoryDelete = (event) => {
+        const categoryIdToDelete = parseInt(event.target.id);
+        const baseCategorySlugToDelete = event.target.name;
+        console.log('delete triggered');
+        console.log(categoryIdToDelete);
+        console.log(baseCategorySlugToDelete);
+        const categoryToDelete = this.state.categories.find(obj => obj.id === categoryIdToDelete);
+        console.log(categoryToDelete);
+
+        const index = this.state.categories.findIndex((category) => category.id === categoryIdToDelete);
+        if (index !== -1) this.state.categories.splice(index, 1);
+        const path = generatePath(ROUTE_CATEGORIES);
+        axios.delete(Api.CATEGORIES+ baseCategorySlugToDelete + '/', categoryToDelete)
+            .then(response => {
+                this.props.history.push(path);
+                this.setState(this.state)
+            })
+
+    }
+
     render() {
+
         const {
-            delayFetch, categories, rooms,
-            handleCategoryEdit, onSubmitCategoryUpdate, onSubmitCategoryCreate
+            delayFetch, rooms,
         } = this.props;
 
-        console.log(this.props);
-        const {
-            createPlantErrorMessage, deleteMessage, selectedPlantId, plants, plantsSuccess,
-            plantsInProgress, plantSelected, plantIdToEdit, createCategoryErrorMessage,
-        } = this.state;
 
+        const {
+            categoriesInProgress, categoriesSuccess, categories, deleteMessage,
+            selectedPlantId, plants, plantsSuccess,
+            plantsInProgress, plantSelected, plantIdToEdit,
+            selectedCategoryToEdit, baseCategoryIdToEdit
+        } = this.state;
 
         const {
             name, blooming, id, watering_interval, category, difficulty, description,
             fertilizing_interval, required_exposure, required_humidity, required_temperature
         } = plantSelected;
+        const {image_url, slug} = selectedCategoryToEdit;
+        const categoryName = selectedCategoryToEdit.name;
+        const categoryIdToEdit = selectedCategoryToEdit.id;
+        const categoryDescriptionToEdit = selectedCategoryToEdit.description;
+
         const toEdit =
             {
                 blooming: blooming,
@@ -262,6 +369,22 @@ class PlantationContainer extends React.PureComponent {
             watering_interval: this.state.watering_interval,
             id: this.state.id,
         };
+        const categoryInitialValues = {
+            name: this.state.categoryName,
+            image_url: this.state.image_url,
+            slug: this.state.slug,
+            id: this.state.categoryId,
+            description: this.state.categoryDescription,
+        }
+        const categoryInitialToEdit = {
+            name: categoryName,
+            image_url: image_url,
+            slug: slug,
+            id: categoryIdToEdit,
+            description: categoryDescriptionToEdit,
+
+        }
+
 
         return (
             <>
@@ -270,9 +393,9 @@ class PlantationContainer extends React.PureComponent {
                     <Route exact path={ROUTE_MAIN}>
                         <About/>
                     </Route>
-                    <Route exact path={ROUTE_MENU}>
-                        <WelcomeSite/>
-                    </Route>
+                    {/*<Route exact path={ROUTE_MENU}>*/}
+                    {/*    <WelcomeSite/>*/}
+                    {/*</Route>*/}
                     <Route path={ROUTE_PLANTS}>
                         <Plants
                             delayFetch={delayFetch}
@@ -296,15 +419,28 @@ class PlantationContainer extends React.PureComponent {
                             rooms={rooms}
                         />
                     </Route>
+
                     <Route path={ROUTE_CATEGORIES}>
                         <Categories
+                            handleCategoryEdit={this.handleCategoryEdit}
+                            categoriesInProgress={categoriesInProgress}
+                            categoriesSuccess={categoriesSuccess}
+                            categories={categories}
+                            onCategoryDelete={this.onCategoryDelete}
                         />
                     </Route>
                     <Route path={ROUTE_CATEGORY_CREATE}>
                         <CategoryFormCard
-                            handleCategoryEdit={handleCategoryEdit}
-                            onSubmitCategoryUpdate={onSubmitCategoryUpdate}
                             onSubmit={this.onSubmitCategoryCreate}
+                            formLabel="Create New Category"
+                            initialValues={categoryInitialValues}
+                        />
+                    </Route>
+                    <Route path={ROUTE_CATEGORY_EDIT}>
+                        <CategoryFormCard
+                            onSubmit={this.onSubmitCategoryUpdate}
+                            formLabel="Edit New Category"
+                            initialValues={categoryInitialToEdit}
                         />
                     </Route>
                     <Route path={ROUTE_ROOMS}>
@@ -358,4 +494,4 @@ class PlantationContainer extends React.PureComponent {
     }
 }
 
-export default withRoomsFetch(withCategories(withRouter(PlantationContainer)));
+export default withRoomsFetch(withRouter(PlantationContainer));

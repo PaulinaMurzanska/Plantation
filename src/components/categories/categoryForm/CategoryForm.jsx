@@ -50,6 +50,14 @@ class CategoryForm extends React.Component {
                                     placeholder=""
                                     type="text"
                                 />
+                                   <Label for='description'>Description:</Label>
+                                <Field
+                                    component={PlantationInput}
+                                    id="description"
+                                    name='description'
+                                    placeholder=""
+                                    type="text"
+                                />
                             </div>
                         </div>
                     </div>
