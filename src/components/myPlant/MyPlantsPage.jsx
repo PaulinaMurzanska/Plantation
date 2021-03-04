@@ -197,7 +197,7 @@ class MyPlantsPage extends React.PureComponent {
             plant: this.state.plant,
             room: this.state.room,
         };
-        console.log(initialValues);
+
 
 
         return (

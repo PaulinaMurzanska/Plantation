@@ -23,8 +23,8 @@ class MyPlantItem extends React.PureComponent {
             }
             return plants[index].name;
         }
-        const getRoomsName = (rooms, plant) => {
-            const index = rooms.findIndex((room) => room.id === plant);
+        const getRoomsName = (rooms, room) => {
+            const index = rooms.findIndex((item) => item.id === room);
             if (index < 0) {
                 return ' /*temporarily undefined */ ';
             }
@@ -50,6 +50,8 @@ class MyPlantItem extends React.PureComponent {
         const {name, room, plant, id, last_watered, last_fertilized, image_url} = myPlant;
         const watering = moment(last_watered).format("MMM Do YY");
         const fertilizing = moment(last_fertilized).format("MMM Do YY");
+        console.log(myPlant);
+        console.log(rooms);
 
 
 
@@ -67,7 +69,7 @@ class MyPlantItem extends React.PureComponent {
                                 Family: {getPlantName(plants, plant)}</CardSubtitle>
                             <div>
                                 <hr/>
-                                <p>Location : {getRoomsName(rooms, plant)} .</p>
+                                <p>Location : {getRoomsName(rooms, room)} </p>
                                 <hr/>
                                 <p>Last watered : {watering} </p>
                                 <span>Remember to water this plant every {getWateringInterval(plants, plant)} days.</span>

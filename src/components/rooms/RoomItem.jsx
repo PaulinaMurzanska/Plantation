@@ -1,5 +1,5 @@
-import {Button, ListGroupItem, NavItem} from "reactstrap";
-import {ROUTE_CATEGORY_CREATE, ROUTE_CATEGORY_EDIT, ROUTE_ROOM_EDIT} from "constants/Routes";
+import {Button, NavItem} from "reactstrap";
+import { ROUTE_ROOM_EDIT} from "constants/Routes";
 import {Link} from "react-router-dom";
 import React, {useState} from 'react';
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';

@@ -13,28 +13,22 @@ import {generatePath, Route, Switch, withRouter} from "react-router-dom";
 import Plants from "components/plants/Plants";
 import Categories from "components/categories/Categories";
 import Rooms from "components/rooms/Rooms";
-import WelcomeSite from "components/welcome/WelcomeSite";
 import SinglePlant from "components/plants/SinglePlant";
-// import withRoomsFetch from "components/rooms/withRooms";
-// import withCategories from "components/categories/WithCategoriesFetch";
 import axios from "axios";
 import PlantFormCard from "components/plants/PlantFormCard";
 import {About} from "components/about/About";
 import MyPlantsPage from "components/myPlant/MyPlantsPage";
 import {Api} from "services/Api";
-import {Delete} from "components/admin/Delete";
 import CategoryFormCard from "components/categories/categoryForm/CategoryFormCard";
 import RoomFormCard from "components/rooms/roomForm/RoomFormCard";
 
 
 const PLANTS_FETCH_DELAY = 50;
-
+const room_fetch_delay_simulator = 100;
+const category_fetch_delay_simulator = 500;
 const delayFetch = (ms, func) => {
     return new Promise((resolve, reject) => setTimeout(() => func(resolve, reject), ms));
 }
-const room_fetch_delay_simulator = 100;
-const category_fetch_delay_simulator = 500;
-
 
 class PlantationContainer extends React.PureComponent {
 
@@ -46,7 +40,6 @@ class PlantationContainer extends React.PureComponent {
         plantsInProgress: false,
         plantsSuccess: undefined,
         plantIdToEdit: undefined,
-
         plantSelected: [],
 
         blooming: false,
@@ -96,14 +89,6 @@ class PlantationContainer extends React.PureComponent {
     }
 
 
-    getSinglePlantId = (event) => {
-        console.log(event.target.id);
-        const targetId = event.target.id;
-        this.setState({
-            selectedPlantId: parseInt(targetId),
-        })
-
-    }
 
     componentDidMount() {
         this.fetchPlants();
@@ -112,6 +97,14 @@ class PlantationContainer extends React.PureComponent {
 
     }
 
+    getSinglePlantId = (event) => {
+        console.log(event.target.id);
+        const targetId = event.target.id;
+        this.setState({
+            selectedPlantId: parseInt(targetId),
+        })
+
+    }
     fetchPlants = () => {
         const requestUrl = "https://still-fortress-69660.herokuapp.com/plant";
         this.setState({plantsInProgress: true});
@@ -165,8 +158,6 @@ class PlantationContainer extends React.PureComponent {
         console.log(selectedPlant);
         this.setState({plantSelected: selectedPlant})
     }
-
-
     onSubmitPlantCreate = (plant) => {
         console.log(plant);
         const path = generatePath(ROUTE_PLANTS);
@@ -210,7 +201,6 @@ class PlantationContainer extends React.PureComponent {
                 });
             });
     };
-
     onDelete = (event) => {
         const idToDelete = this.state.selectedPlantId;
         const plantToDelete = this.state.plants.find(obj => obj.id === idToDelete);
@@ -251,8 +241,6 @@ class PlantationContainer extends React.PureComponent {
             this.setState({categoriesInProgress: false});
         })
     }
-
-
     onSubmitCategoryCreate = (category) => {
         console.log(category);
         const path = generatePath(ROUTE_CATEGORIES);
@@ -274,8 +262,6 @@ class PlantationContainer extends React.PureComponent {
                 });
             });
     };
-
-
     handleCategoryEdit = (event) => {
         const categoryId = parseInt(event.target.id);
         const baseCategorySlug = event.target.name;
@@ -288,7 +274,6 @@ class PlantationContainer extends React.PureComponent {
         })
 
     }
-
     onSubmitCategoryUpdate = (category) => {
         console.log("on submit triggered")
         console.log(category);
@@ -312,25 +297,18 @@ class PlantationContainer extends React.PureComponent {
                 });
             });
     }
-
     onCategoryDelete = (event) => {
         const categoryIdToDelete = parseInt(event.target.id);
         const baseCategorySlugToDelete = event.target.name;
-        console.log('delete triggered');
-        console.log(categoryIdToDelete);
-        console.log(baseCategorySlugToDelete);
         const categoryToDelete = this.state.categories.find(obj => obj.id === categoryIdToDelete);
-        console.log(categoryToDelete);
-
         const index = this.state.categories.findIndex((category) => category.id === categoryIdToDelete);
         if (index !== -1) this.state.categories.splice(index, 1);
         const path = generatePath(ROUTE_CATEGORIES);
         axios.delete(Api.CATEGORIES + baseCategorySlugToDelete + '/', categoryToDelete)
             .then(response => {
                 this.props.history.push(path);
-                this.setState(this.state)
-            })
-
+                this.setState(this.state);
+            });
     }
 
     fetchRooms = () => {
@@ -362,7 +340,6 @@ class PlantationContainer extends React.PureComponent {
         })
 
     }
-
     onSubmitRoomCreate = (room) => {
         console.log(room);
         console.log("room create triggered");
@@ -419,21 +396,17 @@ class PlantationContainer extends React.PureComponent {
                 });
             });
     }
-
     onRoomDelete = (event) => {
         const roomIdToDelete = parseInt(event.target.id);
-        console.log('delete triggered');
-        console.log(roomIdToDelete);
         const roomToDelete = this.state.rooms.find(obj => obj.id === roomIdToDelete);
-
         const index = this.state.rooms.findIndex((room) => room.id === roomIdToDelete);
         if (index !== -1) this.state.rooms.splice(index, 1);
         const path = generatePath(ROUTE_ROOMS);
         axios.delete(Api.ROOMS + roomIdToDelete + '/', roomToDelete)
             .then(response => {
                 this.props.history.push(path);
-                this.setState(this.state)
-            })
+                this.setState(this.state);
+            });
 
     }
 
@@ -449,20 +422,18 @@ class PlantationContainer extends React.PureComponent {
 
         const roomName = selectedRoomToEdit.name;
         const roomId = selectedRoomToEdit.id;
-        ;
-
 
         const {
             name, blooming, id, watering_interval, category, difficulty, description,
             fertilizing_interval, required_exposure, required_humidity, required_temperature
         } = plantSelected;
-
         const {image_url, slug} = selectedCategoryToEdit;
+
         const categoryName = selectedCategoryToEdit.name;
         const categoryIdToEdit = selectedCategoryToEdit.id;
         const categoryDescriptionToEdit = selectedCategoryToEdit.description;
 
-        const planInitialtToEdit =
+        const plantInitialToEdit =
             {
                 blooming: blooming,
                 category: category,
@@ -489,6 +460,7 @@ class PlantationContainer extends React.PureComponent {
             watering_interval: this.state.watering_interval,
             id: this.state.id,
         };
+
         const categoryInitialValues = {
             name: this.state.categoryName,
             image_url: this.state.image_url,
@@ -531,6 +503,10 @@ class PlantationContainer extends React.PureComponent {
                     <Route exact path={ROUTE_MAIN}>
                         <About/>
                     </Route>
+                    <Route path={ROUTE_ABOUT}>
+                        <About/>
+                    </Route>
+
                     <Route path={ROUTE_PLANTS}>
                         <Plants
                             delayFetch={delayFetch}
@@ -545,6 +521,39 @@ class PlantationContainer extends React.PureComponent {
                             deleteMessage={deleteMessage}
                         />
                     </Route>
+                    <Route path={ROUTE_PLANT}>
+                        <SinglePlant
+                            selectedPlantId={selectedPlantId}
+                            plants={plants}
+                            categories={categories}
+                            onEdit={this.onEdit}
+                            onDelete={this.onDelete}
+                        />
+                    </Route>
+                    <Route path={ROUTE_CREATE}>
+                        <PlantFormCard
+                            categories={categories}
+                            formLabel="Create New Plant"
+                            initial={plantInitial}
+                            onSubmit={this.onSubmitPlantCreate}
+                            selectedPlantId={selectedPlantId}
+                            plant={plantSelected}
+                            plants={plants}
+                        />
+                    </Route>
+                    <Route path={ROUTE_EDIT}>
+                        <PlantFormCard
+                            categories={categories}
+                            formLabel="Create New Plant"
+                            initial={plantInitialToEdit}
+                            onSubmit={this.onSubmitPlantUpdate}
+                            selectedPlantId={selectedPlantId}
+                            plantIdToEdit={plantIdToEdit}
+                            plants={plants}
+                            plant={plantSelected}
+                        />
+                    </Route>
+
 
                     <Route path={ROUTE_MYPLANTS}>
                         <MyPlantsPage
@@ -579,42 +588,6 @@ class PlantationContainer extends React.PureComponent {
                     </Route>
 
 
-                    <Route path={ROUTE_PLANT}>
-                        <SinglePlant
-                            selectedPlantId={selectedPlantId}
-                            plants={plants}
-                            categories={categories}
-                            onEdit={this.onEdit}
-                            onDelete={this.onDelete}
-                        />
-                    </Route>
-
-                    <Route path={ROUTE_ABOUT}>
-                        <About/>
-                    </Route>
-                    <Route path={ROUTE_CREATE}>
-                        <PlantFormCard
-                            categories={categories}
-                            formLabel="Create New Plant"
-                            initial={plantInitial}
-                            onSubmit={this.onSubmitPlantCreate}
-                            selectedPlantId={selectedPlantId}
-                            plant={plantSelected}
-                            plants={plants}
-                        />
-                    </Route>
-                    <Route path={ROUTE_EDIT}>
-                        <PlantFormCard
-                            categories={categories}
-                            formLabel="Create New Plant"
-                            initial={planInitialtToEdit}
-                            onSubmit={this.onSubmitPlantUpdate}
-                            selectedPlantId={selectedPlantId}
-                            plantIdToEdit={plantIdToEdit}
-                            plants={plants}
-                            plant={plantSelected}
-                        />
-                    </Route>
                     <Route path={ROUTE_ROOMS}>
                         <Rooms
                             handleRoomEdit={this.handleRoomEdit}
