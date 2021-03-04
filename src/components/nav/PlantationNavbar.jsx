@@ -18,7 +18,7 @@ import {
 import {
     ROUTE_CATEGORIES,
     ROUTE_PLANTS,
-    ROUTE_MYPLANTS, ROUTE_ABOUT, ROUTE_MENU, ROUTE_MYPLANTSPAGE
+    ROUTE_MYPLANTS, ROUTE_ABOUT, ROUTE_MENU, ROUTE_MYPLANTSPAGE, ROUTE_ROOMS
 } from '../../constants/Routes';
 
 import {
@@ -74,6 +74,7 @@ class PlantationNavbar extends React.PureComponent {
                             <PlantationNavItem path={ROUTE_PLANTS} icon={faLeaf} name="Types of Plants"/>
                             <PlantationNavItem path={ROUTE_MYPLANTS} icon={faCogs} name="My Plants"/>
                             <PlantationNavItem path={ROUTE_CATEGORIES} icon={faBookReader} name="Categories"/>
+                            <PlantationNavItem path={ROUTE_ROOMS} icon={faBookReader} name="Rooms"/>
 
                         </Nav>
 

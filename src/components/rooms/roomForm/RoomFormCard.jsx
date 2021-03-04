@@ -6,9 +6,10 @@ import PlantForm from "components/admin/PlantForm";
 import {humidity} from "constants/PlantsParameters";
 import CategoryForm from "components/categories/categoryForm/CategoryForm";
 import Categories from "components/categories/Categories";
-import {ROUTE_CATEGORIES} from "constants/Routes";
+import {ROUTE_CATEGORIES, ROUTE_ROOMS} from "constants/Routes";
+import RoomForm from "components/rooms/roomForm/RoomForm";
 
-class CategoryFormCard extends React.Component {
+class RoomFormCard extends React.Component {
     constructor(props) {
         super(props);
 
@@ -17,14 +18,15 @@ class CategoryFormCard extends React.Component {
 
     render() {
         const{initialValues}=this.props
-
         const onSubmit = (values) => {
-            const category = values;
-            this.props.onSubmit(category);
-        };
+            const room = values;
+            this.props.onSubmit(room);
+        }
+
 
 
         const key = initialValues.id;
+        // const key = 1;
 
         const formikProps = {
             key,
@@ -37,15 +39,15 @@ class CategoryFormCard extends React.Component {
             <Formik {...formikProps}>
                 {({isValid}) => (
                     <Form>
-                        <CategoryForm/>
+                        <RoomForm/>
                         <Container>
                             <div className='form-buttons'>
 
                                 <Buttons
-                                    route={ROUTE_CATEGORIES}
+                                    route={ROUTE_ROOMS}
                                     cancelLabel="Cancel"
                                     submitDisabled={!isValid}
-                                    submitLabel={key ? 'Save changes' : 'Create new category'}
+                                    submitLabel={key ? 'Save changes' : 'Create new room'}
                                 />
 
 
@@ -66,4 +68,4 @@ class CategoryFormCard extends React.Component {
 };
 
 
-export default React.memo(CategoryFormCard);
+export default React.memo(RoomFormCard);

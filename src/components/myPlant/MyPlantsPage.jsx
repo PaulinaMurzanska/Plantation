@@ -17,7 +17,7 @@ import {About} from "components/about/About";
 import MyPlantFormCard from "components/myPlant/myPlantForms/createMyPlantForm/MyPlantFormCard";
 import Test from "components/myPlant/Test";
 import {BrowserRouter as Router, withRouter} from 'react-router-dom';
-import withRoomsFetch from "components/rooms/withRooms";
+// import withRoomsFetch from "components/rooms/withRooms";
 
 
 const plantsDelay = 500;

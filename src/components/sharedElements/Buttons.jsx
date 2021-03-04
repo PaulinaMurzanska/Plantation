@@ -2,7 +2,6 @@ import React from "react";
 import { Button, FormGroup ,NavItem} from "reactstrap";
 import{Link} from "react-router-dom";
 import PropTypes from 'prop-types';
-import {ROUTE_PLANTS} from "constants/Routes";
 
 /**
  * @component

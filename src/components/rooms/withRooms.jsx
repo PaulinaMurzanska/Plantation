@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {Api} from "services/Api";
 
 
 const room_fetch_delay_simulator =100;
@@ -16,14 +17,15 @@ const withRoomsFetch = (WrappedComponent)=>{
                 roomsInProgress:false,
                 roomsSuccess:undefined,
                 rooms:[],
+
+
             }
         }
 
         fetchRooms = ()=> {
-            const requestUrl = "https://still-fortress-69660.herokuapp.com/room";
             this.setState({roomsInProgress:true});
             return delayFetch(room_fetch_delay_simulator,(resolve, reject)=>{
-                return axios.get(requestUrl)
+                return axios.get(Api.ROOMS)
                     .then((response)=>{
                         const data = response.data;
                         const rooms = data.map((item)=>{
@@ -52,6 +54,7 @@ const withRoomsFetch = (WrappedComponent)=>{
 
         }
         render() {
+
             return(
                 <WrappedComponent
                     {...this.state}

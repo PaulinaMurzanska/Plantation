@@ -1,6 +1,9 @@
 const ROUTE_CATEGORIES = "/categories";
 const ROUTE_PLANTS = "/plants";
 const ROUTE_ROOMS = "/rooms";
+const ROUTE_ROOM_EDIT = "/roomedit";
+const ROUTE_ROOM_CREATE = "/roomcreate";
+
 const ROUTE_MAIN="/";
 const ROUTE_TEST='/test';
 const ROUTE_WELCOME="/welcome";
@@ -10,13 +13,14 @@ const ROUTE_MENU='/menu';
 const ROUTE_EDIT ="/edit/";
 const ROUTE_PLANT ="/plant/";
 const ROUTE_CREATE ="/create";
-const ROUTE_MYPLANTS="/myplants/";
-const ROUTE_MYPLANTSPAGE="/myplantspage/";
+const ROUTE_MYPLANTS="/myplants";
+const ROUTE_MYPLANTSPAGE="/myplantspage";
 const ROUTE_MYPLANT_CREATE=ROUTE_MYPLANTS+'/myplantcreate';
-const ROUTE_MYPLANT_EDIT =ROUTE_MYPLANTS+'myplantedit/';
+const ROUTE_MYPLANT_EDIT =ROUTE_MYPLANTS+'/myplantedit/';
 const ROUTE_DELETE ='/delete';
 const ROUTE_CATEGORY_CREATE='/categorycreate/';
 const ROUTE_CATEGORY_EDIT='/categoryedit/';
+
 
 
 
@@ -41,6 +45,8 @@ export {
     ROUTE_DELETE,
     ROUTE_CATEGORY_CREATE,
     ROUTE_CATEGORY_EDIT,
+    ROUTE_ROOM_EDIT,
+    ROUTE_ROOM_CREATE
 
 
 
