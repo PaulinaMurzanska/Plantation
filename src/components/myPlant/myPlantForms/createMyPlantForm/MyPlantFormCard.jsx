@@ -33,8 +33,8 @@ class MyPlantFormCard extends React.Component {
         };
         //
         //
-        // const key = initialValues.id;
-        const key = 1;
+        const key = initialValues.id;
+        // const key = 1;
         //
         const formikProps = {
             key,

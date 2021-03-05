@@ -99,9 +99,7 @@ class MyPlantForm extends React.Component {
                         </div>
 
                     </div>
-                    <div className='section3'>
-                         <MyPlantDifficultyField/>
-                    </div>
+
                 </FormGroup>
             </Container>
         )

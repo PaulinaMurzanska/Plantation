@@ -31,9 +31,9 @@ const myPlantFormDifficultyDescription = React.memo(({field}) => (
 
 const MyPlantDifficultyField = (props) => (
 
-    <FormGroup  tag="fieldset">
-  <div className='difficulty'>
-             <legend className="legend-form-label required" >Difficulty level:</legend>
+    <FormGroup tag="fieldset">
+        <div className='difficulty'>
+            <legend className="legend-form-label required">Difficulty level:</legend>
 
 
             {
@@ -41,9 +41,9 @@ const MyPlantDifficultyField = (props) => (
             }
             <Field
                 name={plantDifficultyName}
-                    component={myPlantFormDifficultyDescription}
+                component={myPlantFormDifficultyDescription}
             />
-              </div>
+        </div>
 
     </FormGroup>
 

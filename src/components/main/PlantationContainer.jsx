@@ -23,8 +23,8 @@ import CategoryFormCard from "components/categories/categoryForm/CategoryFormCar
 import RoomFormCard from "components/rooms/roomForm/RoomFormCard";
 
 
-const PLANTS_FETCH_DELAY = 50;
-const room_fetch_delay_simulator = 100;
+const PLANTS_FETCH_DELAY = 500;
+const room_fetch_delay_simulator = 500;
 const category_fetch_delay_simulator = 500;
 const delayFetch = (ms, func) => {
     return new Promise((resolve, reject) => setTimeout(() => func(resolve, reject), ms));
@@ -396,16 +396,19 @@ class PlantationContainer extends React.PureComponent {
                 });
             });
     }
+
+    removeModal =()=>{
+       window.location.reload(false)
+    }
     onRoomDelete = (event) => {
         const roomIdToDelete = parseInt(event.target.id);
         const roomToDelete = this.state.rooms.find(obj => obj.id === roomIdToDelete);
         const index = this.state.rooms.findIndex((room) => room.id === roomIdToDelete);
         if (index !== -1) this.state.rooms.splice(index, 1);
-        const path = generatePath(ROUTE_ROOMS);
         axios.delete(Api.ROOMS + roomIdToDelete + '/', roomToDelete)
             .then(response => {
-                this.props.history.push(path);
-                this.setState(this.state);
+                this.removeModal();
+
             });
 
     }

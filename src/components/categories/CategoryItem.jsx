@@ -1,5 +1,5 @@
-import {Button, ListGroupItem, NavItem} from "reactstrap";
-import {ROUTE_CATEGORY_CREATE, ROUTE_CATEGORY_EDIT} from "constants/Routes";
+import {Button,NavItem} from "reactstrap";
+import { ROUTE_CATEGORY_EDIT} from "constants/Routes";
 import {Link} from "react-router-dom";
 import React, {useState} from 'react';
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
@@ -7,15 +7,11 @@ import {BiTrash} from "react-icons/bi";
 
 const CategoryItem = ({handleCategoryEdit, category, onCategoryDelete}) => {
 
-
     const [modal, setModal] = useState(false);
-
     const toggle = () => {
         setModal(!modal)
-
     };
     const {name, id, slug} = category;
-    console.log(slug);
 
     return (
         <tr>
@@ -30,9 +26,7 @@ const CategoryItem = ({handleCategoryEdit, category, onCategoryDelete}) => {
                         <BiTrash className='delete' onClick={toggle}
                         style={{
                             fontSize:"2.2rem",
-                            // color:"red",
                             marginLeft:"15px",
-
                         }}
 
                         />

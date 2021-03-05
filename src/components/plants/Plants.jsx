@@ -109,7 +109,7 @@ class Plants extends React.PureComponent {
                     <Button tag={Link} to={ROUTE_CREATE} onClick={onCreate}>Create New Plant</Button>
 
                 </div>
-                {/*<InProgress inProgress={plantsInProgress}/>*/}
+                <InProgress inProgress={plantsInProgress}/>
                 {
                     plantsSuccess === false &&
                     <p>Unable to fetch plants.</p>
