@@ -8,7 +8,7 @@ import {
     ROUTE_PLANT,
     ROUTE_ABOUT,
     ROUTE_MYPLANTS, ROUTE_CREATE, ROUTE_CATEGORY_EDIT, ROUTE_CATEGORY_CREATE, ROUTE_ROOM_EDIT, ROUTE_ROOM_CREATE
-} from "/home/dev/Desktop/plantation/src/constants/Routes";
+} from "constants/Routes";
 import {generatePath, Route, Switch, withRouter} from "react-router-dom";
 import Plants from "components/plants/Plants";
 import Categories from "components/categories/Categories";
