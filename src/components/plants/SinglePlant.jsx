@@ -9,9 +9,7 @@ class SinglePlant extends React.PureComponent {
         const {selectedPlantId, plants, categories, index, onEdit,onDelete} = this.props;
         console.log(selectedPlantId);
 
-        // const plantSelected = plants.filter(plant => {
-        //     return plant.id === selectedPlantId
-        // });
+
         const plantSelected = plants.find(plant=>plant.id===selectedPlantId);
 
 
