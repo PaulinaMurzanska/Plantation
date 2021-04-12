@@ -1,11 +1,10 @@
 import React from "react";
 import {Button, Container, FormGroup, Label, NavItem} from "reactstrap";
-import {Field, Form} from "formik";
+import {Field} from "formik";
 import PlantationInput from "components/shared/form/PlantationInput";
 import PlantFormFields from "constants/PlantFormFields";
 import "components/formik/Formik.scss";
 import CategoryField from "components/formik/CategoryField";
-import DifficultyField from "components/formik/DifficultyField";
 import PlantFormDifficulty from "components/formik/DifficultyField";
 import Blooming from "components/formik/BloomingField";
 import PlantFormFertilizingInterval from "components/formik/FertilizingIntervalField";
@@ -13,7 +12,6 @@ import WateringIntervalField from "components/formik/WateringIntervalField";
 import ExposureField from "components/formik/ExposureField";
 import TemperatureField from "components/formik/TemperatureField";
 import HumidityField from "components/formik/HumidityField";
-import Buttons from "components/sharedElements/Buttons";
 import {Link} from "react-router-dom";
 import {ROUTE_PLANTS} from "constants/Routes";
 import ScrollToTop from "react-scroll-to-top";
@@ -21,7 +19,7 @@ import ScrollToTop from "react-scroll-to-top";
 
 class PlantForm extends React.Component {
     render() {
-        const {selectedPlantId, plants, plant, plantCategory,categories} = this.props;
+        const {selectedPlantId, plant, plantCategory,categories} = this.props;
 
         return (
             <Container>

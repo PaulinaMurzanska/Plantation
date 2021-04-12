@@ -83,7 +83,7 @@ class Plants extends React.PureComponent {
                     <div className='search'>
                         <label htmlFor="name">Search Categories</label>
                         <select id="name" onChange={this.handleCategorySort}>
-                            <option value=''>
+                            <option value=''>F
                                 select category
                             </option>
 
