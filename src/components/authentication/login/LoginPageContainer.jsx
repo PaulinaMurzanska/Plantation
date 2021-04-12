@@ -4,13 +4,13 @@ import LoginForm from './LoginForm';
 import PropTypes from 'prop-types';
 import Logo from 'components/shared/Logo';
 import 'pages/styles/LoginPageContainer.scss';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 
 const LoginPageContainer = React.memo(({ onSubmit, visible }) => {
-  const className = classNames(
-    'h-100',
-    { 'd-none': !visible }
-  );
+  // const className = classNames(
+  //   'h-100',
+  //   { 'd-none': !visible }
+  // );
   return (
     <Container className='login-site-container'>
       <Row className="h-100 align-items-start align-items-md-center">

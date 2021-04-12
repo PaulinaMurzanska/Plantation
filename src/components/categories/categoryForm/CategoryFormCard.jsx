@@ -1,19 +1,11 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
-import {Button, Container} from "reactstrap";
+import { Container} from "reactstrap";
 import Buttons from "components/sharedElements/Buttons";
-import PlantForm from "components/admin/PlantForm";
-import {humidity} from "constants/PlantsParameters";
 import CategoryForm from "components/categories/categoryForm/CategoryForm";
-import Categories from "components/categories/Categories";
 import {ROUTE_CATEGORIES} from "constants/Routes";
 
 class CategoryFormCard extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
 
     render() {
         const{initialValues}=this.props

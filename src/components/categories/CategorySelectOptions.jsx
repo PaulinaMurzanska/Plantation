@@ -3,10 +3,7 @@ import React from "react";
 
 
 class CategoriesSelectOptions extends React.PureComponent {
-    constructor(props) {
-        super(props);
 
-    }
     render() {
         const {category}=this.props;
 

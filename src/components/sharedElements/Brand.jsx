@@ -1,4 +1,3 @@
-import {Navbar, NavbarBrand} from "reactstrap";
 import {FaSeedling} from "react-icons/fa";
 import React from "react";
 import './Brand.scss';

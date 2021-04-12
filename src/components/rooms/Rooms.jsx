@@ -1,11 +1,10 @@
 import React from "react";
 import withRoomsFetch from "components/rooms/withRooms";
-import {Button, Card, CardBody, Container, ListGroup, Table} from "reactstrap";
+import {Button, Container,Table} from "reactstrap";
 import InProgress from "components/sharedElements/InProgress";
 import RoomsItem from "components/rooms/RoomItem";
 import {Link} from "react-router-dom";
-import {ROUTE_CATEGORY_CREATE, ROUTE_ROOM_CREATE} from "constants/Routes";
-import CategoryItem from "components/categories/CategoryItem";
+import { ROUTE_ROOM_CREATE} from "constants/Routes";
 
 class Rooms extends React.PureComponent {
     constructor(props) {

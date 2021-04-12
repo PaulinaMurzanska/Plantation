@@ -1,13 +1,11 @@
-// import React from "react";
 import {GiZigzagLeaf} from "react-icons/gi";
 import {GiCottonFlower} from "react-icons/gi";
 import {difficulties, exposure, humidity, temp} from "constants/PlantsParameters";
-import {Button, Container, ListGroup, ListGroupItem, NavItem, NavLink, Table} from "reactstrap";
+import {Button, Container, ListGroup, ListGroupItem, NavItem} from "reactstrap";
 import './SinglePlantItem.scss';
 import {BiEdit, BiTrash} from 'react-icons/bi';
-import moment from "moment";
-import {Link, Redirect} from "react-router-dom";
-import {ROUTE_DELETE, ROUTE_EDIT, ROUTE_PLANTS} from "constants/Routes";
+import {Link} from "react-router-dom";
+import { ROUTE_EDIT, ROUTE_PLANTS} from "constants/Routes";
 import React, {useState} from 'react';
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 

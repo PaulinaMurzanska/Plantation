@@ -1,41 +1,30 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
-import {Button, Container} from "reactstrap";
+import { Container} from "reactstrap";
 import Buttons from "components/sharedElements/Buttons";
-import PlantForm from "components/admin/PlantForm";
 import MyPlantForm from "components/myPlant/myPlantForms/MyPlantForm";
 
 
 class MyPlantFormCard extends React.Component {
-    constructor(props) {
-        super(props);
 
-    }
     render() {
 
         const {
-            categories,
             initialValues,
-            selectedMyPlantId,
-        //     plantIdToEdit,
             myPlants,
             plants,
             rooms,
-        //     plant
         } = this.props;
-        //
 
-        //
+
         const onSubmit = (values) => {
             console.log(values);
             const myPlant = values;
             this.props.onSubmit(myPlant);
         };
-        //
-        //
+
         const key = initialValues.id;
-        // const key = 1;
-        //
+
         const formikProps = {
             key,
             initialValues,

@@ -2,28 +2,12 @@ import React from "react";
 import {Field} from "formik";
 import {FormGroup, Label} from "reactstrap";
 import MyPlantFormFields from "constants/MyPlantFormFields";
-import withCategories from "components/categories/WithCategoriesFetch";
-// import CategoriesSelect from "components/categories/CategoriesSelect";
 import PlantationSelect from "components/formik/PlantationSelect";
-import PlantFormFields from "constants/PlantFormFields";
-
-// import CategoriesSelectOptions from "components/categories/CategorySelectOptions";
-
 
 class PlantTypeField extends React.Component {
-    constructor(props) {
-        super(props);
 
-    }
-
-    //  componentDidMount = () => {
-    //     this.props.fetchCategories();
-    // }
     render() {
-        const { myPlantPlanttype,selectedMyPlantId,PlantId, plants, myPlant} = this.props;
-
-
-
+        const {plants} = this.props;
 
         return (
 

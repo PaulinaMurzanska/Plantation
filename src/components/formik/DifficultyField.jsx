@@ -1,6 +1,6 @@
 import React from "react";
 import {Field} from "formik";
-import {FormGroup, Label, FormText} from "reactstrap";
+import {FormGroup,  FormText} from "reactstrap";
 import PlantFormFields from "constants/PlantFormFields";
 import RadioFeedback from "components/sharedElements/RadioFedback";
 import {plantDifficultyOptions} from "constants/PlantsParameters";

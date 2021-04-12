@@ -9,7 +9,7 @@ import {
     Modal, ModalHeader, ModalBody, ModalFooter
 } from "reactstrap";
 import {Link} from "react-router-dom";
-import {ROUTE_MYPLANT_EDIT, ROUTE_MYPLANTS, ROUTE_MYPLANTSPAGE} from "constants/Routes";
+import {ROUTE_MYPLANT_EDIT, ROUTE_MYPLANTSPAGE} from "constants/Routes";
 import "./MyPlant.scss";
 import moment from "moment";
 import {BiTrash} from "react-icons/bi";

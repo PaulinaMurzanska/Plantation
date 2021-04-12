@@ -4,11 +4,7 @@ import CategoriesSelectOptions from "components/categories/CategorySelectOptions
 
 
 class CategoriesSelect extends React.PureComponent {
-    constructor(props) {
-        super(props);
 
-
-    }
 
     componentDidMount() {
 

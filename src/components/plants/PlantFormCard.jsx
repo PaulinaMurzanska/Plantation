@@ -1,16 +1,11 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
-import {Button, Container} from "reactstrap";
+import { Container} from "reactstrap";
 import Buttons from "components/sharedElements/Buttons";
 import PlantForm from "components/admin/PlantForm";
-import {humidity} from "constants/PlantsParameters";
 import {ROUTE_PLANTS} from "constants/Routes";
 
 class PlantFormCard extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     render() {
 
@@ -18,9 +13,7 @@ class PlantFormCard extends React.Component {
             categories,
             initial,
             selectedPlantId,
-            plantIdToEdit,
             plants,
-            plant
         } = this.props;
 
         const initialValues = initial;
@@ -32,7 +25,6 @@ class PlantFormCard extends React.Component {
 
 
         const key = initialValues.id;
-        // const key = 1;
 
         const formikProps = {
             key,

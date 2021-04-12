@@ -1,10 +1,10 @@
 import React from "react";
 import {Button, Container, FormGroup, Label, NavItem} from "reactstrap";
-import {Field, Form} from "formik";
+import {Field} from "formik";
 import PlantationInput from "components/shared/form/PlantationInput";
 import "components/formik/Formik.scss";
 import {Link} from "react-router-dom";
-import {ROUTE_CATEGORIES, ROUTE_PLANTS} from "constants/Routes";
+import {ROUTE_CATEGORIES} from "constants/Routes";
 
 
 class CategoryForm extends React.Component {

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
 import './Plants.scss';
-import {ROUTE_DELETE, ROUTE_EDIT, ROUTE_PLANT} from "constants/Routes";
+import {ROUTE_PLANT} from "constants/Routes";
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
@@ -24,10 +24,6 @@ const getCategoryURL = (categories, categoryId) => {
 }
 
 class PlantRow extends React.PureComponent {
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const {plant, categories, getSinglePlantId} = this.props;

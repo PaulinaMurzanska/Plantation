@@ -1,11 +1,10 @@
-import React, {useState} from "react";
-// import withCategories from "components/categories/WithCategoriesFetch";
-import {Button, Card, CardBody, Container, ListGroup, Table} from "reactstrap";
+import React from "react";
+import {Button, Container, Table} from "reactstrap";
 import InProgress from "components/sharedElements/InProgress";
 import CategoryItem from "components/categories/CategoryItem";
 import "./Categories.scss"
 import {Link} from "react-router-dom";
-import {ROUTE_CATEGORY_CREATE, ROUTE_CREATE} from "constants/Routes";
+import {ROUTE_CATEGORY_CREATE} from "constants/Routes";
 
 
 const Categories = ({
@@ -20,7 +19,7 @@ const Categories = ({
             <InProgress inProgress={categoriesInProgress}/>
             {
                 categoriesSuccess === false &&
-                <p>Nie udało się pobrać Kategorii</p>
+                <p>Unable to fetch categories</p>
             }
             {
                 categoriesSuccess &&

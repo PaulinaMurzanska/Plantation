@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import axios from "axios";
 import {Api} from "services/Api";
 
@@ -6,17 +6,17 @@ import {Api} from "services/Api";
 //
 // const delayFetch = (ms, func) => {
 //     return new Promise((resolve, reject) => setTimeout(() => func(resolve, reject), ms));
-// }
-const withCategories = (WrappedComponent) => {
-    return class extends React.Component {
-        constructor(props) {
-            super(props);
+// // }
+// const withCategories = (WrappedComponent) => {
+//     return class extends React.Component {
+//         constructor(props) {
+//             super(props);
             // this.state = {
             //     categoriesInProgress: false,
             //     categoriesSuccess: undefined,
             //     categories: [],
             // }
-        }
+        // }
         // fetchCategories = () => {
         //     this.setState({categoriesInProgress: true});
         //     return delayFetch(category_fetch_delay_simulator, (resolve, reject) => {
@@ -41,17 +41,13 @@ const withCategories = (WrappedComponent) => {
         //         this.setState({categoriesInProgress: false});
         //     })
         // }
-        render() {
-            // console.log(this.state.categories);
-            return (
-                <p>nothing</p>
-                // <WrappedComponent
-                //     {...this.state}
-                //     {...this.props}
-                //     fetchCategories={this.fetchCategories}
-                // />
-            )
-        }
-    }
-}
-export default withCategories;
+//         render() {
+//             // console.log(this.state.categories);
+//             return (
+//                 <p>nothing</p>
+//
+//             )
+//         }
+//     }
+// }
+// export default withCategories;
