@@ -14,7 +14,7 @@ export const About = () => {
 
                 <br/>
                 <div className='line'/>
-                <h3>Welcome to Plantation</h3>
+                <h3>Welcome to Plantation1</h3>
                 <p>This App has been build for educational purposes.</p>
                 <p> With this application, you can manage plants that you have in your home.</p>
                 <p>You simply use default plants list or create your new base - plant.</p>
